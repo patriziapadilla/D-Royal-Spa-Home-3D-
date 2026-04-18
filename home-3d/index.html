@@ -1,103 +1,677 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D’Royal Spa</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D’Royal Spa</title>
+  <style>
+    :root{
+      --bg:#050505;
+      --line:rgba(255,255,255,.11);
+      --gold:#dcc2a2;
+      --cream:#efe2d4;
+      --text:#f8efe7;
+      --muted:rgba(248,239,231,.78);
+      --side:16px;
+      --strip-h:42px;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:black;
-  color:white;
-}
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      background:#000;
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      scroll-behavior:smooth;
+    }
 
-.hero{
-  height:100vh;
-  background:url('modelo.jpg') center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  position:relative;
-}
+    body{overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
 
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-}
+    .hero{
+      min-height:100svh;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.34) 36%, rgba(0,0,0,.70) 76%, rgba(0,0,0,.92) 100%),
+        url('./modelo.jpg') center 22% / cover no-repeat;
+    }
 
-.hero-content{
-  position:relative;
-  z-index:2;
-}
+    .hero-top{
+      position:absolute;
+      top:14px;
+      left:var(--side);
+      right:var(--side);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      font-size:13px;
+      z-index:2;
+      color:rgba(255,255,255,.95);
+      flex-wrap:wrap;
+    }
 
-.hero h1{
-  font-size:40px;
-  margin:10px 0;
-}
+    .hero-center{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      padding:120px 20px 160px;
+      max-width:980px;
+      margin:0 auto;
+    }
 
-.hero p{
-  color:#ccc;
-  letter-spacing:2px;
-}
+    .brand{
+      margin:0 0 14px;
+      color:var(--gold);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(28px,3.3vw,42px);
+      font-weight:500;
+    }
 
-.btn{
-  margin-top:20px;
-  display:inline-block;
-  padding:12px 20px;
-  background:#d6c2a2;
-  color:black;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:bold;
-}
+    .headline{
+      margin:0;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(52px,8vw,96px);
+      line-height:.94;
+      font-weight:500;
+      color:#fff9f0;
+    }
 
-.menu{
-  position:absolute;
-  bottom:0;
-  width:100%;
-}
+    .subline{
+      margin-top:12px;
+      font-size:12px;
+      letter-spacing:.30em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.84);
+    }
 
-.menu button{
-  width:100%;
-  padding:12px;
-  border:none;
-  background:black;
-  color:white;
-  border-top:1px solid #333;
-  font-size:16px;
-  text-align:left;
-}
-</style>
+    .areas{
+      margin-top:22px;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(18px,2vw,28px);
+      color:#f2e6d7;
+    }
+
+    .phone-wrap{
+      margin-top:18px;
+    }
+
+    .phone{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:54px;
+      padding:0 24px;
+      border-radius:999px;
+      background:var(--cream);
+      color:#111;
+      font-weight:800;
+      font-size:clamp(18px,2vw,24px);
+      box-shadow:0 18px 50px rgba(0,0,0,.25);
+    }
+
+    .email{
+      margin-top:10px;
+      font-size:14px;
+      color:rgba(255,255,255,.82);
+    }
+
+    .offer{
+      margin-top:14px;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      padding:7px 10px;
+      background:rgba(10,10,10,.30);
+    }
+
+    .offer b{
+      background:rgba(220,194,162,.18);
+      color:#fff3e5;
+      border-radius:999px;
+      padding:8px 12px;
+    }
+
+    .pick{
+      margin-top:20px;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(18px,2.3vw,30px);
+      color:#fff4e8;
+    }
+
+    .pick-sub{
+      margin-top:8px;
+      font-size:11px;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.68);
+    }
+
+    .hero-menu{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:3;
+      display:grid;
+      gap:4px;
+      padding-bottom:8px;
+      background:linear-gradient(180deg, transparent, rgba(0,0,0,.72) 22%, rgba(0,0,0,.96) 100%);
+    }
+
+    .strip{
+      height:var(--strip-h);
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      padding:0 var(--side);
+      background:#030303;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(16px,1.6vw,25px);
+      color:#fff7ef;
+    }
+
+    .strip .arrow{font-size:22px}
+
+    .page{
+      min-height:100svh;
+      background:#000;
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+
+    .sticky-home{
+      position:sticky;
+      top:0;
+      z-index:10;
+      display:grid;
+      gap:4px;
+      background:rgba(0,0,0,.96);
+      padding-top:0;
+    }
+
+    .home-back{
+      height:42px;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:12px;
+      padding:0 var(--side);
+      background:#050505;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(16px,1.6vw,24px);
+      color:#fff8f0;
+    }
+
+    .mini-note{
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.62);
+      margin-top:2px;
+    }
+
+    .mini-strip{
+      height:36px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      padding:0 var(--side);
+      background:#040404;
+      border-top:1px solid rgba(255,255,255,.08);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      font-size:14px;
+      color:#f7efe6;
+    }
+
+    .page-content{
+      min-height:calc(100svh - 78px);
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      background:#000;
+    }
+
+    .page-image{
+      min-height:460px;
+      background-position:center center;
+      background-size:cover;
+      background-repeat:no-repeat;
+    }
+
+    .page-info{
+      padding:28px var(--side) 18px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.76), rgba(0,0,0,.92));
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+    }
+
+    .page-title{
+      margin:0 0 12px;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(40px,4.8vw,74px);
+      line-height:.94;
+      font-weight:500;
+      color:#fff8ef;
+    }
+
+    .page-text{
+      margin:0;
+      font-size:clamp(16px,1.45vw,22px);
+      line-height:1.6;
+      color:var(--muted);
+      max-width:700px;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:20px 0 18px;
+    }
+
+    .chip{
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.07);
+      color:#f5ecdf;
+      font-size:14px;
+    }
+
+    .ba{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:4px;
+    }
+
+    .ba-card{
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+
+    .ba-lab{
+      padding:10px 8px;
+      text-align:center;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:#000;
+      color:#f5ebdf;
+    }
+
+    .ba-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .icons{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin:16px 0 0;
+      text-align:center;
+      color:#e9dccd;
+    }
+
+    .icon-box{
+      padding:10px 6px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .icon-box b{
+      display:block;
+      font-size:14px;
+      margin-top:4px;
+    }
+
+    .icon-box span{
+      display:block;
+      margin-top:4px;
+      font-size:12px;
+      color:rgba(255,255,255,.66);
+      line-height:1.45;
+    }
+
+    .actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .btn{
+      min-height:54px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:17px;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,.14);
+    }
+
+    .btn.light{
+      color:#fff;
+      background:transparent;
+    }
+
+    .btn.gold{
+      color:#111;
+      background:var(--cream);
+      border-color:transparent;
+    }
+
+    .page-bottom{
+      display:grid;
+      gap:4px;
+      background:#000;
+      padding-bottom:8px;
+    }
+
+    @media (max-width: 900px){
+      .hero{
+        background-position:center 14%;
+      }
+      .hero-center{
+        padding:120px 18px 210px;
+      }
+      .page-content{
+        grid-template-columns:1fr;
+      }
+      .page-image{
+        min-height:320px;
+      }
+      .ba-card img{
+        height:150px;
+      }
+      .actions{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="hero">
-  <div class="hero-content">
-    <h2>D’ROYAL SPA</h2>
-    <h1>Lipo Sin Cirugía</h1>
-    <p>SIN AGUJAS · SIN DOLOR</p>
+  <section class="hero" id="home">
+    <div class="hero-top">
+      <a href="https://wa.me/17866900960?text=Hola%20quiero%20información%20sobre%20el%20tratamiento" target="_blank" rel="noopener">☎ 786 690 0960</a>
+      <a href="mailto:droyalspamiami@gmail.com">✉ droyalspamiami@gmail.com</a>
+    </div>
 
-    <a class="btn" href="https://wa.me/17866900960">
-      📞 786 690 0960
-    </a>
-  </div>
+    <div class="hero-center">
+      <h2 class="brand" id="brand"></h2>
+      <h1 class="headline" id="headline"></h1>
+      <div class="subline" id="subline"></div>
+      <div class="areas" id="areas"></div>
 
-  <div class="menu">
-    <button>Lipo con Láser 360</button>
-    <button>Lipo con Transfer</button>
-    <button>Lipo Papada</button>
-    <button>Aumento de Senos</button>
-    <button>Aumento de Glúteos</button>
-    <button>Brazos</button>
-    <button>Piernas</button>
-  </div>
-</div>
+      <div class="phone-wrap">
+        <a class="phone" href="https://wa.me/17866900960?text=Hola%20quiero%20información%20sobre%20el%20tratamiento" target="_blank" rel="noopener">☎ 786 690 0960</a>
+      </div>
 
+      <div class="email">droyalspamiami@gmail.com</div>
+
+      <div class="offer">
+        <b>25% OFF</b>
+        <span id="offerText"></span>
+      </div>
+
+      <div class="pick" id="pick"></div>
+      <div class="pick-sub" id="pickSub"></div>
+    </div>
+
+    <div class="hero-menu" id="heroMenu"></div>
+  </section>
+
+  <main id="pages"></main>
+
+  <script>
+    const isSpanish = (navigator.language || '').toLowerCase().startsWith('es');
+
+    const T = {
+      brand: "D’ROYAL SPA",
+      headline: isSpanish ? "Lipo sin cirugía" : "Surgery-Free Lipo",
+      subline: isSpanish ? "Sin agujas · Sin dolor" : "No needles · No pain",
+      areas: "Brickell · Downtown · Doral · Miami Beach",
+      offer: isSpanish ? "Primera sesión limitada" : "Limited first session",
+      pick: isSpanish ? "Selecciona tu tratamiento" : "Choose your treatment",
+      pickSub: isSpanish ? "Resultados reales · Tecnología avanzada" : "Real results · Advanced technology",
+      home: isSpanish ? "Lipo sin cirugía" : "Surgery-Free Lipo",
+      homeMini: isSpanish ? "Inicio" : "Home",
+      before: isSpanish ? "Antes" : "Before",
+      after: isSpanish ? "Después" : "After",
+      learn: isSpanish ? "Aprender más" : "Learn more",
+      book: isSpanish ? "Agendar cita" : "Book now",
+      noNeedles: isSpanish ? "Sin agujas" : "No needles",
+      noPain: isSpanish ? "Sin dolor" : "No pain",
+      visible: isSpanish ? "Resultados visibles" : "Visible results",
+      noNeedlesSub: isSpanish ? "No invasivo" : "Non-invasive",
+      noPainSub: isSpanish ? "Sesiones cómodas" : "Comfortable sessions",
+      visibleSub: isSpanish ? "Desde la 1ra sesión" : "From the first session"
+    };
+
+    document.getElementById('brand').textContent = T.brand;
+    document.getElementById('headline').textContent = T.headline;
+    document.getElementById('subline').textContent = T.subline;
+    document.getElementById('areas').textContent = T.areas;
+    document.getElementById('offerText').textContent = T.offer;
+    document.getElementById('pick').textContent = T.pick;
+    document.getElementById('pickSub').textContent = T.pickSub;
+
+    const treatments = [
+      {
+        slug:'lipo-laser',
+        nameEs:'Lipo con Láser 360',
+        nameEn:'Lipo Laser 360',
+        summaryEs:'Moldea y ayuda a reducir grasa localizada para estilizar la silueta desde la primera sesión.',
+        summaryEn:'Contours the body and helps reduce localized fat to refine your shape from the first session.',
+        chipsEs:['Abdomen','Cintura','Espalda','Definición corporal'],
+        chipsEn:['Abdomen','Waist','Back','Body definition'],
+        before:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/e4f9e519-3587-4a6b-a7cc-54c79374a264/Your%2Bparagraph%2Btext-37.jpg',
+        after:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/ca6213db-91b4-4e1d-bba9-667ec1c10175/Untitled%2Bdesign-16.jpg',
+        image:'./modelo.jpg',
+        learn:'https://droyalspa.com/lipo-con-laser',
+        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91559773'
+      },
+      {
+        slug:'transfer',
+        nameEs:'Lipo con Láser 360 con transfer',
+        nameEn:'Lipo Laser 360 with transfer',
+        summaryEs:'Combina reducción localizada y transferencia para crear un contorno más armónico y llamativo.',
+        summaryEn:'Combines targeted reduction and transfer to create a fuller, more balanced contour.',
+        chipsEs:['Moldeo','Curvas','Contorno','Figura armónica'],
+        chipsEn:['Sculpting','Curves','Contour','Balanced shape'],
+        before:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/e4f9e519-3587-4a6b-a7cc-54c79374a264/Your%2Bparagraph%2Btext-37.jpg',
+        after:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/ca6213db-91b4-4e1d-bba9-667ec1c10175/Untitled%2Bdesign-16.jpg',
+        image:'./modelo.jpg',
+        learn:'https://droyalspa.com/lipo-laser-con-transfer',
+        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91559810'
+      },
+      {
+        slug:'papada',
+        nameEs:'LipoPapada con Láser 360',
+        nameEn:'Double Chin Laser Lipo 360',
+        summaryEs:'Define el perfil del rostro y ayuda a estilizar la zona de la papada para un look más limpio.',
+        summaryEn:'Defines the jawline and helps refine the double chin area for a cleaner facial profile.',
+        chipsEs:['Papada','Perfil','Mandíbula','Definición facial'],
+        chipsEn:['Double chin','Profile','Jawline','Facial definition'],
+        before:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/1ea03fe7-ad2f-4796-aeb1-2179eb09fb60/112.jpg',
+        after:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/ec28aa8a-30c9-41f5-ab4e-d369944b68b8/106.jpg',
+        image:'./modelo.jpg',
+        learn:'https://droyalspa.com/lipo-papada',
+        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91560745'
+      },
+      {
+        slug:'dcool',
+        nameEs:'D-Cool',
+        nameEn:'D-Cool',
+        summaryEs:'Tratamiento facial con limpieza, aloe y radiofrecuencia para una piel más firme, luminosa y renovada.',
+        summaryEn:'Facial treatment with cleansing, aloe, and radiofrequency for firmer, brighter, refreshed skin.',
+        chipsEs:['Glow','Firmeza','Limpieza','Lifting facial'],
+        chipsEn:['Glow','Firmness','Cleansing','Facial lifting'],
+        before:'./modelo.jpg',
+        after:'./modelo.jpg',
+        image:'./modelo.jpg',
+        learn:'https://droyalspa.com/d-cool-regeneracion-con-celulas-madre',
+        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91560920'
+      },
+      {
+        slug:'senos',
+        nameEs:'Aumento de Senos sin cirugía',
+        nameEn:'Non-surgical Breast Enhancement',
+        summaryEs:'Ayuda a mejorar proyección, forma y apariencia para un escote más armónico sin cirugía.',
+        summaryEn:'Helps improve projection and shape for a fuller, more balanced look without surgery.',
+        chipsEs:['Forma','Proyección','Escote','Volumen visual'],
+        chipsEn:['Shape','Projection','Cleavage','Visual fullness'],
+        before:'./modelo.jpg',
+        after:'./modelo.jpg',
+        image:'./modelo.jpg',
+        learn:'https://droyalspa.com/new-page',
+        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91560087'
+      },
+      {
+        slug:'gluteos',
+        nameEs:'Aumento de Glúteos sin cirugía',
+        nameEn:'Non-surgical Butt Enhancement',
+        summaryEs:'Trabaja proyección y contorno para resaltar la figura con una apariencia más redonda y definida.',
+        summaryEn:'Enhances projection and contour for a fuller, more sculpted look.',
+        chipsEs:['Proyección','Contorno','Curvas','Figura'],
+        chipsEn:['Projection','Contour','Curves','Figure'],
+        before:'./modelo.jpg',
+        after:'./modelo.jpg',
+        image:'./modelo.jpg',
+        learn:'https://droyalspa.com/piernas',
+        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91560697'
+      },
+      {
+        slug:'brazos',
+        nameEs:'LipoEscultura de brazos 360',
+        nameEn:'Arm Sculpting 360',
+        summaryEs:'Ayuda a reducir volumen y mejorar definición en brazos para un look más limpio y estilizado.',
+        summaryEn:'Helps reduce bulk and improve arm definition for a slimmer, more refined look.',
+        chipsEs:['Brazos','Definición','Firmeza','Moldeo'],
+        chipsEn:['Arms','Definition','Firmness','Sculpting'],
+        before:'./modelo.jpg',
+        after:'./modelo.jpg',
+        image:'./modelo.jpg',
+        learn:'https://droyalspa.com/reduccion-de-brazos',
+        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91873037'
+      },
+      {
+        slug:'piernas',
+        nameEs:'LipoEscultura de piernas 360',
+        nameEn:'Leg Sculpting 360',
+        summaryEs:'Ayuda a estilizar piernas y mejorar su apariencia general para una silueta más lisa y definida.',
+        summaryEn:'Helps refine the legs for a smoother, more sculpted silhouette.',
+        chipsEs:['Piernas','Celulitis','Liso visual','Definición'],
+        chipsEn:['Legs','Cellulite','Smoother look','Definition'],
+        before:'./modelo.jpg',
+        after:'./modelo.jpg',
+        image:'./modelo.jpg',
+        learn:'https://droyalspa.com/1-reduccion-de-celulitis-en-piernas',
+        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91873056'
+      }
+    ];
+
+    const getName = t => isSpanish ? t.nameEs : t.nameEn;
+    const getSummary = t => isSpanish ? t.summaryEs : t.summaryEn;
+    const getChips = t => isSpanish ? t.chipsEs : t.chipsEn;
+
+    const heroMenu = document.getElementById('heroMenu');
+    const pages = document.getElementById('pages');
+
+    heroMenu.innerHTML = treatments.map(t => `
+      <a class="strip" href="#${t.slug}">
+        <span>${getName(t)}</span>
+        <span class="arrow">›</span>
+      </a>
+    `).join('');
+
+    pages.innerHTML = treatments.map((t, i) => {
+      const next1 = treatments[i + 1];
+      const next2 = treatments[i + 2];
+      return `
+        <section class="page" id="${t.slug}">
+          <div class="sticky-home">
+            <a class="home-back" href="#home">
+              <span>‹</span>
+              <span>
+                ${T.home}
+                <div class="mini-note">${T.homeMini}</div>
+              </span>
+              <span></span>
+            </a>
+          </div>
+
+          <div class="page-content">
+            <div class="page-image" style="background-image:url('${t.image}')"></div>
+
+            <div class="page-info">
+              <h2 class="page-title">${getName(t)}</h2>
+              <p class="page-text">${getSummary(t)}</p>
+
+              <div class="chips">
+                ${getChips(t).map(c => `<span class="chip">${c}</span>`).join('')}
+              </div>
+
+              <div class="ba">
+                <div class="ba-card">
+                  <div class="ba-lab">${T.before}</div>
+                  <img src="${t.before}" alt="${T.before}">
+                </div>
+                <div class="ba-card">
+                  <div class="ba-lab">${T.after}</div>
+                  <img src="${t.after}" alt="${T.after}">
+                </div>
+              </div>
+
+              <div class="icons">
+                <div class="icon-box">
+                  <div>○</div>
+                  <b>${T.noNeedles}</b>
+                  <span>${T.noNeedlesSub}</span>
+                </div>
+                <div class="icon-box">
+                  <div>○</div>
+                  <b>${T.noPain}</b>
+                  <span>${T.noPainSub}</span>
+                </div>
+                <div class="icon-box">
+                  <div>□</div>
+                  <b>${T.visible}</b>
+                  <span>${T.visibleSub}</span>
+                </div>
+              </div>
+
+              <div class="actions">
+                <a class="btn light" href="${t.learn}" target="_blank" rel="noopener">${T.learn}</a>
+                <a class="btn gold" href="${t.book}" target="_blank" rel="noopener">${T.book}</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="page-bottom">
+            ${next1 ? `<a class="mini-strip" href="#${next1.slug}"><span>${getName(next1)}</span><span>›</span></a>` : ''}
+            ${next2 ? `<a class="mini-strip" href="#${next2.slug}"><span>${getName(next2)}</span><span>›</span></a>` : ''}
+          </div>
+        </section>
+      `;
+    }).join('');
+  </script>
 </body>
 </html>
