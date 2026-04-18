@@ -14,8 +14,8 @@
       --text:#f8efe7;
       --muted:rgba(248,239,231,.78);
       --side:16px;
-      --strip-h:36px;
-      --shadow:0 18px 40px rgba(0,0,0,.28);
+      --radius:26px;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
     }
 
     *{box-sizing:border-box}
@@ -25,11 +25,6 @@
       background:#000;
       color:var(--text);
       font-family:Arial,Helvetica,sans-serif;
-      overflow-x:hidden;
-      scroll-behavior:smooth;
-    }
-
-    body.overlay-open{
       overflow:hidden;
     }
 
@@ -40,97 +35,142 @@
 
     button{
       font:inherit;
-      color:inherit;
-      background:none;
       border:none;
-      padding:0;
+      background:none;
+      color:inherit;
       cursor:pointer;
     }
 
-    .home{
-      min-height:100svh;
+    .app{
+      width:100%;
+      height:100vh;
+      overflow:hidden;
+      background:#000;
       position:relative;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.22) 0%, rgba(0,0,0,.36) 34%, rgba(0,0,0,.70) 78%, rgba(0,0,0,.94) 100%),
-        url('./modelo.jpg') center 30% / cover no-repeat;
     }
 
-    .topline{
-      position:absolute;
-      top:14px;
-      left:var(--side);
-      right:var(--side);
-      z-index:3;
+    .topbar{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:50;
       display:flex;
+      align-items:center;
       justify-content:space-between;
       gap:12px;
-      flex-wrap:wrap;
-      font-size:13px;
-      color:rgba(255,255,255,.95);
+      padding:14px 16px;
+      background:linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.08));
+      pointer-events:none;
     }
 
-    .hero-center{
-      position:relative;
-      z-index:2;
+    .topbar > *{
+      pointer-events:auto;
+    }
+
+    .topbar-left,
+    .topbar-right{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:120px;
+      font-size:13px;
+      color:rgba(255,255,255,.96);
+    }
+
+    .topbar-center{
       text-align:center;
-      max-width:980px;
-      margin:0 auto;
-      padding:120px 20px 150px;
+      flex:1;
+      min-width:0;
     }
 
     .brand{
-      margin:0 0 14px;
+      margin:0;
       font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(28px,3vw,42px);
+      font-size:clamp(22px,2.6vw,34px);
       font-weight:500;
       color:var(--gold);
+      letter-spacing:.02em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .deck{
+      height:100vh;
+      display:flex;
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+
+    .deck::-webkit-scrollbar{
+      display:none;
+    }
+
+    .slide{
+      flex:0 0 100vw;
+      width:100vw;
+      height:100vh;
+      scroll-snap-align:start;
+      position:relative;
+      overflow:hidden;
+      background:#000;
+    }
+
+    .slide-inner{
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      opacity:.55;
+      transform:scale(.94);
+      transition:opacity .45s ease, transform .45s ease;
+    }
+
+    .slide.active .slide-inner{
+      opacity:1;
+      transform:scale(1);
+    }
+
+    .home{
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.22) 0%, rgba(0,0,0,.36) 34%, rgba(0,0,0,.72) 78%, rgba(0,0,0,.94) 100%),
+        url('./modelo.jpg') center 24% / cover no-repeat;
+    }
+
+    .home-center{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:110px 20px 150px;
     }
 
     .headline{
       margin:0;
       font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(52px,8vw,96px);
-      line-height:.94;
+      font-size:clamp(54px,8vw,104px);
+      line-height:.92;
       font-weight:500;
-      color:#fff9f0;
+      color:#fff9f1;
+      max-width:1000px;
     }
 
     .areas{
-      margin-top:20px;
+      margin-top:18px;
       font-family:Georgia,"Times New Roman",serif;
       font-size:clamp(18px,2vw,28px);
       color:#f3e7d8;
     }
 
-    .phone-wrap{
-      margin-top:18px;
-    }
-
-    .phone{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:50px;
-      padding:0 22px;
-      border-radius:999px;
-      background:var(--cream);
-      color:#111;
-      font-size:clamp(18px,2vw,24px);
-      font-weight:800;
-      box-shadow:var(--shadow);
-    }
-
-    .email{
-      margin-top:10px;
-      font-size:14px;
-      color:rgba(255,255,255,.82);
-    }
-
     .offer{
-      margin-top:14px;
+      margin-top:16px;
       display:inline-flex;
       align-items:center;
       gap:10px;
@@ -138,6 +178,7 @@
       border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
       background:rgba(10,10,10,.34);
+      font-size:14px;
     }
 
     .offer b{
@@ -162,7 +203,7 @@
       color:rgba(255,255,255,.68);
     }
 
-    .hero-menu{
+    .home-rail{
       position:absolute;
       left:0;
       right:0;
@@ -170,154 +211,148 @@
       z-index:3;
       display:grid;
       gap:4px;
-      padding-bottom:8px;
+      padding:0 0 8px;
       background:linear-gradient(180deg, transparent, rgba(0,0,0,.76) 24%, rgba(0,0,0,.96) 100%);
     }
 
-    .strip{
+    .rail-btn,
+    .mini-rail-btn{
       width:100%;
-      height:var(--strip-h);
+      text-align:left;
       display:grid;
       grid-template-columns:1fr auto;
       align-items:center;
-      padding:0 var(--side);
+      padding:0 16px;
       background:#030303;
       border-top:1px solid var(--line);
       border-bottom:1px solid var(--line);
       font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(15px,1.4vw,22px);
       color:#fff8ef;
-      text-align:left;
     }
 
-    .strip .arrow{
-      font-size:19px;
-      line-height:1;
+    .rail-btn{
+      height:36px;
+      font-size:clamp(15px,1.35vw,22px);
     }
 
-    .overlay{
-      position:fixed;
-      inset:0;
-      z-index:9999;
-      background:rgba(0,0,0,.86);
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .28s ease;
-    }
-
-    .overlay.active{
-      opacity:1;
-      pointer-events:auto;
-    }
-
-    .panel{
-      position:absolute;
-      inset:0;
-      background:#000;
-      transform:translateY(100%);
-      transition:transform .34s ease;
-      display:flex;
-      flex-direction:column;
-    }
-
-    .overlay.active .panel{
-      transform:translateY(0);
-    }
-
-    .floating-top,
-    .floating-bottom{
-      display:grid;
-      gap:4px;
-      background:rgba(0,0,0,.98);
-    }
-
-    .floating-top{
-      position:sticky;
-      top:0;
-      z-index:10;
-    }
-
-    .home-back{
-      width:100%;
-      height:38px;
-      display:grid;
-      grid-template-columns:auto 1fr auto;
-      align-items:center;
-      gap:10px;
-      padding:0 var(--side);
-      background:#050505;
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(15px,1.4vw,22px);
-      color:#fff8ef;
-      text-align:left;
-    }
-
-    .mini-note{
-      margin-top:2px;
-      font-size:10px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.58);
-    }
-
-    .mini-strip{
-      width:100%;
+    .mini-rail-btn{
       height:32px;
-      display:grid;
-      grid-template-columns:1fr auto;
-      align-items:center;
-      padding:0 var(--side);
-      background:#030303;
-      border-top:1px solid rgba(255,255,255,.08);
-      border-bottom:1px solid rgba(255,255,255,.08);
       font-size:13px;
-      color:#f8efe6;
-      text-align:left;
     }
 
-    .panel-scroll{
-      flex:1;
-      overflow:auto;
-      -webkit-overflow-scrolling:touch;
-      background:#000;
-    }
-
-    .detail{
-      min-height:calc(100svh - 70px);
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      background:#000;
-    }
-
-    .detail-image{
-      min-height:420px;
+    .treatment{
       background:
-        linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.48)),
-        var(--detail-image) center 28% / cover no-repeat;
+        radial-gradient(circle at top left, rgba(255,255,255,.04), transparent 24%),
+        linear-gradient(180deg, #080808 0%, #000 100%);
     }
 
-    .detail-info{
-      padding:24px var(--side) 18px;
-      background:linear-gradient(180deg, rgba(0,0,0,.78), rgba(0,0,0,.94));
+    .treatment-wrap{
+      width:100%;
+      height:100%;
+      padding:88px 16px 72px;
+      display:grid;
+      grid-template-columns:1.04fr .96fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .media-pane{
+      position:relative;
+      border-radius:28px;
+      overflow:hidden;
+      background:#111;
+      box-shadow:var(--shadow);
+      min-height:0;
+    }
+
+    .media-stage{
+      width:100%;
+      height:100%;
+      position:relative;
+      background:#0e0e0e;
+    }
+
+    .media-stage img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .media-dots{
+      position:absolute;
+      left:50%;
+      bottom:12px;
+      transform:translateX(-50%);
+      display:flex;
+      gap:8px;
+      z-index:4;
+    }
+
+    .media-dots button{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:rgba(255,255,255,.42);
+      border:none;
+      padding:0;
+    }
+
+    .media-dots button.active{
+      background:#fff;
+    }
+
+    .info-pane{
       display:flex;
       flex-direction:column;
-      justify-content:flex-start;
+      min-height:0;
     }
 
-    .detail-title{
+    .page-card{
+      flex:1;
+      min-height:0;
+      border-radius:28px;
+      overflow:auto;
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:var(--shadow);
+    }
+
+    .page-card-inner{
+      padding:24px 18px 18px;
+    }
+
+    .page-topline{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px;
+      color:rgba(255,255,255,.82);
+    }
+
+    .home-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.78);
+    }
+
+    .page-title{
       margin:0 0 12px;
       font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(34px,4.2vw,66px);
+      font-size:clamp(34px,4vw,62px);
       line-height:.94;
       font-weight:500;
       color:#fff8ef;
     }
 
-    .detail-text{
+    .page-text{
       margin:0;
-      font-size:clamp(15px,1.25vw,20px);
+      font-size:clamp(15px,1.18vw,19px);
       line-height:1.6;
       color:var(--muted);
     }
@@ -338,20 +373,21 @@
       font-size:13px;
     }
 
-    .ba{
+    .gallery{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:10px;
       margin-top:4px;
     }
 
-    .ba-card{
+    .gallery-card{
       overflow:hidden;
       background:#0b0b0b;
       border:1px solid rgba(255,255,255,.10);
+      border-radius:20px;
     }
 
-    .ba-lab{
+    .gallery-lab{
       padding:10px 8px;
       text-align:center;
       font-size:12px;
@@ -362,11 +398,12 @@
       border-bottom:1px solid rgba(255,255,255,.08);
     }
 
-    .ba-card img{
+    .gallery-card img{
       width:100%;
-      height:200px;
+      height:210px;
       object-fit:cover;
       display:block;
+      background:#111;
     }
 
     .actions{
@@ -398,62 +435,91 @@
       border-color:transparent;
     }
 
-    @media (max-width:900px){
-      .hero{
-        background-position:center 20%;
+    .bottom-nav{
+      margin-top:12px;
+      display:grid;
+      gap:4px;
+    }
+
+    .whatsapp-float{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:60;
+      width:54px;
+      height:54px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#25D366;
+      color:#fff;
+      box-shadow:0 16px 36px rgba(0,0,0,.35);
+      font-size:26px;
+    }
+
+    .swipe-hint{
+      position:absolute;
+      left:50%;
+      bottom:56px;
+      transform:translateX(-50%);
+      z-index:4;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.66);
+      white-space:nowrap;
+    }
+
+    @media (max-width: 920px){
+      .topbar-left,
+      .topbar-right{
+        font-size:12px;
+        min-width:auto;
       }
 
-      .hero-center{
-        padding:120px 18px 210px;
-      }
-
-      .detail{
+      .treatment-wrap{
         grid-template-columns:1fr;
+        gap:12px;
+        padding:82px 12px 72px;
       }
 
-      .detail-image{
-        min-height:280px;
-        background-position:center 18%;
+      .media-pane{
+        height:34vh;
+        min-height:240px;
       }
 
-      .ba-card img{
-        height:145px;
+      .gallery-card img{
+        height:140px;
+      }
+
+      .headline{
+        font-size:clamp(46px,12vw,78px);
+      }
+
+      .home-center{
+        padding:110px 18px 190px;
       }
     }
   </style>
 </head>
 <body>
-  <section class="home" id="home">
-    <div class="topline">
-      <a href="https://wa.me/17866900960?text=Hola%20quiero%20información%20sobre%20el%20tratamiento" target="_blank" rel="noopener">☎ 786 690 0960</a>
-      <a href="mailto:droyalspamiami@gmail.com">✉ droyalspamiami@gmail.com</a>
+  <div class="app">
+    <div class="topbar">
+      <div class="topbar-left">
+        <a href="mailto:droyalspamiami@gmail.com">droyalspamiami@gmail.com</a>
+      </div>
+      <div class="topbar-center">
+        <h1 class="brand" id="brand"></h1>
+      </div>
+      <div class="topbar-right">
+        <span>786 690 0960</span>
+      </div>
     </div>
 
-    <div class="hero-center">
-      <h2 class="brand" id="brand"></h2>
-      <h1 class="headline" id="headline"></h1>
-      <div class="areas" id="areas"></div>
+    <main class="deck" id="deck"></main>
 
-      <div class="phone-wrap">
-        <a class="phone" href="https://wa.me/17866900960?text=Hola%20quiero%20información%20sobre%20el%20tratamiento" target="_blank" rel="noopener">786 690 0960</a>
-      </div>
-
-      <div class="email">droyalspamiami@gmail.com</div>
-
-      <div class="offer">
-        <b>25% OFF</b>
-        <span id="offerText"></span>
-      </div>
-
-      <div class="pick" id="pick"></div>
-      <div class="pick-sub" id="pickSub"></div>
-    </div>
-
-    <div class="hero-menu" id="heroMenu"></div>
-  </section>
-
-  <div class="overlay" id="overlay">
-    <div class="panel" id="panel"></div>
+    <a class="whatsapp-float" href="https://wa.me/message/6QSXBTK7A47QM1" target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
   </div>
 
   <script>
@@ -464,230 +530,292 @@
       headline: isSpanish ? "Lipo sin cirugía" : "Surgery-Free Lipo",
       areas: "Brickell · Downtown · Doral · Miami Beach",
       offer: isSpanish ? "Primera sesión limitada" : "Limited first session",
-      pick: isSpanish ? "Selecciona tu tratamiento" : "Choose your treatment",
+      pick: isSpanish ? "Desliza para ver tratamientos" : "Swipe to explore treatments",
       pickSub: isSpanish ? "Resultados reales · Tecnología avanzada" : "Real results · Advanced technology",
-      home: isSpanish ? "Lipo sin cirugía" : "Surgery-Free Lipo",
-      homeMini: isSpanish ? "Inicio" : "Home",
+      home: isSpanish ? "Inicio" : "Home",
       before: isSpanish ? "Antes" : "Before",
       after: isSpanish ? "Después" : "After",
       learn: isSpanish ? "Aprender más" : "Learn more",
-      book: isSpanish ? "Agendar cita" : "Book now"
+      book: isSpanish ? "Agendar cita" : "Book now",
+      swipe: isSpanish ? "desliza lateralmente" : "swipe sideways"
     };
 
     document.getElementById('brand').textContent = T.brand;
-    document.getElementById('headline').textContent = T.headline;
-    document.getElementById('areas').textContent = T.areas;
-    document.getElementById('offerText').textContent = T.offer;
-    document.getElementById('pick').textContent = T.pick;
-    document.getElementById('pickSub').textContent = T.pickSub;
 
-    const treatments = [
+    const slides = [
       {
-        nameEs:'Lipo con Láser 360',
-        nameEn:'Lipo Laser 360',
-        summaryEs:'Moldea y ayuda a reducir grasa localizada para estilizar la silueta desde la primera sesión.',
-        summaryEn:'Contours the body and helps reduce localized fat to refine your shape from the first session.',
-        chipsEs:['Abdomen','Cintura','Espalda','Definición corporal'],
-        chipsEn:['Abdomen','Waist','Back','Body definition'],
-        before:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/e4f9e519-3587-4a6b-a7cc-54c79374a264/Your%2Bparagraph%2Btext-37.jpg',
-        after:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/ca6213db-91b4-4e1d-bba9-667ec1c10175/Untitled%2Bdesign-16.jpg',
-        image:'./modelo.jpg',
-        learn:'https://droyalspa.com/lipo-con-laser',
-        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91559773'
+        type: "home"
       },
       {
-        nameEs:'Lipo con Láser 360 con transfer',
-        nameEn:'Lipo Laser 360 with transfer',
-        summaryEs:'Combina reducción localizada y transferencia para crear un contorno más armónico y llamativo.',
-        summaryEn:'Combines targeted reduction and transfer to create a fuller, more balanced contour.',
-        chipsEs:['Moldeo','Curvas','Contorno','Figura armónica'],
-        chipsEn:['Sculpting','Curves','Contour','Balanced shape'],
-        before:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/e4f9e519-3587-4a6b-a7cc-54c79374a264/Your%2Bparagraph%2Btext-37.jpg',
-        after:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/ca6213db-91b4-4e1d-bba9-667ec1c10175/Untitled%2Bdesign-16.jpg',
-        image:'./modelo.jpg',
-        learn:'https://droyalspa.com/lipo-laser-con-transfer',
-        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91559810'
+        nameEs: "Lipo con Láser 360",
+        nameEn: "Lipo Laser 360",
+        textEs: "Moldea, define y ayuda a reducir grasa localizada en abdomen, espalda y contorno corporal desde las primeras sesiones.",
+        textEn: "Contours and helps reduce localized fat across abdomen, back, and body contour from the first sessions.",
+        chipsEs: ["Abdomen","Espalda","Contorno","RF 40K"],
+        chipsEn: ["Abdomen","Back","Contour","RF 40K"],
+        learn: "https://droyalspa.com/lipo-con-laser",
+        book: "https://DRoyalSpaMiami.as.me/?appointmentType=91559773",
+        media: ["./modelo.jpg","./111.jpg","./Untitled design-16.jpg","./Your paragraph text-40.jpg"],
+        gallery: ["./111.jpg","./Untitled design-16.jpg"]
       },
       {
-        nameEs:'LipoPapada con Láser 360',
-        nameEn:'Double Chin Laser Lipo 360',
-        summaryEs:'Define el perfil del rostro y ayuda a estilizar la zona de la papada para un look más limpio.',
-        summaryEn:'Defines the jawline and helps refine the double chin area for a cleaner facial profile.',
-        chipsEs:['Papada','Perfil','Mandíbula','Definición facial'],
-        chipsEn:['Double chin','Profile','Jawline','Facial definition'],
-        before:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/1ea03fe7-ad2f-4796-aeb1-2179eb09fb60/112.jpg',
-        after:'https://images.squarespace-cdn.com/content/v1/65e0b0203d824e56691e609a/ec28aa8a-30c9-41f5-ab4e-d369944b68b8/106.jpg',
-        image:'./modelo.jpg',
-        learn:'https://droyalspa.com/lipo-papada',
-        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91560745'
+        nameEs: "Lipo con Láser 360 con Transfer",
+        nameEn: "Lipo Laser 360 with Transfer",
+        textEs: "Combina definición corporal con transferencia para resaltar curvas, glúteos y cintura con un resultado más armónico.",
+        textEn: "Combines body definition with transfer to enhance curves, butt projection, and waist contour.",
+        chipsEs: ["Transfer","Glúteos","Cintura","RF 40K"],
+        chipsEn: ["Transfer","Butt","Waist","RF 40K"],
+        learn: "https://droyalspa.com/lipo-laser-con-transfer",
+        book: "https://DRoyalSpaMiami.as.me/?appointmentType=91559810",
+        media: ["./modelo.jpg","./111.jpg","./109.jpg","./113.jpg","./Untitled design-16.jpg"],
+        gallery: ["./109.jpg","./113.jpg"]
       },
       {
-        nameEs:'D-Cool',
-        nameEn:'D-Cool',
-        summaryEs:'Tratamiento facial con limpieza, aloe y radiofrecuencia para una piel más firme, luminosa y renovada.',
-        summaryEn:'Facial treatment with cleansing, aloe, and radiofrequency for firmer, brighter, refreshed skin.',
-        chipsEs:['Glow','Firmeza','Limpieza','Lifting facial'],
-        chipsEn:['Glow','Firmness','Cleansing','Facial lifting'],
-        before:'./modelo.jpg',
-        after:'./modelo.jpg',
-        image:'./modelo.jpg',
-        learn:'https://droyalspa.com/d-cool-regeneracion-con-celulas-madre',
-        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91560920'
+        nameEs: "LipoPapada con Láser 360",
+        nameEn: "Chin Lipo Laser 360",
+        textEs: "Ayuda a definir mandíbula, perfil y cuello para una apariencia más limpia, elegante y estilizada.",
+        textEn: "Helps define jawline, profile, and neck for a cleaner, more elegant look.",
+        chipsEs: ["Papada","Perfil","Cuello","RF 40K"],
+        chipsEn: ["Double chin","Profile","Neck","RF 40K"],
+        learn: "https://droyalspa.com/lipo-papada",
+        book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560745",
+        media: ["./107.jpg","./108.jpg","./106.jpg"],
+        gallery: ["./107.jpg","./108.jpg"]
       },
       {
-        nameEs:'Aumento de Senos sin cirugía',
-        nameEn:'Non-surgical Breast Enhancement',
-        summaryEs:'Ayuda a mejorar proyección, forma y apariencia para un escote más armónico sin cirugía.',
-        summaryEn:'Helps improve projection and shape for a fuller, more balanced look without surgery.',
-        chipsEs:['Forma','Proyección','Escote','Volumen visual'],
-        chipsEn:['Shape','Projection','Cleavage','Visual fullness'],
-        before:'./modelo.jpg',
-        after:'./modelo.jpg',
-        image:'./modelo.jpg',
-        learn:'https://droyalspa.com/new-page',
-        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91560087'
+        nameEs: "D-Cool",
+        nameEn: "D-Cool",
+        textEs: "Tratamiento facial regenerativo con RF 40K enfocado en textura, firmeza, mirada, cuello y rejuvenecimiento visual.",
+        textEn: "Regenerative facial treatment with RF 40K focused on texture, firmness, eyes, neck, and visible rejuvenation.",
+        chipsEs: ["Cara","Cuello","Ojos","RF 40K"],
+        chipsEn: ["Face","Neck","Eyes","RF 40K"],
+        learn: "https://droyalspa.com/d-cool-regeneracion-con-celulas-madre",
+        book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560920",
+        media: ["./106.jpg","./108.jpg","./Copia de Untitled design-16.jpg","./107.jpg"],
+        gallery: ["./106.jpg","./Copia de Untitled design-16.jpg"]
       },
       {
-        nameEs:'Aumento de Glúteos sin cirugía',
-        nameEn:'Non-surgical Butt Enhancement',
-        summaryEs:'Trabaja proyección y contorno para resaltar la figura con una apariencia más redonda y definida.',
-        summaryEn:'Enhances projection and contour for a fuller, more sculpted look.',
-        chipsEs:['Proyección','Contorno','Curvas','Figura'],
-        chipsEn:['Projection','Contour','Curves','Figure'],
-        before:'./modelo.jpg',
-        after:'./modelo.jpg',
-        image:'./modelo.jpg',
-        learn:'https://droyalspa.com/piernas',
-        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91560697'
+        nameEs: "Aumento de Senos sin Cirugía",
+        nameEn: "Non-Surgical Breast Enhancement",
+        textEs: "Ayuda a mejorar volumen visual, escote y forma para una apariencia más llena y armónica sin cirugía.",
+        textEn: "Helps improve visual fullness, cleavage, and shape for a fuller non-surgical appearance.",
+        chipsEs: ["Escote","Volumen visual","Forma","RF 40K"],
+        chipsEn: ["Cleavage","Visual fullness","Shape","RF 40K"],
+        learn: "https://droyalspa.com/new-page",
+        book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560087",
+        media: ["./110.jpg","./Copia de Your paragraph text-35 2.jpg"],
+        gallery: ["./110.jpg","./Copia de Your paragraph text-35 2.jpg"]
       },
       {
-        nameEs:'LipoEscultura de brazos 360',
-        nameEn:'Arm Sculpting 360',
-        summaryEs:'Ayuda a reducir volumen y mejorar definición en brazos para un look más limpio y estilizado.',
-        summaryEn:'Helps reduce bulk and improve arm definition for a slimmer, more refined look.',
-        chipsEs:['Brazos','Definición','Firmeza','Moldeo'],
-        chipsEn:['Arms','Definition','Firmness','Sculpting'],
-        before:'./modelo.jpg',
-        after:'./modelo.jpg',
-        image:'./modelo.jpg',
-        learn:'https://droyalspa.com/reduccion-de-brazos',
-        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91873037'
+        nameEs: "Aumento de Glúteos sin Cirugía",
+        nameEn: "Non-Surgical Butt Enhancement",
+        textEs: "Busca más proyección, forma y una apariencia más levantada, combinando contorno visual y trabajo de tejido.",
+        textEn: "Targets more projection, shape, and a lifted appearance through contouring and tissue work.",
+        chipsEs: ["Proyección","Forma","Lifting visual","RF 40K"],
+        chipsEn: ["Projection","Shape","Lifted look","RF 40K"],
+        learn: "https://droyalspa.com/piernas",
+        book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560697",
+        media: ["./109.jpg","./113.jpg"],
+        gallery: ["./109.jpg","./113.jpg"]
       },
       {
-        nameEs:'LipoEscultura de piernas 360',
-        nameEn:'Leg Sculpting 360',
-        summaryEs:'Ayuda a estilizar piernas y mejorar su apariencia general para una silueta más lisa y definida.',
-        summaryEn:'Helps refine the legs for a smoother, more sculpted silhouette.',
-        chipsEs:['Piernas','Celulitis','Liso visual','Definición'],
-        chipsEn:['Legs','Cellulite','Smoother look','Definition'],
-        before:'./modelo.jpg',
-        after:'./modelo.jpg',
-        image:'./modelo.jpg',
-        learn:'https://droyalspa.com/1-reduccion-de-celulitis-en-piernas',
-        book:'https://DRoyalSpaMiami.as.me/?appointmentType=91873056'
+        nameEs: "LipoEscultura de Brazos 360",
+        nameEn: "Arm Sculpting 360",
+        textEs: "Ayuda a afinar, tensar y definir el brazo para una línea más limpia y estética.",
+        textEn: "Helps slim, tighten, and define the arms for a cleaner, more sculpted line.",
+        chipsEs: ["Brazos","Definición","Firmeza","RF 40K"],
+        chipsEn: ["Arms","Definition","Firmness","RF 40K"],
+        learn: "https://droyalspa.com/reduccion-de-brazos",
+        book: "https://DRoyalSpaMiami.as.me/?appointmentType=91873037",
+        media: ["./Your paragraph text-38.jpg"],
+        gallery: ["./Your paragraph text-38.jpg","./Your paragraph text-38.jpg"]
+      },
+      {
+        nameEs: "LipoEscultura de Piernas 360",
+        nameEn: "Leg Sculpting 360",
+        textEs: "Trabaja textura, contorno y reducción visual de celulitis para unas piernas más estilizadas.",
+        textEn: "Targets texture, contour, and visual cellulite reduction for more sculpted legs.",
+        chipsEs: ["Piernas","Celulitis","Contorno","RF 40K"],
+        chipsEn: ["Legs","Cellulite","Contour","RF 40K"],
+        learn: "https://droyalspa.com/1-reduccion-de-celulitis-en-piernas",
+        book: "https://DRoyalSpaMiami.as.me/?appointmentType=91873056",
+        media: ["./113.jpg"],
+        gallery: ["./113.jpg","./113.jpg"]
       }
     ];
 
-    const heroMenu = document.getElementById('heroMenu');
-    const overlay = document.getElementById('overlay');
-    const panel = document.getElementById('panel');
+    const deck = document.getElementById('deck');
 
-    const getName = t => isSpanish ? t.nameEs : t.nameEn;
-    const getSummary = t => isSpanish ? t.summaryEs : t.summaryEn;
-    const getChips = t => isSpanish ? t.chipsEs : t.chipsEn;
+    const getName = (s) => isSpanish ? s.nameEs : s.nameEn;
+    const getText = (s) => isSpanish ? s.textEs : s.textEn;
+    const getChips = (s) => isSpanish ? s.chipsEs : s.chipsEn;
 
-    heroMenu.innerHTML = treatments.map((t,i) => `
-      <button class="strip" data-open="${i}">
-        <span>${getName(t)}</span>
-        <span class="arrow">›</span>
-      </button>
-    `).join('');
+    function makeHomeRail() {
+      return slides
+        .slice(1)
+        .map((s, i) => `
+          <button class="rail-btn" data-go="${i + 1}">
+            <span>${getName(s)}</span>
+            <span>›</span>
+          </button>
+        `)
+        .join("");
+    }
 
-    function mini(i){
-      const t = treatments[i];
-      if(!t) return '';
+    function makeMiniRail(index) {
+      return slides
+        .slice(1)
+        .map((s, i) => {
+          const real = i + 1;
+          if (real === index) return "";
+          return `
+            <button class="mini-rail-btn" data-go="${real}">
+              <span>${getName(s)}</span>
+              <span>›</span>
+            </button>
+          `;
+        })
+        .join("");
+    }
+
+    function mediaMarkup(media, cardIndex) {
       return `
-        <button class="mini-strip" data-open="${i}">
-          <span>${getName(t)}</span>
-          <span>›</span>
-        </button>
+        <div class="media-stage" data-media-stage="${cardIndex}">
+          <img src="${media[0]}" alt="">
+          ${
+            media.length > 1
+              ? `
+                <div class="media-dots">
+                  ${media.map((_, i) => `<button data-dot="${i}" class="${i === 0 ? 'active' : ''}"></button>`).join("")}
+                </div>
+              `
+              : ""
+          }
+        </div>
       `;
     }
 
-    function renderPanel(i){
-      const t = treatments[i];
-
-      panel.innerHTML = `
-        <div class="floating-top">
-          <button class="home-back" id="closePanel">
-            <span>‹</span>
-            <span>${T.home}<div class="mini-note">${T.homeMini}</div></span>
-            <span></span>
-          </button>
-          ${i > 0 ? mini(i-1) : ''}
-        </div>
-
-        <div class="panel-scroll">
-          <section class="detail">
-            <div class="detail-image" style="--detail-image:url('${t.image}')"></div>
-
-            <div class="detail-info">
-              <h2 class="detail-title">${getName(t)}</h2>
-              <p class="detail-text">${getSummary(t)}</p>
-
-              <div class="chips">
-                ${getChips(t).map(c => `<span class="chip">${c}</span>`).join('')}
+    deck.innerHTML = slides.map((slide, index) => {
+      if (slide.type === "home") {
+        return `
+          <section class="slide home-slide active" data-slide="${index}">
+            <div class="slide-inner home">
+              <div class="home-center">
+                <h2 class="headline">${T.headline}</h2>
+                <div class="areas">${T.areas}</div>
+                <div class="offer"><b>25% OFF</b><span>${T.offer}</span></div>
+                <div class="pick">${T.pick}</div>
+                <div class="pick-sub">${T.pickSub}</div>
               </div>
-
-              <div class="ba">
-                <div class="ba-card">
-                  <div class="ba-lab">${T.before}</div>
-                  <img src="${t.before}" alt="${T.before}">
-                </div>
-                <div class="ba-card">
-                  <div class="ba-lab">${T.after}</div>
-                  <img src="${t.after}" alt="${T.after}">
-                </div>
-              </div>
-
-              <div class="actions">
-                <a class="btn light" href="${t.learn}" target="_blank" rel="noopener">${T.learn}</a>
-                <a class="btn gold" href="${t.book}" target="_blank" rel="noopener">${T.book}</a>
+              <div class="swipe-hint">${T.swipe}</div>
+              <div class="home-rail">
+                ${makeHomeRail()}
               </div>
             </div>
           </section>
-        </div>
+        `;
+      }
 
-        <div class="floating-bottom">
-          ${mini(i+1)}
-          ${mini(i+2)}
-        </div>
+      return `
+        <section class="slide treatment" data-slide="${index}">
+          <div class="slide-inner">
+            <div class="treatment-wrap">
+              <div class="media-pane">
+                ${mediaMarkup(slide.media, index)}
+              </div>
+
+              <div class="info-pane">
+                <div class="page-card">
+                  <div class="page-card-inner">
+                    <div class="page-topline">
+                      <button class="home-link" data-go="0">‹ ${T.home}</button>
+                      <span>${index}/${slides.length - 1}</span>
+                    </div>
+
+                    <h2 class="page-title">${getName(slide)}</h2>
+                    <p class="page-text">${getText(slide)}</p>
+
+                    <div class="chips">
+                      ${getChips(slide).map(c => `<span class="chip">${c}</span>`).join("")}
+                    </div>
+
+                    <div class="gallery">
+                      <div class="gallery-card">
+                        <div class="gallery-lab">${T.before}</div>
+                        <img src="${slide.gallery[0]}" alt="${T.before}">
+                      </div>
+                      <div class="gallery-card">
+                        <div class="gallery-lab">${T.after}</div>
+                        <img src="${slide.gallery[1] || slide.gallery[0]}" alt="${T.after}">
+                      </div>
+                    </div>
+
+                    <div class="actions">
+                      <a class="btn light" href="${slide.learn}" target="_blank" rel="noopener">${T.learn}</a>
+                      <a class="btn gold" href="${slide.book}" target="_blank" rel="noopener">${T.book}</a>
+                    </div>
+
+                    <div class="bottom-nav">
+                      ${makeMiniRail(index)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       `;
+    }).join("");
 
-      panel.querySelector('#closePanel').addEventListener('click', closePanel);
-      panel.querySelectorAll('[data-open]').forEach(btn => {
-        btn.addEventListener('click', () => openPanel(Number(btn.dataset.open)));
+    const slideEls = [...document.querySelectorAll('.slide')];
+
+    function setActiveSlide() {
+      const left = deck.scrollLeft;
+      const width = deck.clientWidth;
+      const active = Math.round(left / width);
+
+      slideEls.forEach((el, i) => {
+        el.classList.toggle('active', i === active);
       });
     }
 
-    function openPanel(i){
-      renderPanel(i);
-      overlay.classList.add('active');
-      document.body.classList.add('overlay-open');
+    function goToSlide(index) {
+      deck.scrollTo({
+        left: index * deck.clientWidth,
+        behavior: 'smooth'
+      });
     }
 
-    function closePanel(){
-      overlay.classList.remove('active');
-      document.body.classList.remove('overlay-open');
-    }
+    document.addEventListener('click', (e) => {
+      const go = e.target.closest('[data-go]');
+      if (go) {
+        goToSlide(Number(go.dataset.go));
+      }
 
-    document.querySelectorAll('[data-open]').forEach(btn => {
-      btn.addEventListener('click', () => openPanel(Number(btn.dataset.open)));
+      const dot = e.target.closest('[data-dot]');
+      if (dot) {
+        const stage = dot.closest('[data-media-stage]');
+        const slideIndex = Number(stage.dataset.mediaStage);
+        const slide = slides[slideIndex];
+        const img = stage.querySelector('img');
+        img.src = slide.media[Number(dot.dataset.dot)];
+        stage.querySelectorAll('[data-dot]').forEach((b, i) => {
+          b.classList.toggle('active', i === Number(dot.dataset.dot));
+        });
+      }
     });
 
-    overlay.addEventListener('click', (e) => {
-      if(e.target === overlay) closePanel();
-    });
+    deck.addEventListener('scroll', setActiveSlide);
+    window.addEventListener('resize', setActiveSlide);
+
+    deck.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        deck.scrollLeft += e.deltaY;
+      }
+    }, { passive:false });
+
+    setActiveSlide();
   </script>
 </body>
 </html>
