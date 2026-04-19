@@ -13,8 +13,6 @@
       --cream:#efe2d4;
       --text:#f8efe7;
       --muted:rgba(248,239,231,.78);
-      --side:16px;
-      --radius:26px;
       --shadow:0 24px 70px rgba(0,0,0,.34);
     }
 
@@ -28,11 +26,7 @@
       overflow:hidden;
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
+    a{ color:inherit; text-decoration:none; }
     button{
       font:inherit;
       border:none;
@@ -51,28 +45,17 @@
 
     .topbar{
       position:fixed;
-      top:0;
-      left:0;
-      right:0;
+      top:0; left:0; right:0;
       z-index:50;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:12px;
       padding:14px 16px;
       background:linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.08));
       pointer-events:none;
     }
 
-    .topbar > *{
-      pointer-events:auto;
-    }
-
-    .topbar-center{
-      text-align:center;
-      flex:1;
-      min-width:0;
-    }
+    .topbar > *{ pointer-events:auto; }
 
     .brand{
       margin:0;
@@ -97,9 +80,7 @@
       scrollbar-width:none;
     }
 
-    .deck::-webkit-scrollbar{
-      display:none;
-    }
+    .deck::-webkit-scrollbar{ display:none; }
 
     .slide{
       flex:0 0 100vw;
@@ -190,12 +171,6 @@
       color:#fff8ef;
       font-size:15px;
       font-weight:700;
-      transition:transform .2s ease, background .2s ease;
-    }
-
-    .offer-phone:hover{
-      transform:translateY(-1px);
-      background:rgba(0,0,0,.52);
     }
 
     .pick{
@@ -215,9 +190,7 @@
 
     .home-rail{
       position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
+      left:0; right:0; bottom:0;
       z-index:3;
       display:grid;
       gap:4px;
@@ -225,8 +198,7 @@
       background:linear-gradient(180deg, transparent, rgba(0,0,0,.76) 24%, rgba(0,0,0,.96) 100%);
     }
 
-    .rail-btn,
-    .mini-rail-btn{
+    .rail-btn,.mini-rail-btn{
       width:100%;
       text-align:left;
       display:grid;
@@ -289,6 +261,18 @@
       object-fit:cover;
       display:block;
       background:#111;
+    }
+
+    .fallback-image{
+      display:none;
+    }
+
+    .fallback-image.show{
+      display:block;
+    }
+
+    .hidden-video{
+      display:none;
     }
 
     .info-pane{
@@ -405,6 +389,8 @@
       font-size:16px;
       font-weight:800;
       border:1px solid rgba(255,255,255,.14);
+      padding:0 14px;
+      text-align:center;
     }
 
     .btn.light{
@@ -477,15 +463,17 @@
       .home-center{
         padding:110px 18px 190px;
       }
+
+      .actions{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
 <body>
   <div class="app">
     <div class="topbar">
-      <div class="topbar-center">
-        <h1 class="brand" id="brand"></h1>
-      </div>
+      <h1 class="brand" id="brand"></h1>
     </div>
 
     <main class="deck" id="deck"></main>
@@ -525,6 +513,7 @@
         learn: "https://droyalspa.com/lipo-con-laser",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91559773",
         video: "./lipo/main.mp4",
+        poster: "./lipo/lipo1.jpg",
         result: "./lipo/lipo1.jpg"
       },
       {
@@ -537,6 +526,7 @@
         learn: "https://droyalspa.com/lipo-laser-con-transfer",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91559810",
         video: "./lipo-transfer/main.mp4",
+        poster: "./lipo-transfer/transfer1.jpg",
         result: "./lipo-transfer/transfer1.jpg"
       },
       {
@@ -549,6 +539,7 @@
         learn: "https://droyalspa.com/lipo-papada",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560745",
         video: "./papada/main.mp4",
+        poster: "./papada/chin1.jpg",
         result: "./papada/chin1.jpg"
       },
       {
@@ -561,6 +552,7 @@
         learn: "https://droyalspa.com/d-cool-regeneracion-con-celulas-madre",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560920",
         video: "./d-cool-rf/main.mp4",
+        poster: "./d-cool-rf/face1.jpg",
         result: "./d-cool-rf/face1.jpg"
       },
       {
@@ -573,6 +565,7 @@
         learn: "https://droyalspa.com/new-page",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560087",
         video: "./senos/main.mp4",
+        poster: "./senos/breast1.jpg",
         result: "./senos/breast1.jpg"
       },
       {
@@ -585,6 +578,7 @@
         learn: "https://droyalspa.com/piernas",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560697",
         video: "./gluteos/main.mp4",
+        poster: "./gluteos/glute1.jpg",
         result: "./gluteos/glute1.jpg"
       },
       {
@@ -597,6 +591,7 @@
         learn: "https://droyalspa.com/reduccion-de-brazos",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91873037",
         video: "./brazos/main.mp4",
+        poster: "./brazos/arm1.jpg",
         result: "./brazos/arm1.jpg"
       },
       {
@@ -609,50 +604,59 @@
         learn: "https://droyalspa.com/1-reduccion-de-celulitis-en-piernas",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91873056",
         video: "./piernas/main.mp4",
+        poster: "./piernas/legs1.jpg",
         result: "./piernas/legs1.jpg"
       }
     ];
 
     const deck = document.getElementById('deck');
-
     const getName = (s) => isSpanish ? s.nameEs : s.nameEn;
     const getText = (s) => isSpanish ? s.textEs : s.textEn;
     const getChips = (s) => isSpanish ? s.chipsEs : s.chipsEn;
 
     function makeHomeRail() {
-      return slides
-        .slice(1)
-        .map((s, i) => `
-          <button class="rail-btn" data-go="${i + 1}">
-            <span>${getName(s)}</span>
-            <span>›</span>
-          </button>
-        `)
-        .join("");
+      return slides.slice(1).map((s, i) => `
+        <button class="rail-btn" data-go="${i + 1}">
+          <span>${getName(s)}</span>
+          <span>›</span>
+        </button>
+      `).join("");
     }
 
     function makeMiniRail(index) {
-      return slides
-        .slice(1)
-        .map((s, i) => {
-          const real = i + 1;
-          if (real === index) return "";
-          return `
-            <button class="mini-rail-btn" data-go="${real}">
-              <span>${getName(s)}</span>
-              <span>›</span>
-            </button>
-          `;
-        })
-        .join("");
+      return slides.slice(1).map((s, i) => {
+        const real = i + 1;
+        if (real === index) return "";
+        return `
+          <button class="mini-rail-btn" data-go="${real}">
+            <span>${getName(s)}</span>
+            <span>›</span>
+          </button>
+        `;
+      }).join("");
     }
 
-    function mediaMarkup(slide) {
+    function mediaMarkup(slide, index) {
       return `
         <div class="media-stage">
-          <video autoplay muted loop playsinline preload="metadata">
+          <video
+            id="video-${index}"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="${slide.poster}"
+            onerror="handleVideoError(${index})"
+          >
             <source src="${slide.video}" type="video/mp4">
           </video>
+          <img
+            id="fallback-${index}"
+            class="fallback-image"
+            src="${slide.poster}"
+            alt=""
+          >
         </div>
       `;
     }
@@ -684,7 +688,7 @@
           <div class="slide-inner">
             <div class="treatment-wrap">
               <div class="media-pane">
-                ${mediaMarkup(slide)}
+                ${mediaMarkup(slide, index)}
               </div>
 
               <div class="info-pane">
@@ -724,16 +728,20 @@
       `;
     }).join("");
 
+    window.handleVideoError = function(index) {
+      const video = document.getElementById(`video-${index}`);
+      const fallback = document.getElementById(`fallback-${index}`);
+      if (video) video.classList.add('hidden-video');
+      if (fallback) fallback.classList.add('show');
+    };
+
     const slideEls = [...document.querySelectorAll('.slide')];
 
     function setActiveSlide() {
       const left = deck.scrollLeft;
       const width = deck.clientWidth;
       const active = Math.round(left / width);
-
-      slideEls.forEach((el, i) => {
-        el.classList.toggle('active', i === active);
-      });
+      slideEls.forEach((el, i) => el.classList.toggle('active', i === active));
     }
 
     function goToSlide(index) {
@@ -745,9 +753,7 @@
 
     document.addEventListener('click', (e) => {
       const go = e.target.closest('[data-go]');
-      if (go) {
-        goToSlide(Number(go.dataset.go));
-      }
+      if (go) goToSlide(Number(go.dataset.go));
     });
 
     deck.addEventListener('scroll', setActiveSlide);
