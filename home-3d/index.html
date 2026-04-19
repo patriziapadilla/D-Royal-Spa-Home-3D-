@@ -26,11 +26,7 @@
       overflow:hidden;
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
+    a{color:inherit;text-decoration:none}
     button{
       font:inherit;
       border:none;
@@ -49,28 +45,17 @@
 
     .topbar{
       position:fixed;
-      top:0;
-      left:0;
-      right:0;
+      top:0; left:0; right:0;
       z-index:50;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:12px;
       padding:14px 16px;
       background:linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.08));
       pointer-events:none;
     }
 
-    .topbar > *{
-      pointer-events:auto;
-    }
-
-    .topbar-center{
-      text-align:center;
-      flex:1;
-      min-width:0;
-    }
+    .topbar > *{pointer-events:auto}
 
     .brand{
       margin:0;
@@ -95,9 +80,7 @@
       scrollbar-width:none;
     }
 
-    .deck::-webkit-scrollbar{
-      display:none;
-    }
+    .deck::-webkit-scrollbar{display:none}
 
     .slide{
       flex:0 0 100vw;
@@ -138,6 +121,7 @@
       width:100%;
       height:100%;
       object-fit:cover;
+      display:block;
       z-index:0;
       background:#000;
     }
@@ -146,7 +130,7 @@
       position:absolute;
       inset:0;
       z-index:1;
-      background:linear-gradient(180deg, rgba(0,0,0,.20) 0%, rgba(0,0,0,.34) 34%, rgba(0,0,0,.72) 78%, rgba(0,0,0,.94) 100%);
+      background:linear-gradient(180deg, rgba(0,0,0,.22) 0%, rgba(0,0,0,.36) 34%, rgba(0,0,0,.72) 78%, rgba(0,0,0,.94) 100%);
     }
 
     .home-center{
@@ -235,43 +219,35 @@
 
     .home-rail{
       position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
+      left:0; right:0; bottom:0;
       z-index:3;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:10px;
-      padding:14px 16px 18px;
+      display:grid;
+      gap:4px;
+      padding:0 0 8px;
       background:linear-gradient(180deg, transparent, rgba(0,0,0,.76) 24%, rgba(0,0,0,.96) 100%);
     }
 
-    .rail-btn,
-    .mini-rail-btn{
-      width:auto;
-      min-width:unset;
+    .rail-btn,.mini-rail-btn{
+      width:100%;
       text-align:left;
-      display:inline-flex;
+      display:grid;
+      grid-template-columns:1fr auto;
       align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:10px 16px;
+      padding:0 16px;
       background:#030303;
-      border:1px solid var(--line);
-      border-radius:999px;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
       font-family:Georgia,"Times New Roman",serif;
       color:#fff8ef;
-      margin:0;
     }
 
     .rail-btn{
-      height:auto;
-      font-size:clamp(14px,1.1vw,18px);
+      height:36px;
+      font-size:clamp(15px,1.35vw,22px);
     }
 
     .mini-rail-btn{
-      height:auto;
+      height:32px;
       font-size:13px;
     }
 
@@ -316,17 +292,9 @@
       background:#111;
     }
 
-    .fallback-image{
-      display:none;
-    }
-
-    .fallback-image.show{
-      display:block;
-    }
-
-    .hidden-video{
-      display:none;
-    }
+    .fallback-image{display:none}
+    .fallback-image.show{display:block}
+    .hidden-video{display:none}
 
     .info-pane{
       display:flex;
@@ -459,11 +427,8 @@
 
     .bottom-nav{
       margin-top:12px;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:10px;
-      padding-top:6px;
+      display:grid;
+      gap:4px;
     }
 
     .whatsapp-float{
@@ -486,7 +451,7 @@
     .swipe-hint{
       position:absolute;
       left:50%;
-      bottom:86px;
+      bottom:56px;
       transform:translateX(-50%);
       z-index:4;
       font-size:11px;
@@ -517,15 +482,11 @@
       }
 
       .home-center{
-        padding:110px 18px 220px;
+        padding:110px 18px 190px;
       }
 
       .actions{
         grid-template-columns:1fr;
-      }
-
-      .swipe-hint{
-        bottom:122px;
       }
     }
   </style>
@@ -533,9 +494,7 @@
 <body>
   <div class="app">
     <div class="topbar">
-      <div class="topbar-center">
-        <h1 class="brand" id="brand"></h1>
-      </div>
+      <h1 class="brand" id="brand"></h1>
     </div>
 
     <main class="deck" id="deck"></main>
@@ -569,10 +528,10 @@
       {
         nameEs: "Lipo con Láser 360",
         nameEn: "Lipo Laser 360",
-        textEs: "Ayuda a reducir grasa localizada y definir abdomen, cintura y espalda con una apariencia más estilizada.",
-        textEn: "Helps reduce localized fat and define the abdomen, waist, and back for a more sculpted look.",
-        chipsEs: ["Abdomen","Cintura","Espalda","Láser"],
-        chipsEn: ["Abdomen","Waist","Back","Laser"],
+        textEs: "Moldea, define y ayuda a reducir grasa localizada en abdomen, espalda y contorno corporal desde las primeras sesiones.",
+        textEn: "Contours and helps reduce localized fat across abdomen, back, and body contour from the first sessions.",
+        chipsEs: ["Abdomen","Espalda","Contorno","Láser"],
+        chipsEn: ["Abdomen","Back","Contour","Laser"],
         learn: "https://droyalspa.com/lipo-con-laser",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91559773",
         video: "./lipo-video.mp4",
@@ -582,10 +541,10 @@
       {
         nameEs: "Lipo con Láser 360 con Transfer",
         nameEn: "Lipo Laser 360 with Transfer",
-        textEs: "Combina definición corporal con transferencia para resaltar curvas, glúteos y contorno de cintura.",
-        textEn: "Combines body contouring with transfer to enhance curves, buttocks, and waist definition.",
+        textEs: "Combina definición corporal con transferencia para resaltar curvas, glúteos y cintura con un resultado más armónico.",
+        textEn: "Combines body definition with transfer to enhance curves, butt projection, and waist contour.",
         chipsEs: ["Transfer","Glúteos","Cintura","Láser"],
-        chipsEn: ["Transfer","Buttocks","Waist","Laser"],
+        chipsEn: ["Transfer","Butt","Waist","Laser"],
         learn: "https://droyalspa.com/lipo-laser-con-transfer",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91559810",
         video: "./transfer-video.mp4",
@@ -595,10 +554,10 @@
       {
         nameEs: "Lipo Papada con Láser 360",
         nameEn: "Chin Lipo Laser 360",
-        textEs: "Ayuda a definir la mandíbula y el cuello para un perfil más limpio, fino y elegante.",
-        textEn: "Helps define the jawline and neck for a cleaner, slimmer, and more refined profile.",
-        chipsEs: ["Papada","Mandíbula","Cuello","Láser"],
-        chipsEn: ["Double Chin","Jawline","Neck","Laser"],
+        textEs: "Ayuda a definir mandíbula, perfil y cuello para una apariencia más limpia, elegante y estilizada.",
+        textEn: "Helps define jawline, profile, and neck for a cleaner, more elegant look.",
+        chipsEs: ["Papada","Perfil","Cuello","Láser"],
+        chipsEn: ["Double chin","Profile","Neck","Laser"],
         learn: "https://droyalspa.com/lipo-papada",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560745",
         video: "./chin-video.mp4",
@@ -608,10 +567,10 @@
       {
         nameEs: "D-Cool & RF",
         nameEn: "D-Cool & RF",
-        textEs: "Tratamiento facial enfocado en firmeza, textura y rejuvenecimiento visible del rostro y cuello.",
-        textEn: "Facial treatment focused on firmness, texture, and visible rejuvenation of the face and neck.",
-        chipsEs: ["Rostro","Cuello","Firmeza","RF"],
-        chipsEn: ["Face","Neck","Firmness","RF"],
+        textEs: "Tratamiento facial regenerativo enfocado en textura, firmeza, mirada, cuello y rejuvenecimiento visual.",
+        textEn: "Regenerative facial treatment focused on texture, firmness, eyes, neck, and visible rejuvenation.",
+        chipsEs: ["Cara","Cuello","Ojos","RF"],
+        chipsEn: ["Face","Neck","Eyes","RF"],
         learn: "https://droyalspa.com/d-cool-regeneracion-con-celulas-madre",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560920",
         video: "./face-video.mp4",
@@ -621,10 +580,10 @@
       {
         nameEs: "Aumento de Senos sin Cirugía",
         nameEn: "Non-Surgical Breast Enhancement",
-        textEs: "Ayuda a mejorar el volumen visual, la forma y el escote para una apariencia más armoniosa.",
-        textEn: "Helps improve visual fullness, shape, and cleavage for a more balanced appearance.",
-        chipsEs: ["Escote","Forma","Volumen","RF"],
-        chipsEn: ["Cleavage","Shape","Fullness","RF"],
+        textEs: "Ayuda a mejorar volumen visual, escote y forma para una apariencia más llena y armónica sin cirugía.",
+        textEn: "Helps improve visual fullness, cleavage, and shape for a fuller non-surgical appearance.",
+        chipsEs: ["Escote","Volumen visual","Forma","RF"],
+        chipsEn: ["Cleavage","Visual fullness","Shape","RF"],
         learn: "https://droyalspa.com/new-page",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560087",
         video: "./breast-video.mp4",
@@ -634,10 +593,10 @@
       {
         nameEs: "Aumento de Glúteos sin Cirugía",
         nameEn: "Non-Surgical Butt Enhancement",
-        textEs: "Ayuda a mejorar proyección, forma y apariencia levantada de los glúteos sin cirugía.",
-        textEn: "Helps improve projection, shape, and a lifted appearance without surgery.",
-        chipsEs: ["Glúteos","Forma","Proyección","RF"],
-        chipsEn: ["Buttocks","Shape","Projection","RF"],
+        textEs: "Busca más proyección, forma y una apariencia más levantada, combinando contorno visual y trabajo de tejido.",
+        textEn: "Targets more projection, shape, and a lifted appearance through contouring and tissue work.",
+        chipsEs: ["Proyección","Forma","Lifting visual","RF"],
+        chipsEn: ["Projection","Shape","Lifted look","RF"],
         learn: "https://droyalspa.com/piernas",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91560697",
         video: "./glute-video.mp4",
@@ -647,8 +606,8 @@
       {
         nameEs: "Esculpido de Brazos 360 con Láser",
         nameEn: "Arm Sculpting 360 With Laser",
-        textEs: "Ayuda a definir, afinar y mejorar la apariencia de los brazos para una línea más estilizada.",
-        textEn: "Helps define, slim, and improve the appearance of the arms for a more sculpted line.",
+        textEs: "Ayuda a afinar, tensar y definir el brazo para una línea más limpia y estética.",
+        textEn: "Helps slim, tighten, and define the arms for a cleaner, more sculpted line.",
         chipsEs: ["Brazos","Definición","Firmeza","Láser"],
         chipsEn: ["Arms","Definition","Firmness","Laser"],
         learn: "https://droyalspa.com/reduccion-de-brazos",
@@ -660,10 +619,10 @@
       {
         nameEs: "Esculpido de Piernas 360 con Láser",
         nameEn: "Leg Sculpting 360 With Laser",
-        textEs: "Ayuda a suavizar, definir y estilizar las piernas para un contorno más uniforme.",
-        textEn: "Helps smooth, define, and contour the legs for a more streamlined look.",
-        chipsEs: ["Piernas","Contorno","Suavidad","Láser"],
-        chipsEn: ["Legs","Contour","Smoothness","Laser"],
+        textEs: "Trabaja textura, contorno y reducción visual de celulitis para unas piernas más estilizadas.",
+        textEn: "Targets texture, contour, and visual cellulite reduction for more sculpted legs.",
+        chipsEs: ["Piernas","Celulitis","Contorno","Láser"],
+        chipsEn: ["Legs","Cellulite","Contour","Laser"],
         learn: "https://droyalspa.com/1-reduccion-de-celulitis-en-piernas",
         book: "https://DRoyalSpaMiami.as.me/?appointmentType=91873056",
         video: "./legs-video.mp4",
@@ -730,12 +689,18 @@
           <section class="slide home-slide active" data-slide="${index}">
             <div class="slide-inner">
               <div class="home-video-wrap">
-                <video class="home-video" autoplay muted loop playsinline preload="metadata">
+                <video
+                  class="home-video"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  poster="./modelo.jpg"
+                >
                   <source src="./home-video.mp4" type="video/mp4">
                 </video>
-
                 <div class="home-overlay"></div>
-
                 <div class="home-center">
                   <h2 class="headline">${T.headline}</h2>
                   <div class="areas">${T.areas}</div>
@@ -745,9 +710,7 @@
                   <div class="pick">${T.pick}</div>
                   <div class="pick-sub">${T.pickSub}</div>
                 </div>
-
                 <div class="swipe-hint">${T.swipe}</div>
-
                 <div class="home-rail">
                   ${makeHomeRail()}
                 </div>
@@ -815,9 +778,7 @@
       const left = deck.scrollLeft;
       const width = deck.clientWidth;
       const active = Math.round(left / width);
-      slideEls.forEach((el, i) => {
-        el.classList.toggle('active', i === active);
-      });
+      slideEls.forEach((el, i) => el.classList.toggle('active', i === active));
     }
 
     function goToSlide(index) {
@@ -829,9 +790,7 @@
 
     document.addEventListener('click', (e) => {
       const go = e.target.closest('[data-go]');
-      if (go) {
-        goToSlide(Number(go.dataset.go));
-      }
+      if (go) goToSlide(Number(go.dataset.go));
     });
 
     deck.addEventListener('scroll', setActiveSlide);
