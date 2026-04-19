@@ -218,11 +218,9 @@
       font-weight:700;
     }
 
-    .pick{
-      display:none;
-    }
-
-    .pick-sub{
+    .pick,
+    .pick-sub,
+    .swipe-hint{
       display:none;
     }
 
@@ -337,16 +335,44 @@
       background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
       border:1px solid rgba(255,255,255,.06);
       box-shadow:var(--shadow);
+      position:relative;
     }
 
     .page-card-inner{
       padding:24px 18px 18px;
     }
 
+    .floating-home{
+      position:sticky;
+      top:10px;
+      z-index:12;
+      display:flex;
+      justify-content:flex-start;
+      margin-bottom:14px;
+      pointer-events:none;
+    }
+
+    .floating-home .home-link{
+      pointer-events:auto;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(0,0,0,.72);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 10px 24px rgba(0,0,0,.28);
+      color:#fff8ef;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      backdrop-filter:blur(6px);
+    }
+
     .page-topline{
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:flex-end;
       gap:10px;
       margin-bottom:12px;
       color:rgba(255,255,255,.82);
@@ -484,10 +510,6 @@
       font-size:26px;
     }
 
-    .swipe-hint{
-      display:none;
-    }
-
     @media (max-width: 920px){
       .treatment-wrap{
         grid-template-columns:1fr;
@@ -536,6 +558,16 @@
       .page-text{
         font-size:15px;
         line-height:1.5;
+      }
+
+      .floating-home{
+        top:6px;
+        margin-bottom:10px;
+      }
+
+      .floating-home .home-link{
+        font-size:11px;
+        padding:9px 12px;
       }
     }
   </style>
@@ -719,7 +751,8 @@
             muted
             loop
             playsinline
-            preload="metadata"
+            webkit-playsinline
+            preload="auto"
             poster="${slide.poster}"
             onerror="handleVideoError(${index})"
           >
@@ -741,7 +774,7 @@
           <section class="slide home-slide active" data-slide="${index}">
             <div class="slide-inner">
               <div class="home-video-wrap">
-                <video class="home-video" autoplay muted loop playsinline preload="metadata">
+                <video class="home-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
                   <source src="./home-video.mp4" type="video/mp4">
                 </video>
 
@@ -775,8 +808,11 @@
               <div class="info-pane">
                 <div class="page-card">
                   <div class="page-card-inner">
+                    <div class="floating-home">
+                      <button class="home-link" data-go="0">⌂ ${T.home}</button>
+                    </div>
+
                     <div class="page-topline">
-                      <button class="home-link" data-go="0">‹ ${T.home}</button>
                       <span>${index}/${slides.length - 1}</span>
                     </div>
 
@@ -818,6 +854,21 @@
       if (fallback) fallback.classList.add('show');
     };
 
+    function forcePlayVideos() {
+      const videos = document.querySelectorAll('video');
+      videos.forEach((video) => {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('autoplay', '');
+        video.setAttribute('loop', '');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+        const p = video.play();
+        if (p !== undefined) p.catch(() => {});
+      });
+    }
+
     const slideEls = [...document.querySelectorAll('.slide')];
 
     function setActiveSlide() {
@@ -827,6 +878,7 @@
       slideEls.forEach((el, i) => {
         el.classList.toggle('active', i === active);
       });
+      forcePlayVideos();
     }
 
     function goToSlide(index) {
@@ -834,6 +886,7 @@
         left: index * deck.clientWidth,
         behavior: 'smooth'
       });
+      setTimeout(forcePlayVideos, 250);
     }
 
     document.addEventListener('click', (e) => {
@@ -844,7 +897,10 @@
     });
 
     deck.addEventListener('scroll', setActiveSlide);
-    window.addEventListener('resize', setActiveSlide);
+    window.addEventListener('resize', () => {
+      setActiveSlide();
+      forcePlayVideos();
+    });
 
     deck.addEventListener('wheel', (e) => {
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
@@ -853,7 +909,16 @@
       }
     }, { passive:false });
 
+    document.addEventListener('DOMContentLoaded', forcePlayVideos);
+    window.addEventListener('load', forcePlayVideos);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) forcePlayVideos();
+    });
+    document.addEventListener('touchstart', forcePlayVideos, { passive: true });
+    document.addEventListener('touchend', forcePlayVideos, { passive: true });
+
     setActiveSlide();
+    forcePlayVideos();
   </script>
 </body>
 </html>
