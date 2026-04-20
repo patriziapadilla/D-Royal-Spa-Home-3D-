@@ -146,7 +146,7 @@
       position:absolute;
       inset:0;
       z-index:1;
-      background:linear-gradient(180deg, rgba(0,0,0,.20) 0%, rgba(0,0,0,.34) 34%, rgba(0,0,0,.72) 78%, rgba(0,0,0,.94) 100%);
+      background:linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.32) 32%, rgba(0,0,0,.70) 76%, rgba(0,0,0,.95) 100%);
     }
 
     .home-center{
@@ -156,7 +156,7 @@
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding:82px 20px 190px;
+      padding:68px 20px 150px;
       position:relative;
       z-index:2;
     }
@@ -164,47 +164,54 @@
     .headline{
       margin:0;
       font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(54px,8vw,104px);
+      font-size:clamp(48px,7vw,92px);
       line-height:.92;
       font-weight:500;
       color:#fff9f1;
-      max-width:1000px;
+      max-width:980px;
     }
 
     .review-link{
-      margin-top:14px;
+      margin-top:12px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
-      padding:8px 16px;
+      gap:8px;
+      padding:7px 14px;
       border-radius:999px;
-      background:rgba(0,0,0,.30);
+      background:rgba(0,0,0,.32);
       border:1px solid rgba(255,255,255,.10);
       color:#f3ddba;
       font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(16px,1.5vw,24px);
+      font-size:clamp(15px,1.2vw,21px);
       line-height:1;
     }
 
     .review-stars{
-      letter-spacing:.08em;
-      font-size:1.05em;
+      letter-spacing:.06em;
+      font-size:1em;
+    }
+
+    .home-tagline{
+      margin-top:14px;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(18px,2vw,32px);
+      color:#fff6eb;
     }
 
     .areas{
-      margin-top:18px;
+      margin-top:12px;
       font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(18px,2vw,28px);
+      font-size:clamp(16px,1.9vw,26px);
       color:#f3e7d8;
     }
 
     .offer{
-      margin-top:16px;
+      margin-top:12px;
       display:inline-flex;
       align-items:center;
       gap:10px;
-      padding:7px 10px;
+      padding:6px 10px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
       background:rgba(10,10,10,.34);
@@ -212,48 +219,43 @@
     }
 
     .offer b{
-      padding:8px 12px;
+      padding:7px 12px;
       border-radius:999px;
       background:rgba(220,194,162,.18);
       color:#fff4e8;
     }
 
-    .home-tagline{
-      margin-top:14px;
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(20px,2.4vw,34px);
-      color:#fff6eb;
-    }
-
     .primary-book{
-      margin-top:18px;
+      margin-top:14px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:min(420px, 88vw);
-      padding:14px 26px;
+      width:min(440px, 62vw);
+      max-width:88vw;
+      padding:12px 22px;
       border-radius:999px;
       background:linear-gradient(180deg, #e6c98f 0%, #c99d46 100%);
       color:#111;
       font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(22px,2vw,34px);
+      font-size:clamp(18px,1.7vw,28px);
       font-weight:700;
       box-shadow:0 10px 26px rgba(0,0,0,.28);
       border:1px solid rgba(255,255,255,.22);
+      text-align:center;
     }
 
     .phone-link{
-      margin-top:12px;
+      margin-top:10px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
-      padding:12px 22px;
+      gap:8px;
+      padding:10px 18px;
       border-radius:999px;
       background:rgba(0,0,0,.48);
       border:1px solid rgba(255,255,255,.14);
       color:#fff8ef;
-      font-size:clamp(18px,1.6vw,28px);
+      font-size:clamp(16px,1.35vw,24px);
       font-weight:700;
     }
 
@@ -262,17 +264,10 @@
       line-height:1;
     }
 
-    .home-note{
-      margin-top:16px;
-      color:rgba(255,255,255,.74);
-      font-size:clamp(14px,1.05vw,17px);
-      line-height:1.3;
-    }
-
     .treatments-label{
-      margin-top:26px;
+      margin-top:14px;
       font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(22px,2.1vw,38px);
+      font-size:clamp(18px,1.7vw,30px);
       color:#fff2df;
     }
 
@@ -289,9 +284,9 @@
       bottom:0;
       z-index:3;
       display:grid;
-      gap:2px;
-      padding:0 0 8px;
-      background:linear-gradient(180deg, transparent, rgba(0,0,0,.76) 24%, rgba(0,0,0,.96) 100%);
+      gap:1px;
+      padding:0 0 4px;
+      background:linear-gradient(180deg, transparent, rgba(0,0,0,.76) 24%, rgba(0,0,0,.97) 100%);
     }
 
     .rail-btn,
@@ -315,13 +310,13 @@
     }
 
     .rail-btn{
-      height:30px;
-      font-size:clamp(13px,1.05vw,18px);
+      height:26px;
+      font-size:clamp(12px,0.96vw,16px);
       line-height:1;
     }
 
     .mini-rail-btn{
-      height:28px;
+      height:26px;
       font-size:12px;
       line-height:1;
     }
@@ -585,38 +580,53 @@
       }
 
       .headline{
-        font-size:clamp(46px,12vw,78px);
+        font-size:clamp(40px,10.2vw,66px);
       }
 
       .home-center{
-        padding:86px 18px 205px;
+        padding:74px 16px 154px;
       }
 
       .review-link{
-        font-size:16px;
-        padding:8px 14px;
-        gap:8px;
+        font-size:14px;
+        padding:7px 12px;
+        gap:7px;
+        margin-top:10px;
+      }
+
+      .home-tagline{
+        margin-top:12px;
+        font-size:clamp(16px,5vw,22px);
+      }
+
+      .areas{
+        margin-top:10px;
+        font-size:clamp(14px,4.8vw,20px);
+      }
+
+      .offer{
+        margin-top:10px;
+        font-size:13px;
+        padding:6px 9px;
       }
 
       .primary-book{
-        min-width:86vw;
-        font-size:22px;
-        padding:13px 20px;
+        width:min(320px, 76vw);
+        min-width:unset;
+        font-size:20px;
+        padding:11px 18px;
+        margin-top:12px;
       }
 
       .phone-link{
-        font-size:18px;
-        padding:11px 18px;
-      }
-
-      .home-note{
-        font-size:13px;
-        margin-top:14px;
+        font-size:17px;
+        padding:10px 16px;
+        margin-top:9px;
       }
 
       .treatments-label{
-        margin-top:22px;
-        font-size:22px;
+        margin-top:12px;
+        font-size:20px;
       }
 
       .actions{
@@ -624,20 +634,20 @@
       }
 
       .home-rail{
-        gap:2px;
-        padding:0 0 6px;
+        gap:1px;
+        padding:0 0 3px;
       }
 
       .rail-btn{
-        height:28px;
-        font-size:12px;
-        padding:0 12px;
+        height:24px;
+        font-size:11px;
+        padding:0 10px;
       }
 
       .mini-rail-btn{
-        height:26px;
+        height:24px;
         font-size:11px;
-        padding:0 12px;
+        padding:0 10px;
       }
 
       .page-text{
@@ -882,9 +892,9 @@
                     <span>${T.reviews}</span>
                   </a>
 
+                  <div class="home-tagline">${T.tagline}</div>
                   <div class="areas">${T.areas}</div>
                   <div class="offer"><b>25% OFF</b><span>${T.offer}</span></div>
-                  <div class="home-tagline">${T.tagline}</div>
 
                   <a
                     class="primary-book"
@@ -905,7 +915,6 @@
                     <span>${T.phoneLabel}</span>
                   </a>
 
-                  <div class="home-note">${T.note}</div>
                   <div class="treatments-label">${T.treatmentsLabel} ›</div>
                 </div>
 
