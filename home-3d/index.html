@@ -393,18 +393,11 @@
       overflow-y:auto;
       overflow-x:hidden;
       overscroll-behavior:contain;
-      -webkit-overflow-scrolling:touch;
-      scrollbar-width:thin;
-      scrollbar-color:rgba(243,223,196,.35) rgba(255,255,255,.04);
       background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
       border:1px solid rgba(255,255,255,.06);
       box-shadow:var(--shadow);
       position:relative;
     }
-
-    .page-card::-webkit-scrollbar{width:8px}
-    .page-card::-webkit-scrollbar-track{background:rgba(255,255,255,.04);border-radius:999px}
-    .page-card::-webkit-scrollbar-thumb{background:rgba(243,223,196,.35);border-radius:999px}
 
     .page-card-inner{padding:24px 18px 18px}
 
@@ -811,10 +804,9 @@
     }
 
     .treatment-wrap.l360-stack .page-card{
-      max-height:calc(100vh - 52vh - 150px);
-      min-height:320px;
-      overflow-y:auto;
-      overflow-x:hidden;
+      height:calc(100vh - 52vh - 150px);
+      min-height:280px;
+      overflow:auto;
       background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
     }
 
@@ -947,8 +939,6 @@
       margin-top:12px;
     }
 
-    .l360-pricing-grid-3{grid-template-columns:repeat(3,1fr)}
-
     .l360-price-card{
       padding:18px;
       border-radius:20px;
@@ -1009,7 +999,7 @@
         min-height:300px;
       }
       .treatment-wrap.l360-stack .page-card{
-        max-height:calc(100vh - 38vh - 190px);
+        height:calc(100vh - 38vh - 190px);
         min-height:260px;
       }
     }
@@ -1359,32 +1349,26 @@
       `;
     }
 
-    
-function packageBox(slide, index){
-      const isLipoMain = index === 1;
-      const sessionOptions = isLipoMain
-        ? `
-            <option value="1_offer">${isSpanish ? '1ra Sesión Oferta' : '1st Session Offer'}</option>
-            <option value="8">${isSpanish ? '8 Sesiones' : '8 Sessions'}</option>
-            <option value="10">${isSpanish ? '10 Sesiones' : '10 Sessions'}</option>
-          `
-        : `
-            <option value="3">3 Sessions</option>
-            <option value="6">6 Sessions</option>
-            <option value="8">8 Sessions</option>
-          `;
-
+    function packageBox(slide, index){
+      const isMainLipo = index === 1;
       return `
         <div class="package-box" data-treatment-index="${index}">
           <h4>${T.calcTitle}</h4>
           <div class="calc-grid">
             <select class="package-session-select">
-              ${sessionOptions}
+              ${isMainLipo ? `
+                <option value="1">${isSpanish ? '1 Sesión' : '1 Session'}</option>
+                <option value="10">${isSpanish ? '10 Sesiones' : '10 Sessions'}</option>
+              ` : `
+                <option value="3">3 Sessions</option>
+                <option value="6">6 Sessions</option>
+                <option value="8">8 Sessions</option>
+              `}
             </select>
             <select class="package-area-select">
-              <option value="1">1 Area</option>
-              <option value="2">2 Areas</option>
-              <option value="3">3 Areas</option>
+              <option value="1">${isSpanish ? '1 Área' : '1 Area'}</option>
+              <option value="2">${isSpanish ? '2 Áreas' : '2 Areas'}</option>
+              <option value="3">${isSpanish ? '3 Áreas' : '3 Areas'}</option>
             </select>
           </div>
           <div class="calc-result">
@@ -1392,13 +1376,143 @@ function packageBox(slide, index){
               <div>${T.calcNote}</div>
               <strong>${getName(slide)}</strong>
             </div>
-            <div class="calc-price">$${isLipoMain ? 90 : slide.basePrice}</div>
+            <div class="calc-price">$${slide.basePrice}</div>
           </div>
         </div>
       `;
     }
 
     
+function lipo360IntegratedContent(slide, index) {
+      const faqItems = isSpanish ? [
+        {
+          q: '¿Cuántas sesiones eligen la mayoría de las clientas?',
+          a: 'Muchas empiezan con 1 sesión para probar y luego eligen el paquete de 10 sesiones para ver un cambio más completo.'
+        },
+        {
+          q: '¿Es una lipo sin cirugía?',
+          a: 'Sí. Está presentada como un tratamiento corporal sin cirugía y sin agujas.'
+        },
+        {
+          q: '¿Qué incluye la sesión?',
+          a: 'Incluye Lipo Laser, Ultrasound Cavitation y Radiofrequency (RF).'
+        },
+        {
+          q: '¿Qué hace la radiofrecuencia?',
+          a: 'Ayuda a tensar la piel y mejorar la apariencia después del trabajo corporal.'
+        },
+        {
+          q: '¿Cuándo se pueden empezar a ver resultados?',
+          a: 'Muchas personas empiezan a notar cambios desde las primeras sesiones, dependiendo del cuerpo y la constancia.'
+        }
+      ] : [
+        {
+          q: 'How many sessions do most clients choose?',
+          a: 'Many start with 1 session to try it, then choose the 10-session package for a more complete change.'
+        },
+        {
+          q: 'Is it a surgery-free lipo treatment?',
+          a: 'Yes. It is presented as a non-surgical body treatment without needles.'
+        },
+        {
+          q: 'What is included in the session?',
+          a: 'It includes Lipo Laser, Ultrasound Cavitation, and Radiofrequency (RF).'
+        },
+        {
+          q: 'What does radiofrequency do?',
+          a: 'It helps tighten the skin and improve the look of the treated area after the body contouring work.'
+        },
+        {
+          q: 'When can results start to show?',
+          a: 'Many people start noticing changes from the first sessions, depending on the body and consistency.'
+        }
+      ];
+
+      return `
+        <div class="floating-home">
+          <button class="home-link" data-go="0">⌂ ${T.home}</button>
+        </div>
+
+        <div class="page-topline">
+          <span>${index}/${slides.length - 1}</span>
+        </div>
+
+        <h2 class="page-title">${getName(slide)}</h2>
+        <p class="page-text">${getText(slide)}</p>
+
+        <div class="l360-top-actions">
+          <a class="l360-gold-btn" href="${slide.book}" target="_blank" rel="noopener">${isSpanish ? 'Agendar cita' : 'Book Appointment'}</a>
+        </div>
+
+        <div class="l360-pricing-wrap">
+          <h3 class="l360-section-title">${isSpanish ? 'Precios' : 'Pricing'}</h3>
+          <div class="l360-pricing-grid">
+            <div class="l360-price-card">
+              <strong>${isSpanish ? '1 Sesión' : '1 Session'}</strong>
+              <div class="l360-price">$90</div>
+              <span class="l360-note">${isSpanish ? 'Ideal para empezar.' : 'Great to get started.'}</span>
+            </div>
+            <div class="l360-price-card">
+              <strong>${isSpanish ? '10 Sesiones' : '10 Sessions'}</strong>
+              <div class="l360-price">$1800</div>
+              <span class="l360-note">${isSpanish ? 'Paquete completo.' : 'Complete package.'}</span>
+            </div>
+          </div>
+          <div class="l360-bottom-actions">
+            <button class="l360-package-btn scroll-to-package" data-treatment-index="${index}">${T.packageBtn}</button>
+            <a class="l360-ghost-btn" href="${slide.book}" target="_blank" rel="noopener">${isSpanish ? 'Agendar cita' : 'Book Appointment'}</a>
+          </div>
+          ${packageBox(slide, index)}
+        </div>
+
+        <div class="l360-gallery-wrap">
+          <h3 class="l360-section-title">${isSpanish ? 'Antes y Después' : 'Before & After'}</h3>
+          <div class="l360-results-grid">
+            <article class="l360-result-card featured">
+              <img src="${slide.result}" alt="${isSpanish ? 'Resultado destacado' : 'Featured result'}">
+              <div class="l360-result-copy">
+                <strong>${isSpanish ? 'Resultado destacado' : 'Featured Result'}</strong>
+                <span>${isSpanish ? 'La imagen original de resultados de tu página 3D.' : 'The original results image from your 3D page.'}</span>
+              </div>
+            </article>
+            <article class="l360-result-card">
+              <img src="./lipo-laser-360-before-after-front-abdomen.jpg" alt="${isSpanish ? 'Antes y después frontal abdomen' : 'Front abdomen before and after'}">
+              <div class="l360-result-copy">
+                <strong>${isSpanish ? 'Mujer · Vista frontal' : 'Woman · Front View'}</strong>
+                <span>${isSpanish ? 'Comparación frontal añadida para ver mejor el cambio.' : 'Front comparison added to show the change more clearly.'}</span>
+              </div>
+            </article>
+            <article class="l360-result-card">
+              <img src="./lipo-laser-360-before-after-side-waist.jpg" alt="${isSpanish ? 'Antes y después lateral cintura' : 'Side waist before and after'}">
+              <div class="l360-result-copy">
+                <strong>${isSpanish ? 'Hombre · Vista lateral' : 'Man · Side View'}</strong>
+                <span>${isSpanish ? 'Comparación lateral para mostrar cómo se ve también en hombre.' : 'Side comparison to show how it can look on a man too.'}</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="l360-faq">
+          <h3 class="l360-section-title">FAQ</h3>
+          <div class="l360-faq-list">
+            ${faqItems.map((item, i) => `
+              <details ${i === 0 ? 'open' : ''}>
+                <summary>${item.q}</summary>
+                <p>${item.a}</p>
+              </details>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="results-note">${T.note}</div>
+
+        <div class="bottom-nav">
+          ${makeMiniRail(index)}
+        </div>
+      `;
+    }
+
+
     deck.innerHTML = slides.map((slide, index) => {
       if (slide.type === 'home') {
         return `
@@ -1744,10 +1858,12 @@ function packageBox(slide, index){
 
     deck.addEventListener('wheel', (e) => {
       const card = e.target.closest('.page-card');
-      if (card && card.scrollHeight > card.clientHeight && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) {
-        e.preventDefault();
-        card.scrollTop += e.deltaY;
-        return;
+      if (card && card.scrollHeight > card.clientHeight) {
+        const atTop = card.scrollTop <= 0;
+        const atBottom = Math.ceil(card.scrollTop + card.clientHeight) >= card.scrollHeight;
+        if ((e.deltaY < 0 && !atTop) || (e.deltaY > 0 && !atBottom)) {
+          return;
+        }
       }
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault();
