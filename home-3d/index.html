@@ -1224,6 +1224,21 @@
     const resultsModal = document.getElementById('resultsModal');
     const closeResultsModal = document.getElementById('closeResultsModal');
     const resultsGrid = document.getElementById('resultsGrid');
+
+    if (resultsGrid) {
+      resultsGrid.classList.add('results-gallery-grid');
+      const resultsStyle = document.createElement('style');
+      resultsStyle.textContent = `
+        .results-gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+        .results-gallery-card{padding:12px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);display:grid;gap:10px;text-align:left}
+        .results-gallery-image{width:100%;height:180px;border-radius:16px;object-fit:cover;background:#111;display:block}
+        .results-gallery-title{font-family:Georgia,"Times New Roman",serif;font-size:22px;color:#fff8ef;line-height:1.05;margin:2px 0 0}
+        .results-gallery-sub{font-size:13px;color:var(--muted);line-height:1.4}
+        .results-gallery-btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 14px;border-radius:999px;background:linear-gradient(180deg,#e6c98f 0%,#c99d46 100%);color:#111;font-weight:900;border:none;cursor:pointer}
+        @media (max-width:920px){.results-gallery-grid{grid-template-columns:1fr}.results-gallery-image{height:160px}.results-gallery-title{font-size:20px}}
+      `;
+      document.head.appendChild(resultsStyle);
+    }
     const quoteForm = document.getElementById('quoteForm');
     const leadTreatment = document.getElementById('leadTreatment');
     const sendWhatsBtn = document.getElementById('sendWhatsBtn');
@@ -1237,15 +1252,36 @@
       leadTreatment.appendChild(opt);
 
       if (resultsGrid) {
-        const card = document.createElement('button');
-        card.type = 'button';
-        card.className = 'phase2-area-card';
-        card.innerHTML = `<strong>${getName(slide)}</strong><span>Open results and treatment page</span>`;
-        card.addEventListener('click', () => {
+        const card = document.createElement('div');
+        card.className = 'results-gallery-card';
+
+        const img = document.createElement('img');
+        img.className = 'results-gallery-image';
+        img.src = slide.result;
+        img.alt = `${getName(slide)} result`;
+
+        const title = document.createElement('div');
+        title.className = 'results-gallery-title';
+        title.textContent = getName(slide);
+
+        const sub = document.createElement('div');
+        sub.className = 'results-gallery-sub';
+        sub.textContent = 'See the result and open the treatment page.';
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'results-gallery-btn';
+        btn.textContent = `Learn More About ${getName(slide)}`;
+        btn.addEventListener('click', () => {
           resultsModal.classList.remove('open');
           resultsModal.setAttribute('aria-hidden', 'true');
           goToSlide(idx + 1);
         });
+
+        card.appendChild(img);
+        card.appendChild(title);
+        card.appendChild(sub);
+        card.appendChild(btn);
         resultsGrid.appendChild(card);
       }
     });
