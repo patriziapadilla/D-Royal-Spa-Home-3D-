@@ -335,6 +335,18 @@
       align-items:stretch;
     }
 
+    .l360-stack{
+      grid-template-columns:1fr;
+      align-items:start;
+      height:auto;
+      min-height:100%;
+    }
+
+    .l360-stack .media-pane{
+      min-height:420px;
+      max-height:72vh;
+    }
+
     .media-pane{
       position:relative;
       border-radius:28px;
@@ -369,7 +381,9 @@
       flex:1;
       min-height:0;
       border-radius:28px;
-      overflow:auto;
+      overflow-y:auto;
+      overflow-x:hidden;
+      overscroll-behavior:contain;
       background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
       border:1px solid rgba(255,255,255,.06);
       box-shadow:var(--shadow);
@@ -1094,15 +1108,15 @@
       results: isSpanish ? "Resultados Reales" : "Real Results",
       learn: isSpanish ? "Aprender más" : "Learn more",
       book: isSpanish ? "Agendar cita" : "Book now",
-      bookMain: "Book Appointment",
-      quoteMain: "Quick Quote on WhatsApp",
-      quickLead: "Get Prices Fast",
+      bookMain: isSpanish ? "Agendar cita" : "Book Appointment",
+      quoteMain: isSpanish ? "Cotización rápida por WhatsApp" : "Quick Quote on WhatsApp",
+      quickLead: isSpanish ? "Obtén precios rápido" : "Get Prices Fast",
       note: isSpanish ? "Resultados visibles desde primeras sesiones*" : "Visible results from first sessions*",
-      treatmentsLabel: "Treatments",
-      calcTitle: "Package Estimator",
-      calcNote: "Estimated promo preview",
-      quoteBtn: "Ask About This Treatment",
-      packageBtn: "See Package Price"
+      treatmentsLabel: isSpanish ? "Tratamientos" : "Treatments",
+      calcTitle: isSpanish ? "Escoger paquete" : "Choose Package",
+      calcNote: isSpanish ? "Vista previa del paquete" : "Package preview",
+      quoteBtn: isSpanish ? "Preguntar por este tratamiento" : "Ask About This Treatment",
+      packageBtn: isSpanish ? "Escoger paquete" : "Choose Package"
     };
 
     document.getElementById('brand').textContent = T.brand;
@@ -1284,19 +1298,25 @@
     }
 
     function packageBox(slide, index){
+      const isMainLipo = index === 1;
       return `
         <div class="package-box" data-treatment-index="${index}">
           <h4>${T.calcTitle}</h4>
           <div class="calc-grid">
             <select class="package-session-select">
-              <option value="3">3 Sessions</option>
-              <option value="6">6 Sessions</option>
-              <option value="8">8 Sessions</option>
+              ${isMainLipo ? `
+                <option value="1">${isSpanish ? '1 Sesión' : '1 Session'}</option>
+                <option value="10">${isSpanish ? '10 Sesiones' : '10 Sessions'}</option>
+              ` : `
+                <option value="3">3 Sessions</option>
+                <option value="6">6 Sessions</option>
+                <option value="8">8 Sessions</option>
+              `}
             </select>
             <select class="package-area-select">
-              <option value="1">1 Area</option>
-              <option value="2">2 Areas</option>
-              <option value="3">3 Areas</option>
+              <option value="1">${isSpanish ? '1 Área' : '1 Area'}</option>
+              <option value="2">${isSpanish ? '2 Áreas' : '2 Areas'}</option>
+              <option value="3">${isSpanish ? '3 Áreas' : '3 Areas'}</option>
             </select>
           </div>
           <div class="calc-result">
@@ -1310,7 +1330,52 @@
       `;
     }
 
-    function lipo360IntegratedContent(slide, index) {
+    
+function lipo360IntegratedContent(slide, index) {
+      const faqItems = isSpanish ? [
+        {
+          q: '¿Cuántas sesiones eligen la mayoría de las clientas?',
+          a: 'Muchas empiezan con 1 sesión para probar y luego eligen el paquete de 10 sesiones para ver un cambio más completo.'
+        },
+        {
+          q: '¿Es una lipo sin cirugía?',
+          a: 'Sí. Está presentada como un tratamiento corporal sin cirugía y sin agujas.'
+        },
+        {
+          q: '¿Qué incluye la sesión?',
+          a: 'Incluye Lipo Laser, Ultrasound Cavitation y Radiofrequency (RF).'
+        },
+        {
+          q: '¿Qué hace la radiofrecuencia?',
+          a: 'Ayuda a tensar la piel y mejorar la apariencia después del trabajo corporal.'
+        },
+        {
+          q: '¿Cuándo se pueden empezar a ver resultados?',
+          a: 'Muchas personas empiezan a notar cambios desde las primeras sesiones, dependiendo del cuerpo y la constancia.'
+        }
+      ] : [
+        {
+          q: 'How many sessions do most clients choose?',
+          a: 'Many start with 1 session to try it, then choose the 10-session package for a more complete change.'
+        },
+        {
+          q: 'Is it a surgery-free lipo treatment?',
+          a: 'Yes. It is presented as a non-surgical body treatment without needles.'
+        },
+        {
+          q: 'What is included in the session?',
+          a: 'It includes Lipo Laser, Ultrasound Cavitation, and Radiofrequency (RF).'
+        },
+        {
+          q: 'What does radiofrequency do?',
+          a: 'It helps tighten the skin and improve the look of the treated area after the body contouring work.'
+        },
+        {
+          q: 'When can results start to show?',
+          a: 'Many people start noticing changes from the first sessions, depending on the body and consistency.'
+        }
+      ];
+
       return `
         <div class="floating-home">
           <button class="home-link" data-go="0">⌂ ${T.home}</button>
@@ -1324,93 +1389,52 @@
         <p class="page-text">${getText(slide)}</p>
 
         <div class="l360-top-actions">
-          <a class="l360-gold-btn" href="${slide.book}" target="_blank" rel="noopener">${T.book}</a>
-          <a class="l360-ghost-btn" href="https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola, quiero información sobre Lipo con Láser 360.')}" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-
-        <div class="l360-summary-box">
-          <h3 class="l360-section-title">How It Works</h3>
-          <p>Lipo Laser derrite grasa. Ultrasound Cavitation rompe grasa y ayuda a removerla a través del sistema linfático. Radiofrequency tensa la piel. El masaje linfático ayuda a drenar naturalmente. Es una lipo sin cirugía.</p>
-        </div>
-
-        <div class="l360-section">
-          <h3 class="l360-section-title">Treatment Technology</h3>
-          <div class="l360-step-grid">
-            <article class="l360-step-card">
-              <img src="./lipo-laser-pads-treatment.jpg" alt="Lipo Laser pads treatment">
-              <div class="l360-step-copy">
-                <strong>Lipo Laser</strong>
-                <span>Derrite grasa.</span>
-              </div>
-            </article>
-            <article class="l360-step-card">
-              <img src="./ultrasound-cavitation-treatment.jpg" alt="Ultrasound cavitation treatment">
-              <div class="l360-step-copy">
-                <strong>Ultrasound Cavitation</strong>
-                <span>Rompe grasa y ayuda a eliminarla por el sistema linfático.</span>
-              </div>
-            </article>
-            <article class="l360-step-card">
-              <img src="./radio-frequency-rf-treatment-heads.jpg" alt="Radiofrequency RF treatment heads">
-              <div class="l360-step-copy">
-                <strong>Radiofrequency (RF)</strong>
-                <span>Tensa la piel.</span>
-              </div>
-            </article>
-            <article class="l360-step-card">
-              <img src="./body-contouring-treatment.jpg" alt="Body contouring treatment">
-              <div class="l360-step-copy">
-                <strong>Lymphatic Drainage</strong>
-                <span>Drena naturalmente.</span>
-              </div>
-            </article>
-          </div>
+          <a class="l360-gold-btn" href="${slide.book}" target="_blank" rel="noopener">${isSpanish ? 'Agendar cita' : 'Book Appointment'}</a>
         </div>
 
         <div class="l360-pricing-wrap">
-          <h3 class="l360-section-title">Pricing</h3>
+          <h3 class="l360-section-title">${isSpanish ? 'Precios' : 'Pricing'}</h3>
           <div class="l360-pricing-grid">
             <div class="l360-price-card">
-              <strong>1 Session</strong>
+              <strong>${isSpanish ? '1 Sesión' : '1 Session'}</strong>
               <div class="l360-price">$90</div>
-              <span class="l360-note">Quick intro package.</span>
+              <span class="l360-note">${isSpanish ? 'Ideal para empezar.' : 'Great to get started.'}</span>
             </div>
             <div class="l360-price-card">
-              <strong>10 Sessions</strong>
+              <strong>${isSpanish ? '10 Sesiones' : '10 Sessions'}</strong>
               <div class="l360-price">$1800</div>
-              <span class="l360-note">Complete body contouring package.</span>
+              <span class="l360-note">${isSpanish ? 'Paquete completo.' : 'Complete package.'}</span>
             </div>
           </div>
-          <p class="l360-price-note">Choose your package and book directly from the same page.</p>
           <div class="l360-bottom-actions">
             <button class="l360-package-btn scroll-to-package" data-treatment-index="${index}">${T.packageBtn}</button>
-            <a class="l360-ghost-btn" href="${slide.book}" target="_blank" rel="noopener">Book Appointment</a>
+            <a class="l360-ghost-btn" href="${slide.book}" target="_blank" rel="noopener">${isSpanish ? 'Agendar cita' : 'Book Appointment'}</a>
           </div>
           ${packageBox(slide, index)}
         </div>
 
         <div class="l360-gallery-wrap">
-          <h3 class="l360-section-title">Before & After</h3>
+          <h3 class="l360-section-title">${isSpanish ? 'Antes y Después' : 'Before & After'}</h3>
           <div class="l360-results-grid">
             <article class="l360-result-card featured">
-              <img src="${slide.result}" alt="Real result from current gallery">
+              <img src="${slide.result}" alt="${isSpanish ? 'Resultado destacado' : 'Featured result'}">
               <div class="l360-result-copy">
-                <strong>Featured Result</strong>
-                <span>The original before and after image from your 3D page stays here.</span>
+                <strong>${isSpanish ? 'Resultado destacado' : 'Featured Result'}</strong>
+                <span>${isSpanish ? 'La imagen original de resultados de tu página 3D.' : 'The original results image from your 3D page.'}</span>
               </div>
             </article>
             <article class="l360-result-card">
-              <img src="./lipo-laser-360-before-after-front-abdomen.jpg" alt="Lipo Laser 360 front before and after">
+              <img src="./lipo-laser-360-before-after-front-abdomen.jpg" alt="${isSpanish ? 'Antes y después frontal abdomen' : 'Front abdomen before and after'}">
               <div class="l360-result-copy">
-                <strong>Front View Result</strong>
-                <span>Extra example added from your new uploaded files.</span>
+                <strong>${isSpanish ? 'Mujer · Vista frontal' : 'Woman · Front View'}</strong>
+                <span>${isSpanish ? 'Comparación frontal añadida para ver mejor el cambio.' : 'Front comparison added to show the change more clearly.'}</span>
               </div>
             </article>
             <article class="l360-result-card">
-              <img src="./lipo-laser-360-before-after-side-waist.jpg" alt="Lipo Laser 360 side before and after">
+              <img src="./lipo-laser-360-before-after-side-waist.jpg" alt="${isSpanish ? 'Antes y después lateral cintura' : 'Side waist before and after'}">
               <div class="l360-result-copy">
-                <strong>Side View Result</strong>
-                <span>Extra example added so clients can compare different angles.</span>
+                <strong>${isSpanish ? 'Hombre · Vista lateral' : 'Man · Side View'}</strong>
+                <span>${isSpanish ? 'Comparación lateral para mostrar cómo se ve también en hombre.' : 'Side comparison to show how it can look on a man too.'}</span>
               </div>
             </article>
           </div>
@@ -1419,26 +1443,12 @@
         <div class="l360-faq">
           <h3 class="l360-section-title">FAQ</h3>
           <div class="l360-faq-list">
-            <details open>
-              <summary>How many sessions do most clients choose?</summary>
-              <p>Many clients start with one session to try it, then choose a package for a stronger contouring plan.</p>
-            </details>
-            <details>
-              <summary>Does it include more than one technology?</summary>
-              <p>Yes. This page combines Lipo Laser, Ultrasound Cavitation, Radiofrequency, and lymphatic drainage in one clear offer.</p>
-            </details>
-            <details>
-              <summary>Is it surgery?</summary>
-              <p>No. It is presented here as a non-surgical body contouring treatment without needles.</p>
-            </details>
-            <details>
-              <summary>What does RF do?</summary>
-              <p>RF helps tighten the skin after the fat-melting and contouring steps.</p>
-            </details>
-            <details>
-              <summary>Why is everything on one page now?</summary>
-              <p>So clients can understand the treatment, pricing, results, and booking flow without needing to click Learn More.</p>
-            </details>
+            ${faqItems.map((item, i) => `
+              <details ${i === 0 ? 'open' : ''}>
+                <summary>${item.q}</summary>
+                <p>${item.a}</p>
+              </details>
+            `).join('')}
           </div>
         </div>
 
@@ -1509,14 +1519,13 @@
       return `
         <section class="slide treatment" data-slide="${index}">
           <div class="slide-inner">
-            <div class="treatment-wrap">
+            <div class="treatment-wrap ${isLipo360Main ? 'l360-stack' : ''}">
               <div class="media-pane">
                 ${mediaMarkup(slide, index)}
                 ${isLipo360Main ? `
                   <div class="l360-hero-overlay">
-                    <span class="l360-kicker">Body Contouring · In Home</span>
+                    <span class="l360-kicker">${isSpanish ? 'Body Contouring · En Casa' : 'Body Contouring · In Home'}</span>
                     <h2 class="l360-hero-title">${getName(slide)}</h2>
-                    <div class="l360-hero-sub">${getText(slide)}</div>
                   </div>
                 ` : ``}
               </div>
@@ -1718,8 +1727,13 @@
       const slide = slides[index];
       const sessionValue = Number(box.querySelector('.package-session-select').value);
       const areaValue = Number(box.querySelector('.package-area-select').value);
-      const multiplier = sessionValue === 3 ? 1 : sessionValue === 6 ? 1.75 : 2.25;
-      const total = Math.round(slide.basePrice * multiplier * areaValue);
+      let total;
+      if (index === 1) {
+        total = sessionValue === 10 ? 1800 * areaValue : 90 * areaValue;
+      } else {
+        const multiplier = sessionValue === 3 ? 1 : sessionValue === 6 ? 1.75 : 2.25;
+        total = Math.round(slide.basePrice * multiplier * areaValue);
+      }
       box.querySelector('.calc-price').textContent = `$${total}`;
     }
 
@@ -1791,6 +1805,14 @@
     window.addEventListener('resize', () => { setActiveSlide(); forcePlayVideos(); });
 
     deck.addEventListener('wheel', (e) => {
+      const card = e.target.closest('.page-card');
+      if (card && card.scrollHeight > card.clientHeight) {
+        const atTop = card.scrollTop <= 0;
+        const atBottom = Math.ceil(card.scrollTop + card.clientHeight) >= card.scrollHeight;
+        if ((e.deltaY < 0 && !atTop) || (e.deltaY > 0 && !atBottom)) {
+          return;
+        }
+      }
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault();
         deck.scrollLeft += e.deltaY;
