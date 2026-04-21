@@ -1715,5 +1715,217 @@
       rebuildMiniNav();
     })();
   </script>
+  <script>
+    (function addPhase4Features(){
+      const homeCenter = document.querySelector('.home-center');
+      const homeTools = document.querySelector('.home-tools');
+      if (!homeCenter) return;
+
+      if (!document.querySelector('.phase4-packages')) {
+        const packages = document.createElement('section');
+        packages.className = 'phase4-packages';
+        packages.innerHTML = `
+          <div class="phase4-section-head">Most Popular Packages</div>
+          <div class="phase4-package-grid">
+            <article class="phase4-package-card">
+              <div class="phase4-badge">Starter</div>
+              <h3>3 Sessions</h3>
+              <div class="phase4-price">$199+</div>
+              <p>Perfect to start and see your first visible changes.</p>
+              <ul>
+                <li>Popular for waist, abdomen or papada</li>
+                <li>Mobile appointment</li>
+                <li>Quick booking</li>
+              </ul>
+              <a href="https://wa.me/17866900960?text=Hola,%20quiero%20el%20paquete%20de%203%20sesiones." target="_blank" rel="noopener">Ask for 3 Sessions</a>
+            </article>
+            <article class="phase4-package-card phase4-package-featured">
+              <div class="phase4-badge">Best Seller</div>
+              <h3>6 Sessions</h3>
+              <div class="phase4-price">$349+</div>
+              <p>Best option for stronger body contouring and skin tightening progress.</p>
+              <ul>
+                <li>Great for body sculpting</li>
+                <li>Works for waist, arms, legs and glutes</li>
+                <li>Most requested package</li>
+              </ul>
+              <a href="https://wa.me/17866900960?text=Hola,%20quiero%20el%20paquete%20de%206%20sesiones." target="_blank" rel="noopener">Ask for 6 Sessions</a>
+            </article>
+            <article class="phase4-package-card">
+              <div class="phase4-badge">VIP</div>
+              <h3>8 Sessions</h3>
+              <div class="phase4-price">$499+</div>
+              <p>Ideal for clients who want a more complete transformation plan.</p>
+              <ul>
+                <li>Higher value package</li>
+                <li>Better for consistent results</li>
+                <li>Easy to combine treatments</li>
+              </ul>
+              <a href="https://wa.me/17866900960?text=Hola,%20quiero%20el%20paquete%20de%208%20sesiones." target="_blank" rel="noopener">Ask for 8 Sessions</a>
+            </article>
+          </div>
+        `;
+        homeCenter.appendChild(packages);
+      }
+
+      if (!document.querySelector('.phase4-faq')) {
+        const faq = document.createElement('section');
+        faq.className = 'phase4-faq';
+        faq.innerHTML = `
+          <div class="phase4-section-head">FAQ</div>
+          <div class="phase4-faq-list">
+            <details>
+              <summary>Do you travel to my area?</summary>
+              <p>We serve Miami, Brickell, Downtown Miami, Miami Beach, Doral, Hialeah and nearby areas depending on availability.</p>
+            </details>
+            <details>
+              <summary>Are treatments non-surgical?</summary>
+              <p>Yes. Our most requested services are designed as non-surgical beauty and body contouring treatments.</p>
+            </details>
+            <details>
+              <summary>How do I book?</summary>
+              <p>You can book online, open WhatsApp, or request a quick quote and preferred date directly from the site.</p>
+            </details>
+            <details>
+              <summary>Which treatments are most popular?</summary>
+              <p>Laser lipo, body contouring, papada reduction, D-Cool & RF facial and non-surgical glute enhancement are among the most requested.</p>
+            </details>
+          </div>
+        `;
+        if (homeTools) {
+          homeTools.insertAdjacentElement('afterend', faq);
+        } else {
+          homeCenter.appendChild(faq);
+        }
+      }
+
+      if (!document.getElementById('phase4PromoBar')) {
+        const promo = document.createElement('div');
+        promo.id = 'phase4PromoBar';
+        promo.className = 'phase4-promo-bar';
+        promo.innerHTML = `
+          <span>Limited Offer: Ask about your first-session promo today</span>
+          <a href="https://wa.me/17866900960?text=Hola,%20quiero%20la%20promoci%C3%B3n%20de%20primera%20sesi%C3%B3n." target="_blank" rel="noopener">Claim Offer</a>
+        `;
+        document.body.appendChild(promo);
+      }
+
+      const seoSlidesData = [
+        {
+          title: 'Body Contouring Doral',
+          subtitle: 'Mobile sculpting appointments in Doral',
+          text: 'Droyalspa offers mobile body contouring, laser lipo, RF skin tightening and in-home beauty appointments in Doral. Great for waist, abdomen, arms and targeted contouring sessions.',
+          whatsapp: 'Hola, quiero información sobre Body Contouring en Doral.'
+        },
+        {
+          title: 'Laser Lipo Hialeah',
+          subtitle: 'At-home laser lipo service in Hialeah',
+          text: 'Book laser lipo, cavitation and body contouring appointments in Hialeah with mobile service. Designed for clients looking for convenience, visible shaping and luxury at-home care.',
+          whatsapp: 'Hola, quiero información sobre Laser Lipo en Hialeah.'
+        }
+      ];
+
+      const deck = document.getElementById('deck');
+      const homeRail = document.querySelector('.home-rail');
+      seoSlidesData.forEach((item) => {
+        const exists = [...document.querySelectorAll('.page-title')].some(el => el.textContent.trim() === item.title);
+        if (exists || !deck || !homeRail) return;
+        const section = document.createElement('section');
+        section.className = 'slide treatment phase4-seo-slide';
+        section.setAttribute('data-slide', document.querySelectorAll('.slide').length);
+        section.innerHTML = `
+          <div class="slide-inner">
+            <div class="treatment-wrap phase3-seo-wrap">
+              <div class="media-pane phase3-seo-pane">
+                <div class="phase3-seo-hero">
+                  <div class="phase3-seo-kicker">Local SEO Page</div>
+                  <h2>${item.title}</h2>
+                  <p>${item.subtitle}</p>
+                  <div class="phase3-seo-tags">
+                    <span>Mobile Service</span>
+                    <span>Local Area</span>
+                    <span>Fast Booking</span>
+                  </div>
+                </div>
+              </div>
+              <div class="info-pane">
+                <div class="page-card">
+                  <div class="page-card-inner">
+                    <div class="floating-home"><button class="home-link" data-go="0">⌂ Home</button></div>
+                    <div class="page-topline"><span>Location SEO</span></div>
+                    <h2 class="page-title">${item.title}</h2>
+                    <p class="page-text">${item.text}</p>
+                    <div class="phase3-info-grid">
+                      <div class="phase3-info-card"><strong>Popular requests</strong><span>Laser lipo, waist contouring, RF tightening and mobile beauty sessions.</span></div>
+                      <div class="phase3-info-card"><strong>How it works</strong><span>We travel to your location with selected professional equipment and booking support.</span></div>
+                    </div>
+                    <div class="actions">
+                      <a class="btn light" href="https://droyalspa.com" target="_blank" rel="noopener">Visit Website</a>
+                      <a class="btn gold" href="https://wa.me/17866900960?text=${encodeURIComponent(item.whatsapp)}" target="_blank" rel="noopener">Ask on WhatsApp</a>
+                    </div>
+                    <div class="bottom-nav phase3-mini-nav"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        deck.appendChild(section);
+        const railBtn = document.createElement('button');
+        railBtn.className = 'rail-btn';
+        railBtn.setAttribute('data-go', document.querySelectorAll('.slide').length - 1);
+        railBtn.innerHTML = `<span>${item.title}</span><span>›</span>`;
+        homeRail.appendChild(railBtn);
+      });
+
+      const style = document.createElement('style');
+      style.textContent = `
+        .phase4-section-head{margin:18px 0 12px;font-family:Georgia,"Times New Roman",serif;font-size:22px;color:#fff2df;text-align:center}
+        .phase4-packages{margin-top:18px;width:min(1100px,94vw);display:grid;gap:10px}
+        .phase4-package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+        .phase4-package-card{padding:18px;border-radius:24px;background:rgba(6,6,6,.62);border:1px solid rgba(255,255,255,.10);box-shadow:var(--shadow);display:grid;gap:10px;text-align:left}
+        .phase4-package-featured{outline:1px solid rgba(220,194,162,.36);transform:translateY(-2px)}
+        .phase4-badge{display:inline-flex;align-items:center;justify-content:center;width:max-content;padding:6px 10px;border-radius:999px;background:rgba(220,194,162,.18);color:#fff4e8;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+        .phase4-package-card h3{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:28px;font-weight:500;color:#fff8ef}
+        .phase4-price{font-size:34px;font-weight:900;color:#f3dfc4}
+        .phase4-package-card p{margin:0;color:var(--muted);line-height:1.45;font-size:14px}
+        .phase4-package-card ul{margin:0;padding-left:18px;color:#f1e7db;display:grid;gap:8px;font-size:14px}
+        .phase4-package-card a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border-radius:999px;background:linear-gradient(180deg,#e6c98f 0%,#c99d46 100%);color:#111;font-weight:900;padding:0 16px;margin-top:4px}
+        .phase4-faq{margin-top:18px;width:min(980px,94vw);display:grid;gap:10px}
+        .phase4-faq-list{display:grid;gap:10px}
+        .phase4-faq-list details{padding:14px 16px;border-radius:18px;background:rgba(6,6,6,.58);border:1px solid rgba(255,255,255,.10)}
+        .phase4-faq-list summary{cursor:pointer;font-weight:800;color:#fff8ef;list-style:none}
+        .phase4-faq-list summary::-webkit-details-marker{display:none}
+        .phase4-faq-list p{margin:12px 0 0;color:var(--muted);line-height:1.5;font-size:14px}
+        .phase4-promo-bar{position:fixed;top:62px;left:50%;transform:translateX(-50%);z-index:58;display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;padding:10px 16px;border-radius:999px;background:rgba(7,7,7,.82);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(6px);box-shadow:var(--shadow);max-width:min(92vw,760px);text-align:center}
+        .phase4-promo-bar span{font-size:14px;color:#fff8ef}
+        .phase4-promo-bar a{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 14px;border-radius:999px;background:#f3dfc4;color:#111;font-weight:900}
+        @media (max-width:920px){
+          .phase4-package-grid{grid-template-columns:1fr}
+          .phase4-promo-bar{top:58px;padding:10px 12px;gap:10px}
+          .phase4-promo-bar span{font-size:13px}
+        }
+      `;
+      document.head.appendChild(style);
+
+      function rebuildAllMiniNavsPhase4(){
+        const slidesAll = [...document.querySelectorAll('.slide')];
+        slidesAll.forEach((slide, index) => slide.setAttribute('data-slide', index));
+        slidesAll.forEach((slide, index) => {
+          const nav = slide.querySelector('.bottom-nav, .phase3-mini-nav');
+          if (!nav) return;
+          const items = slidesAll.slice(1).map((s, i) => {
+            const real = i + 1;
+            if (real === index) return '';
+            const titleEl = s.querySelector('.page-title, .phase3-seo-hero h2');
+            const title = titleEl ? titleEl.textContent.trim() : `Page ${real}`;
+            return `<button class="mini-rail-btn" data-go="${real}"><span>${title}</span><span>›</span></button>`;
+          }).join('');
+          nav.innerHTML = items;
+        });
+      }
+      rebuildAllMiniNavsPhase4();
+    })();
+  </script>
 </body>
 </html>
