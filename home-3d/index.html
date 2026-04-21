@@ -1962,5 +1962,94 @@
       document.getElementById('fcSend')?.addEventListener('click',()=>{const n=document.getElementById('fcName').value||'';const c=document.getElementById('fcEmail').value||'';window.open('https://wa.me/17866900960?text='+encodeURIComponent('Hola, quiero un quote rápido. Name: '+n+' Contact: '+c),'_blank');});
     })();
   </script>
+  <script>
+    (function finalEmpireLayer(){
+      if(!document.getElementById('empireStyles')){
+        const s=document.createElement('style'); s.id='empireStyles'; s.textContent=`
+        body{background:radial-gradient(circle at top,#111 0%,#000 42%,#000 100%)}
+        .topbar{backdrop-filter:blur(10px)}
+        .brand{text-shadow:0 0 24px rgba(220,194,162,.18)}
+        .empire-strip{margin:18px auto 0;width:min(1100px,94vw);display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+        .empire-card{padding:18px;border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.10);box-shadow:0 22px 60px rgba(0,0,0,.35)}
+        .empire-card h3{margin:0 0 8px;font-family:Georgia,"Times New Roman",serif;font-size:26px;color:#fff8ef;font-weight:500}
+        .empire-card p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
+        .empire-card a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border-radius:999px;background:#f3dfc4;color:#111;font-weight:900;margin-top:12px}
+        .empire-badge{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(220,194,162,.18);color:#fff4e8;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+        .lux-footer{margin:24px auto 30px;width:min(1100px,94vw);padding:24px;border-radius:28px;background:rgba(6,6,6,.62);border:1px solid rgba(255,255,255,.10);display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px}
+        .lux-footer h4{margin:0 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:22px;font-weight:500;color:#fff8ef}
+        .lux-footer p,.lux-footer a{margin:0;color:var(--muted);line-height:1.5;font-size:14px;display:block;padding:3px 0}
+        .trust-row{margin:16px auto 0;width:min(980px,94vw);display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+        .trust{padding:12px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-align:center;font-size:13px;color:#f5ecdf}
+        .wa-auto{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;z-index:62;padding:10px 16px;border-radius:999px;background:rgba(7,7,7,.84);border:1px solid rgba(255,255,255,.10);box-shadow:0 18px 40px rgba(0,0,0,.35);font-size:13px;color:#fff8ef;display:none}
+        .wa-auto.show{display:block}
+        @media(max-width:920px){.empire-strip,.lux-footer,.trust-row{grid-template-columns:1fr}.lux-footer{padding:18px}}
+        `;document.head.appendChild(s);
+      }
+
+      const home=document.querySelector('.home-center');
+      if(home && !document.querySelector('.empire-strip')){
+        const strip=document.createElement('section'); strip.className='empire-strip'; strip.innerHTML=`
+          <article class='empire-card'>
+            <div class='empire-badge'>Luxury Final</div>
+            <h3>$10M Presence</h3>
+            <p>Premium visuals, trust signals and upscale positioning so clients expect higher value.</p>
+            <a href='https://DRoyalSpaMiami.as.me/' target='_blank'>Book Luxury Session</a>
+          </article>
+          <article class='empire-card'>
+            <div class='empire-badge'>Traffic Machine</div>
+            <h3>Daily Leads</h3>
+            <p>Miami SEO pages, local intent pages and stronger conversion paths for more inquiries.</p>
+            <a href='https://wa.me/17866900960?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20tratamientos.' target='_blank'>Get Quote</a>
+          </article>
+          <article class='empire-card'>
+            <div class='empire-badge'>Automation</div>
+            <h3>24/7 Booking</h3>
+            <p>Fast quote forms, guided WhatsApp actions and stronger self-booking flow.</p>
+            <a href='https://DRoyalSpaMiami.as.me/' target='_blank'>Reserve Now</a>
+          </article>`;
+        home.appendChild(strip);
+
+        const trust=document.createElement('section'); trust.className='trust-row'; trust.innerHTML=`
+          <div class='trust'>⭐ 5-Star Experience</div>
+          <div class='trust'>🚗 Mobile Service</div>
+          <div class='trust'>💎 Premium Treatments</div>
+          <div class='trust'>📍 Miami Areas Served</div>`;
+        home.appendChild(trust);
+      }
+
+      const app=document.querySelector('.app');
+      if(app && !document.querySelector('.lux-footer')){
+        const foot=document.createElement('section'); foot.className='lux-footer'; foot.innerHTML=`
+          <div>
+            <h4>Droyalspa Miami</h4>
+            <p>Luxury mobile beauty and body contouring experiences in Miami, Brickell, Downtown, Miami Beach, Doral and nearby zones.</p>
+          </div>
+          <div>
+            <h4>Popular</h4>
+            <a href='https://droyalspa.com'>Laser Lipo</a>
+            <a href='https://droyalspa.com'>Papada Reduction</a>
+            <a href='https://droyalspa.com'>D-Cool Facial</a>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <a href='https://wa.me/17866900960'>WhatsApp</a>
+            <a href='https://DRoyalSpaMiami.as.me/'>Book Now</a>
+            <a href='tel:+17866900960'>786-690-0960</a>
+          </div>`;
+        app.appendChild(foot);
+      }
+
+      const wa=document.createElement('div'); wa.className='wa-auto'; wa.id='waAuto'; wa.textContent='Need help? Instant quote available on WhatsApp.'; document.body.appendChild(wa);
+      setTimeout(()=>wa.classList.add('show'),6000);
+      wa.addEventListener('click',()=>window.open('https://wa.me/17866900960?text=Hola,%20quiero%20un%20quote%20r%C3%A1pido.','_blank'));
+
+      setTimeout(()=>{
+        if(!window.location.hash.includes('booked')){
+          const btn=document.querySelector('.sticky-book');
+          if(btn){btn.textContent='Reserve Today · Limited Spots';}
+        }
+      },3000);
+    })();
+  </script>
 </body>
 </html>
