@@ -1384,5 +1384,156 @@
     setActiveSlide();
     forcePlayVideos();
   </script>
+  <script>
+    (function addPhase2Features(){
+      const homeCenter = document.querySelector('.home-center');
+      const homeRail = document.querySelector('.home-rail');
+      if (!homeCenter || !homeRail) return;
+
+      const reviewsWrap = document.createElement('div');
+      reviewsWrap.className = 'phase2-reviews';
+      reviewsWrap.innerHTML = `
+        <div class="phase2-reviews-head">Client Love</div>
+        <div class="phase2-reviews-grid">
+          <article class="phase2-review-card">
+            <div class="phase2-stars">★★★★★</div>
+            <p>“Loved my results. Super convenient at-home service and very professional.”</p>
+            <span>- Miami Client</span>
+          </article>
+          <article class="phase2-review-card">
+            <div class="phase2-stars">★★★★★</div>
+            <p>“My waist looked more defined after my sessions. Booking was easy and fast.”</p>
+            <span>- Brickell Client</span>
+          </article>
+          <article class="phase2-review-card">
+            <div class="phase2-stars">★★★★★</div>
+            <p>“The facial left my skin tighter and glowing. Luxury service at home.”</p>
+            <span>- Miami Beach Client</span>
+          </article>
+        </div>
+      `;
+      homeCenter.appendChild(reviewsWrap);
+
+      const areasSlide = document.createElement('button');
+      areasSlide.className = 'rail-btn';
+      areasSlide.setAttribute('data-open-areas', 'true');
+      areasSlide.innerHTML = `<span>Areas We Serve</span><span>›</span>`;
+      homeRail.appendChild(areasSlide);
+
+      const areasModal = document.createElement('div');
+      areasModal.className = 'modal';
+      areasModal.id = 'areasModal';
+      areasModal.setAttribute('aria-hidden','true');
+      areasModal.innerHTML = `
+        <div class="modal-card">
+          <div class="modal-top">
+            <h2 class="modal-title">Areas We Serve</h2>
+            <button class="close-btn" id="closeAreasModal" aria-label="Cerrar">×</button>
+          </div>
+          <p class="modal-text">Serving Miami, Brickell, Downtown Miami, Miami Beach, Doral, Hialeah and nearby areas with mobile luxury treatments.</p>
+          <div class="area-grid phase2-area-grid">
+            <a class="phase2-area-card" href="https://wa.me/17866900960?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20tratamientos%20en%20Miami." target="_blank" rel="noopener"><strong>Miami</strong><span>Laser lipo, body contouring, facials</span></a>
+            <a class="phase2-area-card" href="https://wa.me/17866900960?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20tratamientos%20en%20Brickell." target="_blank" rel="noopener"><strong>Brickell</strong><span>Luxury in-home service</span></a>
+            <a class="phase2-area-card" href="https://wa.me/17866900960?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20tratamientos%20en%20Downtown%20Miami." target="_blank" rel="noopener"><strong>Downtown Miami</strong><span>Fast booking availability</span></a>
+            <a class="phase2-area-card" href="https://wa.me/17866900960?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20tratamientos%20en%20Miami%20Beach." target="_blank" rel="noopener"><strong>Miami Beach</strong><span>Facial and body treatments</span></a>
+            <a class="phase2-area-card" href="https://wa.me/17866900960?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20tratamientos%20en%20Doral." target="_blank" rel="noopener"><strong>Doral</strong><span>Mobile appointments</span></a>
+            <a class="phase2-area-card" href="https://wa.me/17866900960?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20tratamientos%20en%20Hialeah." target="_blank" rel="noopener"><strong>Hialeah</strong><span>Ask about availability</span></a>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(areasModal);
+
+      const chatbot = document.createElement('div');
+      chatbot.className = 'phase2-chatbot';
+      chatbot.innerHTML = `
+        <button class="phase2-chatbot-toggle" id="chatbotToggle" aria-label="Open chat">💬</button>
+        <div class="phase2-chatbot-window" id="chatbotWindow" aria-hidden="true">
+          <div class="phase2-chatbot-head">
+            <strong>Droyalspa Assistant</strong>
+            <button class="phase2-chatbot-close" id="chatbotClose" aria-label="Close">×</button>
+          </div>
+          <div class="phase2-chatbot-body" id="chatbotBody">
+            <div class="phase2-msg bot">Hi 👋 What would you like help with?</div>
+            <div class="phase2-chatbot-actions">
+              <button data-chat-msg="Hola, quiero saber precios de Laser Lipo.">Laser Lipo</button>
+              <button data-chat-msg="Hola, quiero saber sobre papada.">Double Chin</button>
+              <button data-chat-msg="Hola, quiero saber sobre D-Cool y RF facial.">Facial</button>
+              <button data-chat-msg="Hola, quiero ver disponibilidad para una cita.">Book Now</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(chatbot);
+
+      const style = document.createElement('style');
+      style.textContent = `
+        .phase2-reviews{margin-top:18px;width:min(980px,94vw);display:grid;gap:10px}
+        .phase2-reviews-head{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:#fff2df;text-align:center}
+        .phase2-reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+        .phase2-review-card{padding:14px;border-radius:20px;background:rgba(6,6,6,.58);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(6px);box-shadow:var(--shadow);text-align:left}
+        .phase2-review-card p{margin:8px 0 10px;font-size:14px;line-height:1.45;color:var(--muted)}
+        .phase2-review-card span{font-size:12px;color:#f0dfc9}
+        .phase2-stars{color:#f3ddba;letter-spacing:.08em}
+        .phase2-area-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+        .phase2-area-card{display:grid;gap:6px;padding:16px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);min-height:92px}
+        .phase2-area-card strong{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:#fff8ef}
+        .phase2-area-card span{font-size:14px;color:var(--muted)}
+        .phase2-chatbot{position:fixed;left:16px;bottom:16px;z-index:61}
+        .phase2-chatbot-toggle{width:56px;height:56px;border-radius:50%;background:#f3dfc4;color:#111;box-shadow:0 16px 36px rgba(0,0,0,.35);font-size:24px;font-weight:900}
+        .phase2-chatbot-window{display:none;position:absolute;left:0;bottom:68px;width:min(360px,90vw);background:#090909;border:1px solid rgba(255,255,255,.12);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+        .phase2-chatbot-window.open{display:block}
+        .phase2-chatbot-head{display:flex;align-items:center;justify-content:space-between;padding:14px 14px 12px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.08);color:#fff8ef}
+        .phase2-chatbot-close{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04)}
+        .phase2-chatbot-body{padding:14px;display:grid;gap:12px}
+        .phase2-msg{max-width:92%;padding:10px 12px;border-radius:16px;font-size:14px;line-height:1.45}
+        .phase2-msg.bot{background:rgba(255,255,255,.06);color:#fff8ef}
+        .phase2-chatbot-actions{display:grid;gap:8px}
+        .phase2-chatbot-actions button{min-height:42px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);color:#fff8ef;font-weight:700;text-align:left}
+        @media (max-width: 920px){
+          .phase2-reviews-grid,.phase2-area-grid{grid-template-columns:1fr}
+          .phase2-chatbot{left:12px;bottom:12px}
+          .phase2-chatbot-toggle{width:52px;height:52px}
+          .phase2-chatbot-window{bottom:62px}
+        }
+      `;
+      document.head.appendChild(style);
+
+      const areasModalEl = document.getElementById('areasModal');
+      const closeAreasModal = document.getElementById('closeAreasModal');
+      document.querySelector('[data-open-areas="true"]')?.addEventListener('click', () => {
+        areasModalEl.classList.add('open');
+        areasModalEl.setAttribute('aria-hidden','false');
+      });
+      closeAreasModal?.addEventListener('click', () => {
+        areasModalEl.classList.remove('open');
+        areasModalEl.setAttribute('aria-hidden','true');
+      });
+      areasModalEl.addEventListener('click', (e) => {
+        if (e.target === areasModalEl) {
+          areasModalEl.classList.remove('open');
+          areasModalEl.setAttribute('aria-hidden','true');
+        }
+      });
+
+      const chatbotToggle = document.getElementById('chatbotToggle');
+      const chatbotWindow = document.getElementById('chatbotWindow');
+      const chatbotClose = document.getElementById('chatbotClose');
+      chatbotToggle?.addEventListener('click', () => {
+        chatbotWindow.classList.toggle('open');
+        chatbotWindow.setAttribute('aria-hidden', chatbotWindow.classList.contains('open') ? 'false' : 'true');
+      });
+      chatbotClose?.addEventListener('click', () => {
+        chatbotWindow.classList.remove('open');
+        chatbotWindow.setAttribute('aria-hidden','true');
+      });
+
+      document.querySelectorAll('[data-chat-msg]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const msg = btn.getAttribute('data-chat-msg');
+          window.open(`https://wa.me/17866900960?text=${encodeURIComponent(msg)}`, '_blank');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
