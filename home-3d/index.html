@@ -210,6 +210,12 @@
 
     .primary-book,
     .secondary-cta,
+    .results-btn{margin-top:14px;display:flex;align-items:center;gap:14px;max-width:640px;width:min(92vw,640px);padding:14px 18px;border-radius:26px;background:rgba(8,8,8,.58);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px);color:#f6ead7;text-align:left;box-shadow:0 18px 40px rgba(0,0,0,.32)}
+    .results-thumb{width:56px;height:56px;border-radius:16px;background:url('./lipo-results.jpg') center/cover no-repeat;flex:0 0 56px}
+    .results-copy{display:flex;flex-direction:column;line-height:1.15}
+    .results-copy strong{font-size:28px;font-family:Georgia,"Times New Roman",serif;font-weight:700}
+    .results-copy small{font-size:14px;opacity:.82;margin-top:4px}
+    .results-arrow{margin-left:auto;font-size:44px;line-height:1;color:#d8b15c}
     .phone-link{
       display:inline-flex;
       align-items:center;
@@ -764,6 +770,11 @@
       .areas{margin-top:10px;font-size:clamp(14px,4.8vw,20px)}
       .offer{margin-top:10px;font-size:13px;padding:6px 9px}
       .primary-book,.secondary-cta{width:min(320px, 76vw);font-size:20px;padding:11px 18px;margin-top:12px}
+      .results-btn{width:min(92vw,92vw);padding:12px 14px;border-radius:22px}
+      .results-thumb{width:48px;height:48px;flex-basis:48px}
+      .results-copy strong{font-size:22px}
+      .results-copy small{font-size:12px}
+      .results-arrow{font-size:34px}
       .phone-link{font-size:17px;padding:10px 16px;margin-top:9px}
       .treatments-label{margin-top:12px;font-size:20px}
       .actions,.quick-tools,.calc-grid,.home-tools,.form-grid,.inline-actions{grid-template-columns:1fr}
@@ -863,6 +874,17 @@
           <button type="button" class="primary-modal-btn" id="sendWhatsBtn">Send to WhatsApp</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <div class="modal" id="resultsModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h2 class="modal-title">Before & After Results</h2>
+        <button class="close-btn" id="closeResultsModal" aria-label="Cerrar">×</button>
+      </div>
+      <p class="modal-text">Open a treatment to view its result photo and details.</p>
+      <div class="area-grid phase2-area-grid" id="resultsGrid"></div>
     </div>
   </div>
 
@@ -1115,6 +1137,15 @@
                     <span>${T.phoneLabel}</span>
                   </a>
 
+                  <button class="results-btn" id="openResultsBtn" type="button">
+                    <span class="results-thumb"></span>
+                    <span class="results-copy">
+                      <strong>Before & After Results</strong>
+                      <small>See real client transformations</small>
+                    </span>
+                    <span class="results-arrow">›</span>
+                  </button>
+
                   <div class="home-tools">
                     
                   </div>
@@ -1189,6 +1220,10 @@
     const quoteModal = document.getElementById('quoteModal');
     const quoteFloat = document.getElementById('quoteFloat');
     const closeModal = document.getElementById('closeModal');
+    const openResultsBtn = document.getElementById('openResultsBtn');
+    const resultsModal = document.getElementById('resultsModal');
+    const closeResultsModal = document.getElementById('closeResultsModal');
+    const resultsGrid = document.getElementById('resultsGrid');
     const quoteForm = document.getElementById('quoteForm');
     const leadTreatment = document.getElementById('leadTreatment');
     const sendWhatsBtn = document.getElementById('sendWhatsBtn');
@@ -1200,6 +1235,19 @@
       opt.textContent = getName(slide);
       opt.dataset.index = idx + 1;
       leadTreatment.appendChild(opt);
+
+      if (resultsGrid) {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'phase2-area-card';
+        card.innerHTML = `<strong>${getName(slide)}</strong><span>Open results and treatment page</span>`;
+        card.addEventListener('click', () => {
+          resultsModal.classList.remove('open');
+          resultsModal.setAttribute('aria-hidden', 'true');
+          goToSlide(idx + 1);
+        });
+        resultsGrid.appendChild(card);
+      }
     });
 
     function openModal(treatmentIndex = null){
@@ -1216,11 +1264,25 @@
     }
 
     quoteFloat.addEventListener('click', () => openModal());
+    openResultsBtn?.addEventListener('click', () => {
+      resultsModal.classList.add('open');
+      resultsModal.setAttribute('aria-hidden', 'false');
+    });
+    closeResultsModal?.addEventListener('click', () => {
+      resultsModal.classList.remove('open');
+      resultsModal.setAttribute('aria-hidden', 'true');
+    });
     closeModal.addEventListener('click', closeQuoteModal);
     
 
     quoteModal.addEventListener('click', (e) => {
       if (e.target === quoteModal) closeQuoteModal();
+    });
+    resultsModal?.addEventListener('click', (e) => {
+      if (e.target === resultsModal) {
+        resultsModal.classList.remove('open');
+        resultsModal.setAttribute('aria-hidden', 'true');
+      }
     });
 
     function buildLeadMessage(){
@@ -1359,26 +1421,7 @@
       const homeRail = document.querySelector('.home-rail');
       if (!homeCenter || !homeRail) return;
 
-      const reviewsWrap = document.createElement('div');
-      reviewsWrap.className = 'phase2-reviews';
-      reviewsWrap.innerHTML = `
-        
-            <p>“Loved my results. Super convenient at-home service and very professional.”</p>
-            <span>- Miami Client</span>
-          </article>
-          <article class="phase2-review-card">
-            <div class="phase2-stars">★★★★★</div>
-            <p>“My waist looked more defined after my sessions. Booking was easy and fast.”</p>
-            <span>- Brickell Client</span>
-          </article>
-          <article class="phase2-review-card">
-            <div class="phase2-stars">★★★★★</div>
-            <p>“The facial left my skin tighter and glowing. Luxury service at home.”</p>
-            <span>- Miami Beach Client</span>
-          </article>
-        </div>
-      `;
-      homeCenter.appendChild(reviewsWrap);
+      
 
       const areasSlide = document.createElement('button');
       areasSlide.className = 'rail-btn';
@@ -1755,11 +1798,7 @@
         @media(max-width:920px){.fc-gallery,.fc-lead-grid,.fc-actions{grid-template-columns:1fr}}
         `;document.head.appendChild(style);
       }
-      const home=document.querySelector('.home-center'); if(home){
-        
-        
-        
-      }
+      const home=document.querySelector('.home-center'); if(home){}
       const exit=document.createElement('div'); exit.className='fc-exit'; exit.id='fcExit'; exit.innerHTML='<div class="fc-box"><h3>Wait ✨</h3><p><img src="seidenperle-ai-generated-8626811_1920.png" alt="Luxury Spa Offer" style="width:100%;height:180px;object-fit:cover;border-radius:18px;margin:6px 0 14px;display:block;opacity:.96"><div style="font-size:18px;font-weight:800;color:#f3dfc4;margin-bottom:8px">New Client Offer $90</div><div style="color:var(--muted);font-size:15px">Limited availability today.</div></p><div class="fc-actions"><a href="https://wa.me/17866900960?text=Hola,%20quiero%20la%20promo%20de%20primera%20sesi%C3%B3n." target="_blank">Claim Offer</a><button id="fcClose">Maybe Later</button></div></div>'; document.body.appendChild(exit);
       document.getElementById('fcClose')?.addEventListener('click',()=>exit.classList.remove('open'));
       let shown=false; document.addEventListener('mouseout',e=>{if(e.clientY<=0 && !shown){shown=true;exit.classList.add('open');}});
