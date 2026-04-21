@@ -1927,5 +1927,40 @@
       rebuildAllMiniNavsPhase4();
     })();
   </script>
+  <script>
+    (function addFinalConversion(){
+      if(!document.getElementById('finalConversionStyles')){
+        const style=document.createElement('style');
+        style.id='finalConversionStyles';
+        style.textContent=`
+        .fc-review-slider{margin:18px auto;width:min(980px,94vw);overflow:hidden;border-radius:22px;border:1px solid rgba(255,255,255,.1);background:rgba(6,6,6,.58)}
+        .fc-track{display:flex;animation:fcslide 18s linear infinite}
+        .fc-item{min-width:100%;padding:18px}.fc-item b{display:block;margin-bottom:8px;color:#f3dfc4}.fc-item p{margin:0;color:var(--muted)}
+        @keyframes fcslide{0%,28%{transform:translateX(0)}33%,61%{transform:translateX(-100%)}66%,94%{transform:translateX(-200%)}100%{transform:translateX(0)}}
+        .fc-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px auto;width:min(980px,94vw)}
+        .fc-card{padding:14px;border-radius:20px;background:rgba(6,6,6,.58);border:1px solid rgba(255,255,255,.1)}
+        .fc-card strong{display:block;margin-bottom:8px}.fc-card span{color:var(--muted);font-size:14px}
+        .fc-exit{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:200;padding:16px}
+        .fc-exit.open{display:flex}.fc-box{max-width:520px;width:100%;background:#090909;padding:22px;border-radius:24px;border:1px solid rgba(255,255,255,.1);text-align:center}
+        .fc-box h3{margin:0 0 10px;font-size:32px}.fc-box p{color:var(--muted)}.fc-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+        .fc-actions a,.fc-actions button{min-height:46px;border-radius:999px;font-weight:900}
+        .fc-actions a{display:flex;align-items:center;justify-content:center;background:#f3dfc4;color:#111}.fc-actions button{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(255,255,255,.1)}
+        .fc-lead{margin:18px auto;width:min(760px,94vw);padding:18px;border-radius:22px;background:rgba(6,6,6,.58);border:1px solid rgba(255,255,255,.1);display:grid;gap:12px}
+        .fc-lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fc-lead input{min-height:44px;border-radius:14px;background:#050505;color:#fff;border:1px solid rgba(255,255,255,.1);padding:0 12px}
+        .fc-lead button{min-height:46px;border-radius:999px;background:linear-gradient(180deg,#e6c98f 0%,#c99d46 100%);color:#111;font-weight:900}
+        @media(max-width:920px){.fc-gallery,.fc-lead-grid,.fc-actions{grid-template-columns:1fr}}
+        `;document.head.appendChild(style);
+      }
+      const home=document.querySelector('.home-center'); if(home){
+        const rev=document.createElement('section'); rev.className='fc-review-slider'; rev.innerHTML='<div class="fc-track"><div class="fc-item"><b>★★★★★ Miami Client</b><p>Amazing results and super convenient mobile service.</p></div><div class="fc-item"><b>★★★★★ Brickell Client</b><p>Booked fast and loved my waist contour sessions.</p></div><div class="fc-item"><b>★★★★★ Miami Beach Client</b><p>Luxury facial experience at home.</p></div></div>'; home.appendChild(rev);
+        const gal=document.createElement('section'); gal.className='fc-gallery'; gal.innerHTML='<div class="fc-card"><strong>Abdomen Results</strong><span>Visible contouring after sessions*</span></div><div class="fc-card"><strong>Double Chin Results</strong><span>Sharper jawline appearance*</span></div><div class="fc-card"><strong>Glute Lift Results</strong><span>Rounder lifted look*</span></div>'; home.appendChild(gal);
+        const lead=document.createElement('section'); lead.className='fc-lead'; lead.innerHTML='<strong>Get a Free Quote in 60 Seconds</strong><div class="fc-lead-grid"><input id="fcName" placeholder="Name"><input id="fcEmail" placeholder="Email or Phone"></div><button id="fcSend">Get My Quote</button>'; home.appendChild(lead);
+      }
+      const exit=document.createElement('div'); exit.className='fc-exit'; exit.id='fcExit'; exit.innerHTML='<div class="fc-box"><h3>Wait ✨</h3><p>Claim your first-session promo before you go.</p><div class="fc-actions"><a href="https://wa.me/17866900960?text=Hola,%20quiero%20la%20promo%20de%20primera%20sesi%C3%B3n." target="_blank">Claim Offer</a><button id="fcClose">Maybe Later</button></div></div>'; document.body.appendChild(exit);
+      document.getElementById('fcClose')?.addEventListener('click',()=>exit.classList.remove('open'));
+      let shown=false; document.addEventListener('mouseout',e=>{if(e.clientY<=0 && !shown){shown=true;exit.classList.add('open');}});
+      document.getElementById('fcSend')?.addEventListener('click',()=>{const n=document.getElementById('fcName').value||'';const c=document.getElementById('fcEmail').value||'';window.open('https://wa.me/17866900960?text='+encodeURIComponent('Hola, quiero un quote rápido. Name: '+n+' Contact: '+c),'_blank');});
+    })();
+  </script>
 </body>
 </html>
