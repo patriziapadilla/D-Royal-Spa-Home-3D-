@@ -1046,6 +1046,17 @@
       .floating-home .home-link{font-size:11px;padding:9px 12px}
       .whatsapp-float{bottom:24px;right:12px}
       .quote-float{bottom:96px;right:12px}
+
+      .treatment-wrap.l360-stack{
+        gap:12px;
+        padding:82px 12px 92px;
+      }
+
+      .l360-stack .media-pane{
+        flex:0 0 34vh;
+        min-height:240px;
+        max-height:34vh;
+      }
     }
       .page-text{font-size:15px;line-height:1.5}
       .floating-home{top:6px;margin-bottom:10px}
@@ -1198,7 +1209,7 @@
         video: './lipo-video.mp4',
         poster: './lipo-results.jpg',
         result: './lipo-results.jpg',
-        basePrice: 99
+        basePrice: 90
       },
       {
         nameEs: 'Lipo con Láser 360 con Transfer',
@@ -1368,7 +1379,8 @@
           <div class="calc-grid">
             <select class="package-session-select">
               ${isMainLipo ? `
-                <option value="1">${isSpanish ? '1 Sesión' : '1 Session'}</option>
+                <option value="1">${isSpanish ? '1ra Sesión Oferta' : '1st Session Offer'}</option>
+                <option value="8">${isSpanish ? '8 Sesiones' : '8 Sessions'}</option>
                 <option value="10">${isSpanish ? '10 Sesiones' : '10 Sessions'}</option>
               ` : `
                 <option value="3">3 Sessions</option>
@@ -1797,7 +1809,7 @@ function lipo360IntegratedContent(slide, index) {
       const areaValue = Number(box.querySelector('.package-area-select').value);
       let total;
       if (index === 1) {
-        total = sessionValue === 10 ? 1800 * areaValue : 90 * areaValue;
+        total = sessionValue === 1 ? 90 * areaValue : sessionValue === 8 ? 900 * areaValue : 1000 * areaValue;
       } else {
         const multiplier = sessionValue === 3 ? 1 : sessionValue === 6 ? 1.75 : 2.25;
         total = Math.round(slide.basePrice * multiplier * areaValue);
@@ -1874,24 +1886,20 @@ function lipo360IntegratedContent(slide, index) {
 
     document.querySelectorAll('.page-card').forEach((card) => {
       card.addEventListener('wheel', (e) => {
-        const canScroll = card.scrollHeight > card.clientHeight;
+        const canScroll = card.scrollHeight > card.clientHeight + 4;
         if (!canScroll) return;
 
-        const goingDown = e.deltaY > 0;
-        const goingUp = e.deltaY < 0;
-        const atTop = card.scrollTop <= 0;
-        const atBottom = Math.ceil(card.scrollTop + card.clientHeight) >= card.scrollHeight;
-
-        if ((goingDown && !atBottom) || (goingUp && !atTop)) {
-          e.preventDefault();
-          e.stopPropagation();
-          card.scrollTop += e.deltaY;
-        }
+        e.preventDefault();
+        e.stopPropagation();
+        card.scrollTop += e.deltaY;
       }, { passive:false });
     });
 
     deck.addEventListener('wheel', (e) => {
-      if (e.target.closest('.page-card')) return;
+      if (e.target.closest('.page-card')) {
+        e.stopPropagation();
+        return;
+      }
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault();
         deck.scrollLeft += e.deltaY;
