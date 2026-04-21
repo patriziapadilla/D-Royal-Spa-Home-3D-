@@ -1123,10 +1123,9 @@
 
                   <div class="home-tagline">${T.tagline}</div>
                   <div class="areas">${T.areas}</div>
-                  <div class="offer"><b>25% OFF</b><span>${T.offer}</span></div>
+                  <div class="offer"><b>New Client Offer $90</b></div>
 
                   <a class="primary-book" href="https://DRoyalSpaMiami.as.me/" target="_blank" rel="noopener">${T.bookMain}</a>
-                  <button class="secondary-cta" id="homeQuoteBtn">${T.quoteMain}</button>
                   <a class="phone-link" href="https://wa.me/${whatsappNumber}" target="_blank" rel="noopener">
                     <span class="phone-icon">✆</span>
                     <span>${T.phoneLabel}</span>
@@ -1244,7 +1243,7 @@
 
     quoteFloat.addEventListener('click', () => openModal());
     closeModal.addEventListener('click', closeQuoteModal);
-    document.getElementById('homeQuoteBtn')?.addEventListener('click', () => openModal());
+    
 
     quoteModal.addEventListener('click', (e) => {
       if (e.target === quoteModal) closeQuoteModal();
