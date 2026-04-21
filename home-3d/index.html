@@ -823,6 +823,134 @@
       font-size:14px;
     }
 
+    .transfer-flow{
+      display:grid;
+      gap:14px;
+    }
+
+    .transfer-tech-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .transfer-tech-card{
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:20px;
+      overflow:hidden;
+      display:grid;
+      cursor:default;
+    }
+
+    .transfer-tech-card img{
+      width:100%;
+      height:150px;
+      object-fit:cover;
+      display:block;
+      background:#111;
+      cursor:zoom-in;
+    }
+
+    .transfer-tech-copy{
+      padding:12px;
+      display:grid;
+      gap:6px;
+    }
+
+    .transfer-tech-copy strong{
+      display:block;
+      color:#fff8ef;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .transfer-tech-copy span{
+      display:block;
+      color:var(--muted);
+      line-height:1.4;
+      font-size:13px;
+    }
+
+    .transfer-extra-beforeafter{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .transfer-extra-beforeafter .result-card{
+      margin-top:0;
+      overflow:hidden;
+    }
+
+    .transfer-extra-beforeafter .result-card img,
+    .result-card img,
+    .results-gallery-image{
+      cursor:zoom-in;
+    }
+
+    .image-zoom-modal{
+      position:fixed;
+      inset:0;
+      z-index:3000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.88);
+      padding:18px;
+    }
+
+    .image-zoom-modal.open{
+      display:flex;
+    }
+
+    .image-zoom-shell{
+      position:relative;
+      width:min(1200px,100%);
+      height:min(90vh,100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:auto;
+      border-radius:22px;
+    }
+
+    .image-zoom-img{
+      max-width:none;
+      width:auto;
+      height:auto;
+      max-height:none;
+      transform-origin:center center;
+      transition:transform .18s ease;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+
+    .image-zoom-close,
+    .image-zoom-plus,
+    .image-zoom-minus{
+      position:absolute;
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.18);
+      color:#fff;
+      font-size:20px;
+      z-index:3;
+      backdrop-filter:blur(6px);
+    }
+
+    .image-zoom-close{top:16px;right:16px}
+    .image-zoom-plus{bottom:16px;right:70px}
+    .image-zoom-minus{bottom:16px;right:16px}
+
+
 
     @media (max-width: 920px){
       .treatment-wrap{
@@ -966,6 +1094,15 @@
     </div>
   </div>
 
+  <div class="image-zoom-modal" id="imageZoomModal" aria-hidden="true">
+    <button class="image-zoom-close" id="imageZoomClose" aria-label="Close">×</button>
+    <button class="image-zoom-plus" id="imageZoomPlus" aria-label="Zoom in">+</button>
+    <button class="image-zoom-minus" id="imageZoomMinus" aria-label="Zoom out">−</button>
+    <div class="image-zoom-shell" id="imageZoomShell">
+      <img class="image-zoom-img" id="imageZoomImg" alt="">
+    </div>
+  </div>
+
   <script>
     const isSpanish = (navigator.language || '').toLowerCase().startsWith('es');
     const whatsappNumber = '17866900960';
@@ -1028,14 +1165,26 @@
         nameEn: 'Lipo Laser 360 with Transfer',
         textEs: 'Derrite grasa localizada, define cintura y realza glúteos sin cirugía y sin agujas. Con Lipo Láser, Ultrasonic Cavitation y Radiofrecuencia (RF) se derrite la grasa mientras mejora contorno corporal, celulitis, flacidez y textura de la piel. Butt Blaster utiliza tecnología vacuum para levantar, redondear y proyectar glúteos de forma natural.',
         textEn: 'Melts localized fat, defines the waist, and enhances the buttocks without surgery or needles. With Lipo Laser, Ultrasonic Cavitation, and Radiofrequency (RF), fat is melted while improving body contour, cellulite, flaccidity, and skin texture. Butt Blaster uses vacuum technology to lift, round, and project the buttocks naturally.',
-        chipsEs: ['Cintura','Glúteos','Muslos 360','Piernas','Espalda Baja'],
-        chipsEn: ['Waist','Buttocks','Thighs 360','Legs','Lower Back'],
-        learn: 'https://droyalspa.com/lipo-laser-con-transfer',
+        chipsEs: [],
+        chipsEn: [],
+        learn: '#',
         book: 'https://DRoyalSpaMiami.as.me/?appointmentType=91559810',
         video: './transfer-video.mp4',
         poster: './transfer-results.jpg',
         result: './transfer-results.jpg',
-        basePrice: 139
+        basePrice: 139,
+        faqEs: [
+          { q: '¿Qué incluye este tratamiento?', a: 'Incluye Lipo Laser, Ultrasound Cavitation, Radiofrequency (RF) y trabajo para realzar glúteos.' },
+          { q: '¿Qué hace el transfer?', a: 'Ayuda a levantar, redondear y proyectar visualmente los glúteos.' },
+          { q: '¿Se puede ver más cintura y mejor forma?', a: 'Sí. Está pensado para marcar más la cintura y mejorar la forma general de la figura.' },
+          { q: '¿Es sin cirugía y sin agujas?', a: 'Sí. Es un tratamiento corporal sin cirugía y sin agujas.' }
+        ],
+        faqEn: [
+          { q: 'What is included in this treatment?', a: 'It includes Lipo Laser, Ultrasound Cavitation, Radiofrequency (RF), and enhancement work for the buttocks.' },
+          { q: 'What does the transfer do?', a: 'It helps lift, round, and visually project the buttocks.' },
+          { q: 'Can it make the waist look smaller and the shape look better?', a: 'Yes. It is designed to enhance the waist and improve the overall body shape.' },
+          { q: 'Is it non-surgical and needle-free?', a: 'Yes. It is a non-surgical, needle-free body treatment.' }
+        ]
       },
       {
         nameEs: 'Lipo Papada con Láser 360',
@@ -1287,7 +1436,7 @@
                       <div class="l360-flow">
                         <div class="result-card no-phase3">
                           <div class="result-lab">${T.results}</div>
-                          <img src="${slide.result}" alt="${T.results}">
+                          <img src="${slide.result}" alt="${T.results}" class="zoomable">
                         </div>
 
                         <div class="quick-tools">
@@ -1299,7 +1448,7 @@
 
                         <div class="l360-tech-grid">
                           <div class="l360-tech-card">
-                            <img src="./lipo-laser-pads-treatment.jpg" alt="Lipo Laser">
+                            <img src="./lipo-laser-pads-treatment.jpg" alt="Lipo Laser" class="zoomable">
                             <div class="l360-tech-copy">
                               <strong>Lipo Laser</strong>
                               <span>${isSpanish ? 'Derrite la grasa.' : 'Melts fat.'}</span>
@@ -1307,7 +1456,7 @@
                           </div>
 
                           <div class="l360-tech-card">
-                            <img src="./ultrasound-cavitation-treatment.jpg" alt="Ultrasound Cavitation">
+                            <img src="./ultrasound-cavitation-treatment.jpg" alt="Ultrasound Cavitation" class="zoomable">
                             <div class="l360-tech-copy">
                               <strong>Ultrasound Cavitation</strong>
                               <span>${isSpanish ? 'Rompe la grasa y ayuda a eliminarla.' : 'Breaks fat and helps remove it.'}</span>
@@ -1315,7 +1464,7 @@
                           </div>
 
                           <div class="l360-tech-card">
-                            <img src="./body-contouring-treatment.jpg" alt="Radiofrequency">
+                            <img src="./body-contouring-treatment.jpg" alt="Radiofrequency" class="zoomable">
                             <div class="l360-tech-copy">
                               <strong>Radiofrequency</strong>
                               <span>${isSpanish ? 'Tensa la piel y la deja firme.' : 'Tightens the skin and leaves it firm.'}</span>
@@ -1323,7 +1472,7 @@
                           </div>
 
                           <div class="l360-tech-card">
-                            <img src="./44(1).jpg" alt="Lymphatic Drainage">
+                            <img src="./44(1).jpg" alt="Lymphatic Drainage" class="zoomable">
                             <div class="l360-tech-copy">
                               <strong>Lymphatic Drainage</strong>
                               <span>${isSpanish ? 'Drena la grasa y desinflama el cuerpo.' : 'Drains fat and reduces bloating.'}</span>
@@ -1334,11 +1483,92 @@
                         <div class="l360-extra-beforeafter">
                           <div class="result-card no-phase3">
                             <div class="result-lab">${isSpanish ? 'Antes y Después' : 'Before & After'}</div>
-                            <img src="./lipo-laser-360-before-after-front-abdomen.jpg" alt="Before and after front abdomen">
+                            <img src="./lipo-laser-360-before-after-front-abdomen.jpg" alt="Before and after front abdomen" class="zoomable">
                           </div>
                           <div class="result-card no-phase3">
                             <div class="result-lab">${isSpanish ? 'Antes y Después' : 'Before & After'}</div>
-                            <img src="./lipo-laser-360-before-after-side-waist.jpg" alt="Before and after side waist">
+                            <img src="./lipo-laser-360-before-after-side-waist.jpg" alt="Before and after side waist" class="zoomable">
+                          </div>
+                        </div>
+
+                        <div class="l360-faq">
+                          <h4>${isSpanish ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'}</h4>
+                          <div class="l360-faq-list">
+                            ${(isSpanish ? slide.faqEs : slide.faqEn).map(item => `
+                              <div class="l360-faq-item">
+                                <strong>${item.q}</strong>
+                                <span>${item.a}</span>
+                              </div>
+                            `).join('')}
+                          </div>
+                        </div>
+
+                        <div class="actions">
+                          <a class="btn gold" href="${slide.book}" target="_blank" rel="noopener">${T.book}</a>
+                        </div>
+
+                        <div class="results-note">${T.note}</div>
+
+                        <div class="bottom-nav">
+                          ${makeMiniRail(index)}
+                        </div>
+                      </div>
+                    ` : index === 2 ? `
+                      <div class="transfer-flow">
+                        <div class="result-card no-phase3">
+                          <div class="result-lab">${T.results}</div>
+                          <img src="${slide.result}" alt="${T.results}" class="zoomable">
+                        </div>
+
+                        <div class="quick-tools">
+                          <button class="open-treatment-quote" data-treatment-index="${index}">${T.quoteBtn}</button>
+                          <button class="scroll-to-package" data-treatment-index="${index}">${T.packageBtn}</button>
+                        </div>
+
+                        ${packageBox(slide, index)}
+
+                        <div class="transfer-tech-grid">
+                          <div class="transfer-tech-card">
+                            <img src="./lipo-laser-pads-treatment.jpg" alt="Lipo Laser" class="zoomable">
+                            <div class="transfer-tech-copy">
+                              <strong>Lipo Laser</strong>
+                              <span>${isSpanish ? 'Derrite la grasa.' : 'Melts fat.'}</span>
+                            </div>
+                          </div>
+
+                          <div class="transfer-tech-card">
+                            <img src="./luxury-spa-relaxation.jpg" alt="Ultrasound Cavitation" class="zoomable">
+                            <div class="transfer-tech-copy">
+                              <strong>Ultrasound Cavitation</strong>
+                              <span>${isSpanish ? 'Rompe la grasa y ayuda a eliminarla.' : 'Breaks fat and helps remove it.'}</span>
+                            </div>
+                          </div>
+
+                          <div class="transfer-tech-card">
+                            <img src="./body-contouring-treatment.jpg" alt="Radiofrequency" class="zoomable">
+                            <div class="transfer-tech-copy">
+                              <strong>Radiofrequency</strong>
+                              <span>${isSpanish ? 'Tensa la piel y la deja firme.' : 'Tightens the skin and leaves it firm.'}</span>
+                            </div>
+                          </div>
+
+                          <div class="transfer-tech-card">
+                            <img src="./44(1).jpg" alt="Lymphatic Massage" class="zoomable">
+                            <div class="transfer-tech-copy">
+                              <strong>${isSpanish ? 'Lymphatic Massage' : 'Lymphatic Massage'}</strong>
+                              <span>${isSpanish ? 'Drena la grasa y desinflama el cuerpo.' : 'Drains fat and reduces bloating.'}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="transfer-extra-beforeafter">
+                          <div class="result-card no-phase3">
+                            <div class="result-lab">${isSpanish ? 'Antes y Después' : 'Before & After'}</div>
+                            <img src="./lipo-results.jpg" alt="Before and after abdomen" class="zoomable">
+                          </div>
+                          <div class="result-card no-phase3">
+                            <div class="result-lab">${isSpanish ? 'Antes y Después' : 'Before & After'}</div>
+                            <img src="./back-sculpting-before-after-lipo-laser.jpg" alt="Before and after back sculpting" class="zoomable">
                           </div>
                         </div>
 
@@ -1542,6 +1772,55 @@
       }
     });
 
+    const imageZoomModal = document.getElementById('imageZoomModal');
+    const imageZoomImg = document.getElementById('imageZoomImg');
+    const imageZoomClose = document.getElementById('imageZoomClose');
+    const imageZoomPlus = document.getElementById('imageZoomPlus');
+    const imageZoomMinus = document.getElementById('imageZoomMinus');
+    let currentZoom = 1;
+
+    function applyZoom() {
+      if (imageZoomImg) imageZoomImg.style.transform = `scale(${currentZoom})`;
+    }
+
+    function openImageZoom(src, alt = '') {
+      if (!imageZoomModal || !imageZoomImg) return;
+      imageZoomImg.src = src;
+      imageZoomImg.alt = alt;
+      currentZoom = 1;
+      applyZoom();
+      imageZoomModal.classList.add('open');
+      imageZoomModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageZoom() {
+      if (!imageZoomModal) return;
+      imageZoomModal.classList.remove('open');
+      imageZoomModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    imageZoomClose?.addEventListener('click', closeImageZoom);
+    imageZoomPlus?.addEventListener('click', () => {
+      currentZoom = Math.min(currentZoom + 0.25, 4);
+      applyZoom();
+    });
+    imageZoomMinus?.addEventListener('click', () => {
+      currentZoom = Math.max(currentZoom - 0.25, 1);
+      applyZoom();
+    });
+
+    imageZoomModal?.addEventListener('click', (e) => {
+      if (e.target === imageZoomModal) closeImageZoom();
+    });
+
+    imageZoomImg?.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      currentZoom = Math.max(1, Math.min(4, currentZoom + (e.deltaY < 0 ? 0.15 : -0.15)));
+      applyZoom();
+    }, { passive:false });
+
     function updatePackagePrice(box){
       const index = Number(box.dataset.treatmentIndex);
       const slide = slides[index];
@@ -1623,6 +1902,11 @@
         const index = Number(scrollToPackage.dataset.treatmentIndex);
         const box = document.querySelector(`.package-box[data-treatment-index="${index}"]`);
         if (box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      const zoomableImg = e.target.closest('img.zoomable, .result-card img, .results-gallery-image');
+      if (zoomableImg && !e.target.closest('#imageZoomModal')) {
+        openImageZoom(zoomableImg.getAttribute('src'), zoomableImg.getAttribute('alt') || '');
       }
     });
 
