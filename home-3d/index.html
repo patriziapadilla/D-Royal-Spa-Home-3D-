@@ -1200,16 +1200,30 @@
       {
         nameEs: 'Lipo con Láser 360',
         nameEn: 'Lipo Laser 360',
-        textEs: 'Derrite grasa localizada y mejora contorno corporal sin cirugía y sin agujas. Con Lipo Láser, Ultrasonic Cavitation y Radiofrecuencia (RF) se derrite la grasa, ayudando a definir abdomen, cintura y espalda, mientras elimina flacidez, celulitis y mejora textura de la piel.',
-        textEn: 'Melts localized fat and improves body contour without surgery or needles. With Lipo Laser, Ultrasonic Cavitation, and Radiofrequency (RF), fat is melted to help define the abdomen, waist, and back while reducing flaccidity, cellulite, and improving skin texture.',
-        chipsEs: ['Abdomen','Cintura','Espalda','Costados'],
-        chipsEn: ['Abdomen','Waist','Back','Flanks'],
-        learn: 'https://droyalspa.com/lipo-con-laser',
+        textEs: 'Derrite grasa localizada y mejora contorno corporal sin cirugía y sin agujas. Con Lipo Láser, Ultrasound Cavitation y Radiofrecuencia (RF), la grasa se reduce mientras mejora flacidez, celulitis y textura de la piel.',
+        textEn: 'Melts localized fat and improves body contour without surgery or needles. With Lipo Laser, Ultrasound Cavitation, and Radiofrequency (RF), fat is reduced while improving flaccidity, cellulite, and skin texture.',
+        chipsEs: ['1ra Sesión $90','8 Sesiones $900','10 Sesiones $1000'],
+        chipsEn: ['1st Session $90','8 Sessions $900','10 Sessions $1000'],
+        learn: '#',
         book: 'https://DRoyalSpaMiami.as.me/?appointmentType=91559773',
         video: './lipo-video.mp4',
         poster: './lipo-results.jpg',
         result: './lipo-results.jpg',
-        basePrice: 90
+        basePrice: 90,
+        faqEs: [
+          '¿Cuántas sesiones eligen la mayoría? Muchas empiezan con 1 sesión y luego pasan al paquete de 8 o 10 sesiones.',
+          '¿Es una lipo sin cirugía? Sí, es un tratamiento sin cirugía y sin agujas.',
+          '¿Qué incluye? Lipo Laser, Ultrasound Cavitation y Radiofrequency (RF).',
+          '¿Cuándo se empiezan a ver resultados? Muchas personas notan cambios desde las primeras sesiones.',
+          '¿Tiene tiempo de recuperación? No.'
+        ],
+        faqEn: [
+          'How many sessions do most clients choose? Many start with 1 session and then move into the 8 or 10 session package.',
+          'Is it surgery-free? Yes, it is non-surgical and needle-free.',
+          'What is included? Lipo Laser, Ultrasound Cavitation, and Radiofrequency (RF).',
+          'When do results start to show? Many people notice changes from the first sessions.',
+          'Is there downtime? No.'
+        ]
       },
       {
         nameEs: 'Lipo con Láser 360 con Transfer',
@@ -1389,9 +1403,13 @@
               `}
             </select>
             <select class="package-area-select">
-              <option value="1">${isSpanish ? '1 Área' : '1 Area'}</option>
-              <option value="2">${isSpanish ? '2 Áreas' : '2 Areas'}</option>
-              <option value="3">${isSpanish ? '3 Áreas' : '3 Areas'}</option>
+              ${isMainLipo ? `
+                <option value="1">${isSpanish ? 'Paquete' : 'Package'}</option>
+              ` : `
+                <option value="1">${isSpanish ? '1 Área' : '1 Area'}</option>
+                <option value="2">${isSpanish ? '2 Áreas' : '2 Areas'}</option>
+                <option value="3">${isSpanish ? '3 Áreas' : '3 Areas'}</option>
+              `}
             </select>
           </div>
           <div class="calc-result">
@@ -1594,64 +1612,85 @@ function lipo360IntegratedContent(slide, index) {
           </section>
         `;
       }
-
       const isLipo360Main = index === 1;
       return `
         <section class="slide treatment" data-slide="${index}">
           <div class="slide-inner">
-            <div class="treatment-wrap ${isLipo360Main ? 'l360-stack' : ''}">
+            <div class="treatment-wrap">
               <div class="media-pane">
                 ${mediaMarkup(slide, index)}
-                ${isLipo360Main ? `
-                  <div class="l360-hero-overlay">
-                    <span class="l360-kicker">${isSpanish ? 'Body Contouring · En Casa' : 'Body Contouring · In Home'}</span>
-                    <h2 class="l360-hero-title">${getName(slide)}</h2>
-                  </div>
-                ` : ``}
               </div>
 
               <div class="info-pane">
                 <div class="page-card">
                   <div class="page-card-inner">
-                    ${isLipo360Main ? lipo360IntegratedContent(slide, index) : `
-                      <div class="floating-home">
-                        <button class="home-link" data-go="0">⌂ ${T.home}</button>
-                      </div>
+                    <div class="floating-home">
+                      <button class="home-link" data-go="0">⌂ ${T.home}</button>
+                    </div>
 
-                      <div class="page-topline">
-                        <span>${index}/${slides.length - 1}</span>
-                      </div>
+                    <div class="page-topline">
+                      <span>${index}/${slides.length - 1}</span>
+                    </div>
 
-                      <h2 class="page-title">${getName(slide)}</h2>
-                      <p class="page-text">${getText(slide)}</p>
+                    <h2 class="page-title">${getName(slide)}</h2>
+                    <p class="page-text">${getText(slide)}</p>
 
-                      <div class="chips">
-                        ${getChips(slide).map(c => `<span class="chip">${c}</span>`).join('')}
-                      </div>
+                    <div class="chips">
+                      ${getChips(slide).map(c => `<span class="chip">${c}</span>`).join('')}
+                    </div>
 
-                      <div class="quick-tools">
-                        <button class="open-treatment-quote" data-treatment-index="${index}">${T.quoteBtn}</button>
-                        <button class="scroll-to-package" data-treatment-index="${index}">${T.packageBtn}</button>
-                      </div>
+                    <div class="quick-tools">
+                      <button class="open-treatment-quote" data-treatment-index="${index}">${T.quoteBtn}</button>
+                      <button class="scroll-to-package" data-treatment-index="${index}">${T.packageBtn}</button>
+                    </div>
 
-                      ${packageBox(slide, index)}
+                    ${packageBox(slide, index)}
 
+                    ${isLipo360Main ? `
                       <div class="result-card">
                         <div class="result-lab">${T.results}</div>
                         <img src="${slide.result}" alt="${T.results}">
                       </div>
 
-                      <div class="actions">
-                        <a class="btn light" href="${slide.learn}" target="_blank" rel="noopener">${T.learn}</a>
-                        <a class="btn gold" href="${slide.book}" target="_blank" rel="noopener">${T.book}</a>
+                      <div class="result-card" style="margin-top:14px">
+                        <div class="result-lab">${T.results}</div>
+                        <img src="./lipo-laser-360-before-after-front-abdomen.jpg" alt="${isSpanish ? 'Antes y después frontal abdomen' : 'Front abdomen before and after'}">
                       </div>
 
-                      <div class="results-note">${T.note}</div>
-
-                      <div class="bottom-nav">
-                        ${makeMiniRail(index)}
+                      <div class="result-card" style="margin-top:14px">
+                        <div class="result-lab">${T.results}</div>
+                        <img src="./lipo-laser-360-before-after-side-waist.jpg" alt="${isSpanish ? 'Antes y después lateral cintura' : 'Side waist before and after'}">
+                      </div>
+                    ` : `
+                      <div class="result-card">
+                        <div class="result-lab">${T.results}</div>
+                        <img src="${slide.result}" alt="${T.results}">
                       </div>
                     `}
+
+                    <div class="actions">
+                      ${isLipo360Main ? `
+                        <a class="btn gold" href="${slide.book}" target="_blank" rel="noopener">${T.book}</a>
+                      ` : `
+                        <a class="btn light" href="${slide.learn}" target="_blank" rel="noopener">${T.learn}</a>
+                        <a class="btn gold" href="${slide.book}" target="_blank" rel="noopener">${T.book}</a>
+                      `}
+                    </div>
+
+                    <div class="results-note">${T.note}</div>
+
+                    ${isLipo360Main ? `
+                      <div class="package-box" style="margin-top:14px">
+                        <h4>${isSpanish ? 'FAQ' : 'FAQ'}</h4>
+                        <div class="page-text" style="display:grid;gap:10px">
+                          ${(isSpanish ? slide.faqEs : slide.faqEn).map(item => `<div>• ${item}</div>`).join('')}
+                        </div>
+                      </div>
+                    ` : ``}
+
+                    <div class="bottom-nav">
+                      ${makeMiniRail(index)}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1809,8 +1848,13 @@ function lipo360IntegratedContent(slide, index) {
       const areaValue = Number(box.querySelector('.package-area-select').value);
       let total;
       if (index === 1) {
-        total = sessionValue === 1 ? 90 * areaValue : sessionValue === 8 ? 900 * areaValue : 1000 * areaValue;
+        total = sessionValue === 1 ? 90 : sessionValue === 8 ? 900 : 1000;
       } else {
+        const multiplier = sessionValue === 3 ? 1 : sessionValue === 6 ? 1.75 : 2.25;
+        total = Math.round(slide.basePrice * multiplier * areaValue);
+      }
+      box.querySelector('.calc-price').textContent = `$${total}`;
+    } else {
         const multiplier = sessionValue === 3 ? 1 : sessionValue === 6 ? 1.75 : 2.25;
         total = Math.round(slide.basePrice * multiplier * areaValue);
       }
