@@ -1107,7 +1107,7 @@
 
                   <div class="home-tagline">${T.tagline}</div>
                   <div class="areas">${T.areas}</div>
-                  <div class="offer"><b>New Client Offer $90</b></div>
+                  <div class="offer"><b>New Client Limited Offer $90</b></div>
 
                   <a class="primary-book" href="https://DRoyalSpaMiami.as.me/" target="_blank" rel="noopener">${T.bookMain}</a>
                   <a class="phone-link" href="https://wa.me/${whatsappNumber}" target="_blank" rel="noopener">
@@ -1116,11 +1116,6 @@
                   </a>
 
                   <div class="home-tools">
-                    
-                    <div class="tool-card">
-                      <h3>Packages</h3>
-                      <p>Preview package pricing before booking. Good for faster yes decisions.</p>
-                    </div>
                     <div class="tool-card">
                       <h3>Areas Served</h3>
                       <p>Miami, Brickell, Downtown, Miami Beach, Doral and nearby zones.</p>
@@ -1456,7 +1451,7 @@
         .phase2-area-card{display:grid;gap:6px;padding:16px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);min-height:92px}
         .phase2-area-card strong{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:#fff8ef}
         .phase2-area-card span{font-size:14px;color:var(--muted)}
-        .phase2-chatbot{position:fixed;right:16px;left:auto;bottom:154px;z-index:61}
+        .phase2-chatbot{position:fixed;right:16px;left:auto;bottom:220px;z-index:61}
         .phase2-chatbot-toggle{width:56px;height:56px;border-radius:50%;background:#f3dfc4;color:#111;box-shadow:0 16px 36px rgba(0,0,0,.35);font-size:24px;font-weight:900}
         .phase2-chatbot-window{display:none;position:absolute;right:0;left:auto;bottom:68px;width:min(360px,90vw);background:#090909;border:1px solid rgba(255,255,255,.12);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
         .phase2-chatbot-window.open{display:block}
@@ -1469,7 +1464,7 @@
         .phase2-chatbot-actions button{min-height:42px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);color:#fff8ef;font-weight:700;text-align:left}
         @media (max-width: 920px){
           .phase2-reviews-grid,.phase2-area-grid{grid-template-columns:1fr}
-          .phase2-chatbot{right:12px;left:auto;bottom:150px}
+          .phase2-chatbot{right:12px;left:auto;bottom:220px}
           .phase2-chatbot-toggle{width:52px;height:52px}
           .phase2-chatbot-window{bottom:62px}
         }
@@ -1626,52 +1621,7 @@
       const homeTools = document.querySelector('.home-tools');
       if (!homeCenter) return;
 
-      if (!document.querySelector('.phase4-packages')) {
-        const packages = document.createElement('section');
-        packages.className = 'phase4-packages';
-        packages.innerHTML = `
-          <div class="phase4-section-head">Most Popular Packages</div>
-          <div class="phase4-package-grid">
-            <article class="phase4-package-card">
-              <div class="phase4-badge">Starter</div>
-              <h3>3 Sessions</h3>
-              <div class="phase4-price">$199+</div>
-              <p>Perfect to start and see your first visible changes.</p>
-              <ul>
-                <li>Popular for waist, abdomen or papada</li>
-                <li>Mobile appointment</li>
-                <li>Quick booking</li>
-              </ul>
-              <a href="https://wa.me/17866900960?text=Hola,%20quiero%20el%20paquete%20de%203%20sesiones." target="_blank" rel="noopener">Ask for 3 Sessions</a>
-            </article>
-            <article class="phase4-package-card phase4-package-featured">
-              <div class="phase4-badge">Best Seller</div>
-              <h3>6 Sessions</h3>
-              <div class="phase4-price">$349+</div>
-              <p>Best option for stronger body contouring and skin tightening progress.</p>
-              <ul>
-                <li>Great for body sculpting</li>
-                <li>Works for waist, arms, legs and glutes</li>
-                <li>Most requested package</li>
-              </ul>
-              <a href="https://wa.me/17866900960?text=Hola,%20quiero%20el%20paquete%20de%206%20sesiones." target="_blank" rel="noopener">Ask for 6 Sessions</a>
-            </article>
-            <article class="phase4-package-card">
-              <div class="phase4-badge">VIP</div>
-              <h3>8 Sessions</h3>
-              <div class="phase4-price">$499+</div>
-              <p>Ideal for clients who want a more complete transformation plan.</p>
-              <ul>
-                <li>Higher value package</li>
-                <li>Better for consistent results</li>
-                <li>Easy to combine treatments</li>
-              </ul>
-              <a href="https://wa.me/17866900960?text=Hola,%20quiero%20el%20paquete%20de%208%20sesiones." target="_blank" rel="noopener">Ask for 8 Sessions</a>
-            </article>
-          </div>
-        `;
-        homeCenter.appendChild(packages);
-      }
+      
 
       if (!document.querySelector('.phase4-faq')) {
         const faq = document.createElement('section');
@@ -1789,9 +1739,9 @@
         .phase4-faq-list summary{cursor:pointer;font-weight:800;color:#fff8ef;list-style:none}
         .phase4-faq-list summary::-webkit-details-marker{display:none}
         .phase4-faq-list p{margin:12px 0 0;color:var(--muted);line-height:1.5;font-size:14px}
-        .phase4-promo-bar{position:fixed;top:62px;left:50%;transform:translateX(-50%);z-index:58;display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;padding:10px 16px;border-radius:999px;background:rgba(7,7,7,.82);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(6px);box-shadow:var(--shadow);max-width:min(92vw,760px);text-align:center}
-        .phase4-promo-bar span{font-size:14px;color:#fff8ef}
-        .phase4-promo-bar a{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 14px;border-radius:999px;background:#f3dfc4;color:#111;font-weight:900}
+        .phase4-promo-bar{display:none !important}
+        .phase4-promo-bar span{display:none !important}
+        .phase4-promo-bar a{display:none !important}
         @media (max-width:920px){
           .phase4-package-grid{grid-template-columns:1fr}
           .phase4-promo-bar{top:58px;padding:10px 12px;gap:10px}
@@ -1832,8 +1782,8 @@
         .fc-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px auto;width:min(980px,94vw)}
         .fc-card{padding:14px;border-radius:20px;background:rgba(6,6,6,.58);border:1px solid rgba(255,255,255,.1)}
         .fc-card strong{display:block;margin-bottom:8px}.fc-card span{color:var(--muted);font-size:14px}
-        .fc-exit{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:200;padding:16px}
-        .fc-exit.open{display:flex}.fc-box{max-width:520px;width:100%;background:#090909;padding:22px;border-radius:24px;border:1px solid rgba(255,255,255,.1);text-align:center}
+        .fc-exit{display:none !important}
+        .fc-exit.open{display:none !important}.fc-box{max-width:520px;width:100%;background:#090909;padding:22px;border-radius:24px;border:1px solid rgba(255,255,255,.1);text-align:center}
         .fc-box h3{margin:0 0 10px;font-size:32px}.fc-box p{color:var(--muted)}.fc-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
         .fc-actions a,.fc-actions button{min-height:46px;border-radius:999px;font-weight:900}
         .fc-actions a{display:flex;align-items:center;justify-content:center;background:#f3dfc4;color:#111}.fc-actions button{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(255,255,255,.1)}
