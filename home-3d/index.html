@@ -1619,37 +1619,6 @@
 
       
 
-      if (!document.querySelector('.phase4-faq')) {
-        const faq = document.createElement('section');
-        faq.className = 'phase4-faq';
-        faq.innerHTML = `
-          <div class="phase4-section-head">FAQ</div>
-          <div class="phase4-faq-list">
-            <details>
-              <summary>Do you travel to my area?</summary>
-              <p>We serve Miami, Brickell, Downtown Miami, Miami Beach, Doral, Hialeah and nearby areas depending on availability.</p>
-            </details>
-            <details>
-              <summary>Are treatments non-surgical?</summary>
-              <p>Yes. Our most requested services are designed as non-surgical beauty and body contouring treatments.</p>
-            </details>
-            <details>
-              <summary>How do I book?</summary>
-              <p>You can book online, open WhatsApp, or request a quick quote and preferred date directly from the site.</p>
-            </details>
-            <details>
-              <summary>Which treatments are most popular?</summary>
-              <p>Laser lipo, body contouring, papada reduction, D-Cool & RF facial and non-surgical glute enhancement are among the most requested.</p>
-            </details>
-          </div>
-        `;
-        if (homeTools) {
-          homeTools.insertAdjacentElement('afterend', faq);
-        } else {
-          homeCenter.appendChild(faq);
-        }
-      }
-
       if (!document.getElementById('phase4PromoBar')) {
         const promo = document.createElement('div');
         promo.id = 'phase4PromoBar';
