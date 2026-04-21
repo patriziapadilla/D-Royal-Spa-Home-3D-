@@ -1541,83 +1541,10 @@
       const deck = document.getElementById('deck');
       if (!homeRail || !deck) return;
 
-      const seoSlides = [
-        {
-          title: 'Laser Lipo Miami',
-          subtitle: 'Mobile body contouring in Miami',
-          text: 'Droyalspa offers mobile laser lipo, body contouring, cavitation, RF skin tightening and non-surgical sculpting in Miami. Ideal for abdomen, waist, arms, legs and double chin treatments in the comfort of your home.',
-          whatsapp: 'Hola, quiero información sobre Laser Lipo Miami.'
-        },
-        {
-          title: 'Body Contouring Brickell',
-          subtitle: 'Luxury in-home treatments in Brickell',
-          text: 'Serving Brickell clients with luxury at-home body contouring, RF facials, D-Cool treatments, waist sculpting and premium mobile appointments designed for visible results and convenience.',
-          whatsapp: 'Hola, quiero información sobre Body Contouring en Brickell.'
-        },
-        {
-          title: 'Botox Effect Miami Beach',
-          subtitle: 'Needle-free rejuvenation in Miami Beach',
-          text: 'Needle-free Botox effect facials, D-Cool and RF treatments in Miami Beach. We help tighten skin, improve texture and create a lifted, smoother look with luxury mobile service.',
-          whatsapp: 'Hola, quiero información sobre efecto Botox sin agujas en Miami Beach.'
-        }
-      ];
+      // SEO landing pages hidden from home rail by request
+      const seoSlides = [];
 
       seoSlides.forEach((item, idx) => {
-        const section = document.createElement('section');
-        section.className = 'slide treatment phase3-seo-slide';
-        section.setAttribute('data-slide', document.querySelectorAll('.slide').length);
-        section.innerHTML = `
-          <div class="slide-inner">
-            <div class="treatment-wrap phase3-seo-wrap">
-              <div class="media-pane phase3-seo-pane">
-                <div class="phase3-seo-hero">
-                  <div class="phase3-seo-kicker">SEO Landing Page</div>
-                  <h2>${item.title}</h2>
-                  <p>${item.subtitle}</p>
-                  <div class="phase3-seo-tags">
-                    <span>Mobile Service</span>
-                    <span>Miami Area</span>
-                    <span>Book Fast</span>
-                  </div>
-                </div>
-              </div>
-              <div class="info-pane">
-                <div class="page-card">
-                  <div class="page-card-inner">
-                    <div class="floating-home">
-                      <button class="home-link" data-go="0">⌂ Home</button>
-                    </div>
-                    <div class="page-topline"><span>Location SEO</span></div>
-                    <h2 class="page-title">${item.title}</h2>
-                    <p class="page-text">${item.text}</p>
-                    <div class="phase3-info-grid">
-                      <div class="phase3-info-card">
-                        <strong>Best for</strong>
-                        <span>Laser lipo, body contouring, RF facials, mobile beauty treatments.</span>
-                      </div>
-                      <div class="phase3-info-card">
-                        <strong>Service model</strong>
-                        <span>We travel to your home, condo or office in select Miami areas.</span>
-                      </div>
-                    </div>
-                    <div class="actions">
-                      <a class="btn light" href="https://droyalspa.com" target="_blank" rel="noopener">Visit Website</a>
-                      <a class="btn gold" href="https://wa.me/17866900960?text=${encodeURIComponent(item.whatsapp)}" target="_blank" rel="noopener">Ask on WhatsApp</a>
-                    </div>
-                    <div class="bottom-nav phase3-mini-nav"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-        deck.appendChild(section);
-
-        const railBtn = document.createElement('button');
-        railBtn.className = 'rail-btn';
-        railBtn.setAttribute('data-go', document.querySelectorAll('.slide').length - 1);
-        railBtn.innerHTML = `<span>${item.title}</span><span>›</span>`;
-        homeRail.appendChild(railBtn);
       });
 
       const resultCards = document.querySelectorAll('.result-card');
@@ -1810,20 +1737,7 @@
         document.body.appendChild(promo);
       }
 
-      const seoSlidesData = [
-        {
-          title: 'Body Contouring Doral',
-          subtitle: 'Mobile sculpting appointments in Doral',
-          text: 'Droyalspa offers mobile body contouring, laser lipo, RF skin tightening and in-home beauty appointments in Doral. Great for waist, abdomen, arms and targeted contouring sessions.',
-          whatsapp: 'Hola, quiero información sobre Body Contouring en Doral.'
-        },
-        {
-          title: 'Laser Lipo Hialeah',
-          subtitle: 'At-home laser lipo service in Hialeah',
-          text: 'Book laser lipo, cavitation and body contouring appointments in Hialeah with mobile service. Designed for clients looking for convenience, visible shaping and luxury at-home care.',
-          whatsapp: 'Hola, quiero información sobre Laser Lipo en Hialeah.'
-        }
-      ];
+      const seoSlidesData = [];
 
       const deck = document.getElementById('deck');
       const homeRail = document.querySelector('.home-rail');
