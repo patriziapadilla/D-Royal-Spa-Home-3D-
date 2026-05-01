@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>D'Royal Spa · Mockup Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0807;
+  --bg-2:#1a1310;
+  --gold:#d4af6b;
+  --gold-soft:#b8945a;
+  --cream:#f5e9d3;
+  --bronze:#8a6c47;
+  --text:#efe2cf;
+  --muted:rgba(239,226,207,.55);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+.serif{font-family:'Cormorant Garamond',serif;font-weight:400}
+
+/* === GRAIN OVERLAY === */
+.grain{
+  position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.08;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+
+/* === TOP NAV === */
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:28px 56px;
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--cream);
+  background:linear-gradient(180deg,rgba(10,8,7,.55) 0%,rgba(10,8,7,0) 100%);
+}
+.topnav-brand{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:18px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+.topnav-brand .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 12px;vertical-align:middle;opacity:.6}
+.topnav-links{display:flex;gap:42px}
+.topnav-links a{color:var(--cream);text-decoration:none;opacity:.78;transition:opacity .3s, color .3s}
+.topnav-links a:hover{color:var(--gold);opacity:1}
+.topnav-links a.active{color:var(--gold);opacity:1}
+.topnav-links a.active::after{content:"";display:block;width:14px;height:1px;background:var(--gold);margin-top:6px}
+.topnav-right{display:flex;align-items:center;gap:18px;font-size:10px}
+.menu-pill{padding:8px 16px;border:1px solid rgba(212,175,107,.32);border-radius:999px;color:var(--gold);letter-spacing:.32em}
+
+/* === SIDE NAV (left vertical) === */
+.sidenav{
+  position:fixed;left:40px;top:50%;transform:translateY(-50%);z-index:90;
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+.sidenav-item{
+  display:flex;align-items:center;gap:14px;
+  position:relative;padding:14px 0;
+  color:var(--muted);font-size:10px;letter-spacing:.32em;text-transform:uppercase;
+  cursor:pointer;transition:color .3s;
+}
+.sidenav-item .num{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:0;width:24px;color:var(--bronze)}
+.sidenav-item .line{display:block;width:30px;height:1px;background:rgba(212,175,107,.18);transition:width .4s ease, background .4s ease}
+.sidenav-item.active{color:var(--cream)}
+.sidenav-item.active .num{color:var(--gold)}
+.sidenav-item.active .line{width:60px;background:var(--gold)}
+.sidenav-item.active::before{
+  content:"◆";position:absolute;left:-14px;color:var(--gold);font-size:8px;
+}
+
+/* === HERO === */
+.hero{
+  position:relative;height:100vh;width:100%;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:brightness(.45) saturate(.7) sepia(.18);
+  transform:scale(1.04);
+}
+.hero-overlay-1{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(10,8,7,.0) 0%,rgba(10,8,7,.55) 60%,rgba(10,8,7,.92) 100%);
+}
+.hero-overlay-2{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,8,7,.7) 0%,rgba(10,8,7,0) 22%,rgba(10,8,7,0) 60%,rgba(10,8,7,.95) 100%);
+}
+.hero-overlay-3{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(212,175,107,.06) 0%,rgba(0,0,0,0) 40%);
+  mix-blend-mode:screen;
+}
+
+.hero-content{
+  position:relative;z-index:5;
+  width:100%;max-width:1640px;padding:0 80px;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:80px;
+}
+
+.hero-eyebrow{
+  display:flex;align-items:center;gap:14px;
+  font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:32px;
+}
+.hero-eyebrow .bar{display:block;width:48px;height:1px;background:var(--gold)}
+
+.hero-headline{
+  font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:clamp(56px,7.2vw,118px);
+  line-height:.92;letter-spacing:-.005em;
+  color:var(--cream);
+}
+.hero-headline em{font-style:italic;color:var(--gold);font-weight:300}
+.hero-headline .spaced{
+  display:block;font-size:.18em;letter-spacing:.6em;
+  color:var(--bronze);text-transform:uppercase;margin-top:24px;font-family:'Inter',sans-serif;
+}
+
+.hero-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
+  font-size:24px;color:var(--text);opacity:.78;margin-top:28px;max-width:480px;line-height:1.45;
+}
+
+.hero-meta{
+  display:flex;flex-direction:column;gap:24px;
+  border-left:1px solid rgba(212,175,107,.22);padding-left:40px;
+}
+.hero-meta-row{display:flex;flex-direction:column;gap:4px}
+.hero-meta-row .label{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--bronze)}
+.hero-meta-row .value{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);font-weight:400}
+.hero-meta-row .value em{color:var(--gold);font-style:italic}
+
+.hero-ctas{display:flex;gap:18px;margin-top:36px}
+.cta-primary{
+  display:inline-flex;align-items:center;gap:14px;
+  padding:18px 28px;background:var(--gold);color:var(--bg);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;
+  border-radius:0;border:none;cursor:pointer;transition:background .3s, gap .3s;
+  text-decoration:none;
+}
+.cta-primary:hover{background:var(--cream);gap:22px}
+.cta-primary .arrow{font-size:14px}
+.cta-ghost{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:18px 0;color:var(--cream);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  border:none;background:none;cursor:pointer;
+  border-bottom:1px solid rgba(245,233,211,.32);
+  transition:border-color .3s,color .3s;
+  text-decoration:none;
+}
+.cta-ghost:hover{color:var(--gold);border-color:var(--gold)}
+
+/* === BOTTOM HUD === */
+.hud-bottom{
+  position:fixed;bottom:32px;left:0;right:0;z-index:80;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:0 56px;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);
+}
+.hud-scroll{display:flex;align-items:center;gap:14px;color:var(--cream)}
+.hud-scroll .arrow{
+  display:inline-block;width:1px;height:36px;background:linear-gradient(180deg,var(--gold) 0%,transparent 100%);
+  position:relative;
+}
+.hud-scroll .arrow::after{
+  content:"";position:absolute;bottom:0;left:-3px;width:7px;height:7px;
+  border-right:1px solid var(--gold);border-bottom:1px solid var(--gold);
+  transform:rotate(45deg);
+}
+
+.hud-rating{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.hud-rating .stars{color:var(--gold);font-size:11px;letter-spacing:.18em}
+.hud-rating .label{color:var(--muted)}
+
+/* === FLOATING DECOR === */
+.deco-line-h{
+  position:absolute;left:80px;right:80px;height:1px;background:rgba(212,175,107,.12);
+}
+.deco-line-h.top{top:96px}
+.deco-line-h.bottom{bottom:96px}
+.deco-corner{position:absolute;width:32px;height:32px;border:1px solid rgba(212,175,107,.32)}
+.deco-corner.tl{top:80px;left:56px;border-right:none;border-bottom:none}
+.deco-corner.tr{top:80px;right:56px;border-left:none;border-bottom:none}
+.deco-corner.bl{bottom:80px;left:56px;border-right:none;border-top:none}
+.deco-corner.br{bottom:80px;right:56px;border-left:none;border-top:none}
+
+/* === SECTION 2 (treatment preview) === */
+.section{
+  position:relative;height:100vh;width:100%;overflow:hidden;
+  display:flex;align-items:center;
+}
+.section-bg-video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:brightness(.32) saturate(.65) sepia(.2);
+}
+.section-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(10,8,7,.95) 0%,rgba(10,8,7,.45) 50%,rgba(10,8,7,.85) 100%);
+}
+.section-content{
+  position:relative;z-index:5;
+  width:100%;max-width:1640px;margin:0 auto;padding:0 80px;
+  display:grid;grid-template-columns:.42fr .58fr;gap:80px;align-items:center;
+}
+.section-meta{display:flex;flex-direction:column;gap:24px}
+.section-num{
+  font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);
+  display:flex;align-items:center;gap:14px;
+}
+.section-num .line{display:block;width:48px;height:1px;background:var(--gold)}
+.section-title{
+  font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:clamp(44px,5.4vw,86px);line-height:.96;color:var(--cream);
+}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-text{font-size:15px;line-height:1.7;color:var(--text);opacity:.78;max-width:440px}
+.section-stats{display:flex;gap:48px;margin-top:24px}
+.section-stats .stat{display:flex;flex-direction:column;gap:4px}
+.section-stats .num{font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--gold);line-height:1}
+.section-stats .lbl{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+
+.section-visual{
+  position:relative;aspect-ratio:4/5;width:100%;max-width:640px;justify-self:end;
+  border:1px solid rgba(212,175,107,.22);
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 100px rgba(212,175,107,.06);
+}
+.section-visual::before{
+  content:"";position:absolute;inset:14px;border:1px solid rgba(212,175,107,.16);z-index:3;pointer-events:none;
+}
+.section-visual img,.section-visual video{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.85) saturate(.92) sepia(.05);
+}
+.section-visual-label{
+  position:absolute;bottom:24px;left:24px;z-index:4;
+  font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:10px;
+}
+.section-visual-label .dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+
+/* === MOCKUP LABEL TAG === */
+.mockup-tag{
+  position:fixed;top:18px;left:50%;transform:translateX(-50%);
+  z-index:300;padding:10px 22px;
+  background:rgba(212,175,107,.12);border:1px solid rgba(212,175,107,.32);
+  color:var(--gold);font-size:10px;letter-spacing:.4em;text-transform:uppercase;
+  border-radius:999px;backdrop-filter:blur(10px);
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- ======================== HERO SECTION ======================== -->
+<div class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="home-video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay-1"></div>
+  <div class="hero-overlay-2"></div>
+  <div class="hero-overlay-3"></div>
+
+  <!-- decorative frame -->
+  <div class="deco-corner tl"></div>
+  <div class="deco-corner tr"></div>
+  <div class="deco-corner bl"></div>
+  <div class="deco-corner br"></div>
+
+  <!-- top nav -->
+  <nav class="topnav">
+    <div class="topnav-brand">D'Royal<span class="dot"></span>Spa</div>
+    <div class="topnav-links">
+      <a href="#" class="active">Home</a>
+      <a href="#">Treatments</a>
+      <a href="#">Results</a>
+      <a href="#">Areas</a>
+      <a href="#">Booking</a>
+    </div>
+    <div class="topnav-right">
+      <span>+1 786 690 0960</span>
+      <span class="menu-pill">Menu</span>
+    </div>
+  </nav>
+
+  <!-- side nav -->
+  <div class="sidenav">
+    <div class="sidenav-item active"><span class="num">01</span><span class="line"></span><span>Home</span></div>
+    <div class="sidenav-item"><span class="num">02</span><span class="line"></span><span>Lipo Laser</span></div>
+    <div class="sidenav-item"><span class="num">03</span><span class="line"></span><span>Transfer</span></div>
+    <div class="sidenav-item"><span class="num">04</span><span class="line"></span><span>Chin</span></div>
+    <div class="sidenav-item"><span class="num">05</span><span class="line"></span><span>Breast</span></div>
+    <div class="sidenav-item"><span class="num">06</span><span class="line"></span><span>Glute</span></div>
+    <div class="sidenav-item"><span class="num">07</span><span class="line"></span><span>Arms</span></div>
+    <div class="sidenav-item"><span class="num">08</span><span class="line"></span><span>Legs</span></div>
+  </div>
+
+  <!-- hero content -->
+  <div class="hero-content">
+    <div>
+      <div class="hero-eyebrow"><span class="bar"></span><span>Miami's In-Home Luxury Spa</span></div>
+      <h1 class="hero-headline">
+        Surgery-<em>Free</em><br>
+        Lipo Ritual.
+        <span class="spaced">Brickell · Downtown · Doral · Miami Beach</span>
+      </h1>
+      <p class="hero-sub">A discreet, elevated body sculpting experience — performed in the privacy of your home, by certified specialists, with results that whisper.</p>
+      <div class="hero-ctas">
+        <a class="cta-primary" href="#"><span>Book the Ritual</span><span class="arrow">→</span></a>
+        <a class="cta-ghost" href="#"><span>Discover Treatments</span><span>↓</span></a>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-row">
+        <span class="label">First Session</span>
+        <span class="value"><em>$90</em> · Limited Offer</span>
+      </div>
+      <div class="hero-meta-row">
+        <span class="label">Eight Signature Rituals</span>
+        <span class="value">Lipo · Breast · Glute · Face<br>Chin · Arms · Legs · Transfer</span>
+      </div>
+      <div class="hero-meta-row">
+        <span class="label">Service Areas</span>
+        <span class="value">Brickell — Downtown — Doral<br>Miami Beach</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- bottom HUD -->
+  <div class="hud-bottom">
+    <div class="hud-scroll"><span>Scroll · Discover</span><span class="arrow"></span></div>
+    <div class="hud-rating">
+      <span class="stars">★ ★ ★ ★ ★</span>
+      <span class="label">Rated 5 Stars in Miami</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TREATMENT SECTION (preview) ======================== -->
+<div class="section">
+  <video class="section-bg-video" autoplay muted loop playsinline>
+    <source src="lipo-video.mp4" type="video/mp4">
+  </video>
+  <div class="section-overlay"></div>
+
+  <div class="deco-corner tl"></div>
+  <div class="deco-corner tr"></div>
+  <div class="deco-corner bl"></div>
+  <div class="deco-corner br"></div>
+
+  <div class="section-content">
+    <div class="section-meta">
+      <div class="section-num"><span class="line"></span><span>02 — Signature</span></div>
+      <h2 class="section-title">Lipo Laser <em>360°</em></h2>
+      <p class="section-text">A non-invasive sculpting protocol that melts localized fat while refining contour, texture, and skin tone. Three modalities — laser, ultrasonic cavitation, radiofrequency — choreographed in a single ritual.</p>
+      <div class="section-stats">
+        <div class="stat"><span class="num">90<small style="font-size:.5em;color:var(--bronze)">$</small></span><span class="lbl">First Session</span></div>
+        <div class="stat"><span class="num">45<small style="font-size:.5em;color:var(--bronze)">m</small></span><span class="lbl">Per Area</span></div>
+        <div class="stat"><span class="num">8<small style="font-size:.5em;color:var(--bronze)">+</small></span><span class="lbl">Sessions</span></div>
+      </div>
+      <div class="hero-ctas" style="margin-top:36px">
+        <a class="cta-primary" href="#"><span>Reserve</span><span class="arrow">→</span></a>
+        <a class="cta-ghost" href="#"><span>See Results</span><span>↗</span></a>
+      </div>
+    </div>
+    <div class="section-visual">
+      <img src="lipo-results.jpg" alt="Lipo Laser results">
+      <div class="section-visual-label"><span class="dot"></span><span>Real Client · Verified</span></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
