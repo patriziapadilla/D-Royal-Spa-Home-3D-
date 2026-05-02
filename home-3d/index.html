@@ -6,47 +6,27 @@
 <title>D’ROYAL SPA</title>
 
 <style>
-
-/* BASE */
 body{
 margin:0;
 font-family:Arial, sans-serif;
 color:#111;
 background:#fff;
-}
-
-.section{
-padding:100px 40px;
-max-width:1100px;
-margin:auto;
-}
-
-/* NAV */
-nav{
-display:flex;
-justify-content:space-between;
-padding:20px 40px;
-font-size:14px;
-}
-
-nav a{
-margin:0 10px;
-text-decoration:none;
-color:#111;
-}
-
-/* HOME */
-.center{
 text-align:center;
 }
 
+.section{
+padding:80px 20px;
+max-width:1000px;
+margin:auto;
+}
+
+/* HOME */
 h1{
 font-size:48px;
-margin-bottom:20px;
 }
 
 .line{
-width:250px;
+width:200px;
 height:1px;
 background:#999;
 margin:20px auto;
@@ -58,8 +38,8 @@ margin:20px 0;
 }
 
 .buttons a{
-margin:10px;
 display:inline-block;
+margin:10px;
 padding:12px 20px;
 border:1px solid #000;
 text-decoration:none;
@@ -71,121 +51,80 @@ background:#000;
 color:#fff;
 }
 
-/* RESULTADOS CARRUSEL */
-.carousel{
-width:100%;
-max-width:700px;
-margin:40px auto;
-overflow:hidden;
+/* RESULTADOS */
+h2{
+font-size:32px;
+margin-bottom:10px;
 }
 
-.slide{
-width:100%;
-display:none;
+.top-text{
+font-size:16px;
+color:#555;
+margin-bottom:30px;
+}
+
+.bottom-text{
+font-size:15px;
+color:#444;
+margin-top:30px;
+}
+
+/* CARRUSEL */
+.carousel-wrapper{
+position:relative;
+max-width:900px;
+margin:auto;
+}
+
+.carousel-track{
+display:flex;
+gap:20px;
+overflow-x:auto;
+scroll-behavior:smooth;
+padding:10px;
+}
+
+.carousel-track img{
+height:260px;
+width:auto;
 border-radius:12px;
+flex-shrink:0;
+object-fit:cover;
 }
 
-.active{
-display:block;
+/* Flechas */
+.arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:#000;
+color:#fff;
+border:none;
+padding:10px;
+cursor:pointer;
 }
 
+.left{ left:0; }
+.right{ right:0; }
+
+/* LINKS */
 .carousel-links{
-text-align:center;
-margin-top:20px;
+margin-top:25px;
 }
 
 .carousel-links a{
 margin:0 10px;
 color:#007aff;
 text-decoration:none;
+font-size:15px;
 }
-
-/* TRATAMIENTOS (LAYOUT CORRECTO) */
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:60px;
-align-items:center;
-}
-
-.tag{
-font-size:12px;
-letter-spacing:2px;
-color:#777;
-}
-
-h2{
-font-size:40px;
-margin:10px 0;
-}
-
-.areas{
-letter-spacing:2px;
-margin:10px 0;
-}
-
-strong{
-color:#007aff;
-}
-
-/* CARRUSEL LATERAL */
-.side-carousel{
-width:100%;
-max-width:350px;
-}
-
-.side-carousel img{
-width:100%;
-border-radius:12px;
-display:none;
-}
-
-.side-carousel img.active{
-display:block;
-}
-
-.buttons-small{
-margin-top:20px;
-}
-
-.buttons-small a{
-margin-right:10px;
-text-decoration:none;
-}
-
-/* RESPONSIVE */
-@media(max-width:800px){
-.grid{
-grid-template-columns:1fr;
-text-align:center;
-}
-.side-carousel{
-margin:auto;
-}
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-<nav>
-<div>
-<a href="#">tratamientos</a>
-<a href="#">inicio</a>
-<a href="#">resultados</a>
-<a href="#">áreas</a>
-</div>
-
-<div>
-+1 786 690 0960
-<a href="https://wa.me/17866900960">AGENDAR</a>
-</div>
-</nav>
-
 <!-- HOME -->
-<section class="section center">
+<section class="section">
 
 <h1>D’ROYAL SPA</h1>
 
@@ -209,163 +148,58 @@ margin:auto;
 
 </section>
 
-<!-- RESULTADOS -->
-<section class="section center">
+<!-- 🔥 RESULTADOS (YA EXACTO COMO PEDISTE) -->
+<section class="section">
 
-<h2>Resultados reales</h2>
+<h2>Resultados</h2>
 
-<div class="carousel">
-<img src="r1.jpg" class="slide active">
-<img src="r2.jpg" class="slide">
-<img src="r3.jpg" class="slide">
+<p class="top-text">La diferencia se ve</p>
+
+<div class="carousel-wrapper">
+
+<button class="arrow left">&#10094;</button>
+
+<div class="carousel-track" id="track">
+
+<img src="antes1.jpg">
+<img src="despues1.jpg">
+
+<img src="antes2.jpg">
+<img src="despues2.jpg">
+
+<img src="antes3.jpg">
+<img src="despues3.jpg">
+
+<img src="antes4.jpg">
+<img src="despues4.jpg">
+
 </div>
+
+<button class="arrow right">&#10095;</button>
+
+</div>
+
+<p class="bottom-text">Desde la primera sesión</p>
 
 <div class="carousel-links">
-<a href="#">Lipo con Láser</a>
-<a href="#">Aumentos</a>
-<a href="#">Botox</a>
-<a href="#">CoolSculpting</a>
-</div>
-
-</section>
-
-<!-- LIPO -->
-<section class="section grid">
-
-<div>
-<p class="tag">SIGNATURE · BODY SCULPTING</p>
-
-<h2>Lipo con Láser</h2>
-
-<p class="areas">ABDOMEN · BRAZOS · PIERNAS · PAPADA</p>
-
-<p>
-Esculpe localizadamente abdomen, brazos, piernas o papada con 
-<strong>tecnología láser + ultrasonido + radiofrecuencia + terapia de luz de 7 colores</strong>. 
-Reduce, moldea, reafirma y rejuvenece tu piel sin cirugía, sin dolor, resultados desde la primera sesión.
-</p>
-
-<div class="buttons-small">
-<a href="https://wa.me/17866900960">RESERVAR</a>
-<a href="https://wa.me/17866900960">CONSULTAR</a>
-</div>
-
-</div>
-
-<div class="side-carousel">
-<img src="l1.jpg" class="active">
-<img src="l2.jpg">
-<img src="l3.jpg">
-</div>
-
-</section>
-
-<!-- AUMENTOS -->
-<section class="section grid">
-
-<div>
-<p class="tag">AUMENTOS · VACUUM THERAPY</p>
-
-<h2>Aumentos sin Cirugía.</h2>
-
-<p>
-Tecnología vacuum + láser que activa el tejido adiposo y estimula la circulación, aumentando volumen natural en glúteos y senos. Sin implantes, sin inyecciones.
-</p>
-
-<p class="areas">GLÚTEOS · SENOS</p>
-
-<div class="buttons-small">
-<a href="https://wa.me/17866900960">RESERVAR</a>
-<a href="https://wa.me/17866900960">CONSULTAR</a>
-</div>
-
-</div>
-
-<div class="side-carousel">
-<img src="a1.jpg" class="active">
-<img src="a2.jpg">
-<img src="a3.jpg">
-</div>
-
-</section>
-
-<!-- BOTOX -->
-<section class="section grid">
-
-<div>
-
-<h2>Botox Natural con Láser.</h2>
-
-<p>
-Hydromicrodermabration + D’Cool + <strong>Radiofrecuencia + Terapia de luz de 7 colores</strong> que regenera las células madres, eliminando las líneas de expresión y pigmentación de la piel, ideal para rejuvenecer de forma natural, sin agujas, sin inyecciones, sin tiempo de recuperación.
-</p>
-
-<p class="areas">OJOS · CARA · CUELLO</p>
-
-<div class="buttons-small">
-<a href="https://wa.me/17866900960">RESERVAR</a>
-<a href="https://wa.me/17866900960">CONSULTAR</a>
-</div>
-
-</div>
-
-<div class="side-carousel">
-<img src="b1.jpg" class="active">
-<img src="b2.jpg">
-<img src="b3.jpg">
-</div>
-
-</section>
-
-<!-- COOL -->
-<section class="section grid">
-
-<div>
-
-<h2>CoolSculpting</h2>
-
-<p class="areas">ABDOMEN · BRAZOS · PIERNAS</p>
-
-<p>
-Reducción de grasa localizada mediante enfriamiento controlado que elimina células adiposas sin cirugía. Se combina con radiofrecuencia para reafirmar la piel (skin tightening).
-</p>
-
-<div class="buttons-small">
-<a href="https://wa.me/17866900960">RESERVAR</a>
-<a href="https://wa.me/17866900960">CONSULTAR</a>
-</div>
-
-</div>
-
-<div class="side-carousel">
-<img src="c1.jpg" class="active">
-<img src="c2.jpg">
-<img src="c3.jpg">
+<a href="#lipo">Lipo con Láser</a>
+<a href="#aumentos">Aumentos</a>
+<a href="#botox">Botox</a>
+<a href="#cool">CoolSculpting</a>
 </div>
 
 </section>
 
 <script>
+const track = document.getElementById("track");
 
-/* carrusel principal */
-setInterval(()=>{
-let slides=document.querySelectorAll(".carousel .slide");
-let i=[...slides].findIndex(s=>s.classList.contains("active"));
-slides[i].classList.remove("active");
-slides[(i+1)%slides.length].classList.add("active");
-},3000);
+document.querySelector(".left").onclick = () => {
+track.scrollBy({ left: -300, behavior: 'smooth' });
+};
 
-/* carruseles laterales */
-document.querySelectorAll(".side-carousel").forEach(carousel=>{
-let imgs=carousel.querySelectorAll("img");
-let i=0;
-setInterval(()=>{
-imgs[i].classList.remove("active");
-i=(i+1)%imgs.length;
-imgs[i].classList.add("active");
-},3000);
-});
-
+document.querySelector(".right").onclick = () => {
+track.scrollBy({ left: 300, behavior: 'smooth' });
+};
 </script>
 
 </body>
