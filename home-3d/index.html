@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>D’ROYAL SPA</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -20,9 +19,30 @@ font-family:'Inter',sans-serif;
 body{
 background:#fff;
 color:#111;
+scroll-behavior:smooth;
 }
 
-/* ESPACIADO PRO */
+/* NAV */
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:#fff;
+padding:15px 20px;
+display:flex;
+justify-content:space-between;
+font-size:13px;
+z-index:1000;
+border-bottom:1px solid #eee;
+}
+
+nav a{
+text-decoration:none;
+color:#111;
+margin-left:15px;
+}
+
+/* SECCIONES */
 section{
 padding:120px 20px;
 text-align:center;
@@ -93,21 +113,21 @@ color:#555;
 .title{
 font-size:30px;
 font-weight:600;
-margin-bottom:15px;
+margin-bottom:10px;
 }
 
 .text{
 font-size:15px;
 color:#555;
-margin-bottom:30px;
+margin-bottom:25px;
 }
 
-/* CARRUSEL LUJO */
+/* CARRUSEL */
 .carousel{
 position:relative;
-margin-top:30px;
 display:flex;
 justify-content:center;
+margin-top:25px;
 }
 
 .track{
@@ -116,7 +136,6 @@ gap:20px;
 overflow-x:auto;
 scroll-snap-type:x mandatory;
 padding:10px;
-max-width:100%;
 }
 
 .card{
@@ -152,7 +171,22 @@ font-size:12px;
 border-radius:20px;
 }
 
-/* BOTONES AREAS */
+/* LINKS RESULTADOS */
+.carousel-links{
+margin-top:20px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:12px;
+}
+
+.carousel-links a{
+text-decoration:none;
+font-size:14px;
+color:#0A66FF;
+}
+
+/* BOTONES AREA */
 .area-buttons{
 display:flex;
 flex-wrap:wrap;
@@ -187,15 +221,27 @@ text-align:center;
 
 <body>
 
-<!-- HOME -->
-<section class="hero">
+<!-- NAV -->
+<nav>
+<div>D’ROYAL SPA</div>
 <div>
+<a href="#home">Inicio</a>
+<a href="#resultados">Resultados</a>
+<a href="#lipo">Lipo</a>
+<a href="#botox">Botox</a>
+</div>
+</nav>
+
+<!-- HOME -->
+<section class="hero" id="home">
+<div>
+
 <h1>D’ROYAL SPA</h1>
 
 <p class="subtitle">
 Belleza natural con tecnología avanzada<br>
 Resultados reales sin cirugía ni agujas<br>
-<i>Tratamientos diseñados para rejuvenecer de forma inteligente</i>
+<i>Diseñados para rejuvenecer de forma inteligente</i>
 </p>
 
 <div class="buttons">
@@ -204,113 +250,125 @@ Resultados reales sin cirugía ni agujas<br>
 </div>
 
 <div class="trust">$80 · ★★★★★ MIAMI</div>
+
 </div>
 </section>
 
 <!-- RESULTADOS -->
-<section>
+<section id="resultados">
 <div class="title">Resultados reales</div>
 
 <div class="carousel">
 <div class="track">
 
-<div class="card"><img src="https://images.unsplash.com/photo-1581091870627-3e7c2f1a6b1d"></div>
-<div class="card active"><img src="https://images.unsplash.com/photo-1603570419888-65f7b7b8bca7"></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1611078489935-0cb964de46d6"></div>
+<div class="card"><img src="https://via.placeholder.com/600x400"></div>
+<div class="card active"><img src="https://via.placeholder.com/600x400"></div>
+<div class="card"><img src="https://via.placeholder.com/600x400"></div>
 
 </div>
-
 <div class="label">ANTES / DESPUÉS</div>
 </div>
+
+<div class="carousel-links">
+<a href="#lipo">Lipo 360</a>
+<a href="#aumentos">Aumentos</a>
+<a href="#botox">Botox</a>
+<a href="#cool">CoolSculpting</a>
+</div>
+
 </section>
 
 <!-- LIPO -->
-<section>
+<section id="lipo">
 <div class="title">Lipo Láser 360</div>
 <div class="text">RF · Cavitación · Lipolaser · 7 Colors · Maderoterapia</div>
 
 <div class="carousel">
 <div class="track">
 
-<div class="card"><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6"></div>
-<div class="card active"><img src="https://images.unsplash.com/photo-1594824475544-9c8d47c0b6cb"></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1580281658629-8f4b1f88c9f0"></div>
+<div class="card"><img src="https://via.placeholder.com/600x400"></div>
+<div class="card active"><img src="https://via.placeholder.com/600x400"></div>
+<div class="card"><img src="https://via.placeholder.com/600x400"></div>
 
 </div>
 <div class="label">ANTES / DESPUÉS</div>
 </div>
 
 <div class="area-buttons">
-<a href="#">Abdomen</a>
-<a href="#">Brazos</a>
-<a href="#">Piernas</a>
-<a href="#">Papada</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Abdomen</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Brazos</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Piernas</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Papada</a>
 </div>
+
 </section>
 
 <!-- AUMENTOS -->
-<section>
+<section id="aumentos">
 <div class="title">Aumentos sin cirugía</div>
 
 <div class="carousel">
 <div class="track">
 
-<div class="card"><img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2"></div>
-<div class="card active"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5"></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5"></div>
+<div class="card"><img src="https://via.placeholder.com/600x400"></div>
+<div class="card active"><img src="https://via.placeholder.com/600x400"></div>
+<div class="card"><img src="https://via.placeholder.com/600x400"></div>
 
 </div>
 <div class="label">ANTES / DESPUÉS</div>
 </div>
 
 <div class="area-buttons">
-<a href="#">Glúteos</a>
-<a href="#">Senos</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Glúteos</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Senos</a>
 </div>
+
 </section>
 
 <!-- BOTOX -->
-<section>
+<section id="botox">
 <div class="title">Botox Natural con Láser</div>
 
 <div class="carousel">
 <div class="track">
 
-<div class="card"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5"></div>
-<div class="card active"><img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5"></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1603570419888-65f7b7b8bca7"></div>
+<div class="card"><img src="https://via.placeholder.com/600x400"></div>
+<div class="card active"><img src="https://via.placeholder.com/600x400"></div>
+<div class="card"><img src="https://via.placeholder.com/600x400"></div>
 
 </div>
 <div class="label">ANTES / DESPUÉS</div>
 </div>
 
 <div class="area-buttons">
-<a href="#">Ojos</a>
-<a href="#">Cara</a>
-<a href="#">Cuello</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Ojos</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Cara</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Cuello</a>
 </div>
+
 </section>
 
 <!-- COOL -->
-<section>
+<section id="cool">
 <div class="title">CoolSculpting</div>
 
 <div class="carousel">
 <div class="track">
 
-<div class="card"><img src="https://images.unsplash.com/photo-1580281658629-8f4b1f88c9f0"></div>
-<div class="card active"><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6"></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1594824475544-9c8d47c0b6cb"></div>
+<div class="card"><img src="https://via.placeholder.com/600x400"></div>
+<div class="card active"><img src="https://via.placeholder.com/600x400"></div>
+<div class="card"><img src="https://via.placeholder.com/600x400"></div>
 
 </div>
 <div class="label">ANTES / DESPUÉS</div>
 </div>
 
 <div class="area-buttons">
-<a href="#">Abdomen</a>
-<a href="#">Brazos</a>
-<a href="#">Piernas</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Abdomen</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Brazos</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Piernas</a>
 </div>
+
 </section>
 
 <footer>
