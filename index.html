@@ -1,674 +1,501 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>D’Royal Spa · Home 3D</title>
-  <style>
-    :root{
-      --bg:#050505;
-      --panel:#0b0b0b;
-      --line:rgba(255,255,255,.10);
-      --gold:#dcc2a2;
-      --cream:#efe2d4;
-      --text:#f8efe7;
-      --muted:rgba(248,239,231,.78);
-      --shadow:0 24px 70px rgba(0,0,0,.34);
-    }
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      padding:0;
-      background:#000;
-      color:var(--text);
-      font-family:Arial,Helvetica,sans-serif;
-      overflow:hidden;
-    }
-    a{color:inherit;text-decoration:none}
-    button{
-      font:inherit;
-      border:none;
-      background:none;
-      color:inherit;
-      cursor:pointer;
-    }
-    .app{
-      width:100%;
-      height:100vh;
-      overflow:hidden;
-      background:#000;
-      position:relative;
-    }
-    .deck{
-      height:100vh;
-      display:flex;
-      overflow-x:auto;
-      overflow-y:hidden;
-      scroll-snap-type:x mandatory;
-      scroll-behavior:smooth;
-      -webkit-overflow-scrolling:touch;
-      scrollbar-width:none;
-    }
-    .deck::-webkit-scrollbar{display:none}
-    .slide{
-      flex:0 0 100vw;
-      width:100vw;
-      height:100vh;
-      scroll-snap-align:start;
-      position:relative;
-      overflow:hidden;
-      background:#000;
-    }
-    .slide-inner{
-      width:100%;
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      opacity:.55;
-      transform:scale(.94);
-      transition:opacity .45s ease, transform .45s ease;
-    }
-    .slide.active .slide-inner{
-      opacity:1;
-      transform:scale(1);
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="description" content="D'Royal Spa · Lipo sin Cirugía · 100% Móvil en Miami · Brickell · Downtown · Doral · Miami Beach" />
+<title>D'Royal Spa · Lipo sin Cirugía · Miami</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="video" href="home-video.mp4">
+<style>
+:root{
+  --bg:#f5f1ea;
+  --cream:#efe2cf;
+  --cream-soft:#f5e9d3;
+  --gold:#c9a875;
+  --gold-bright:#e8c789;
+  --gold-deep:#b8945a;
+  --bronze:#8a6c47;
+  --espresso:#5c4a3a;
+  --noir:#0d0805;
+  --white:#fffaf0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.serif{font-family:'Cormorant Garamond',serif}
 
-    .home{
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.22) 0%, rgba(0,0,0,.36) 34%, rgba(0,0,0,.72) 78%, rgba(0,0,0,.94) 100%),
-        url('./modelo.jpg') center 24% / cover no-repeat;
-    }
-    .home-center{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:110px 20px 170px;
-    }
-    .brand{
-      margin:0 0 14px;
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(28px,3vw,42px);
-      font-weight:500;
-      color:var(--gold);
-    }
-    .headline{
-      margin:0;
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(54px,8vw,104px);
-      line-height:.92;
-      font-weight:500;
-      color:#fff9f1;
-      max-width:1000px;
-    }
-    .areas{
-      margin-top:18px;
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(18px,2vw,28px);
-      color:#f3e7d8;
-    }
-    .phone{
-      margin-top:18px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:50px;
-      padding:0 22px;
-      border-radius:999px;
-      background:var(--cream);
-      color:#111;
-      font-size:clamp(18px,2vw,24px);
-      font-weight:800;
-      box-shadow:var(--shadow);
-    }
-    .offer{
-      margin-top:16px;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(10,10,10,.34);
-      font-size:14px;
-    }
-    .offer b{
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(220,194,162,.18);
-      color:#fff4e8;
-    }
-    .pick{
-      margin-top:22px;
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(18px,2.2vw,30px);
-      color:#fff5ea;
-    }
-    .pick-sub{
-      margin-top:8px;
-      font-size:11px;
-      letter-spacing:.20em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.68);
-    }
-    .home-rail{
-      position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
-      z-index:3;
-      display:grid;
-      gap:4px;
-      padding:0 0 8px;
-      background:linear-gradient(180deg, transparent, rgba(0,0,0,.76) 24%, rgba(0,0,0,.96) 100%);
-    }
-    .rail-btn,
-    .mini-rail-btn{
-      width:100%;
-      text-align:left;
-      display:grid;
-      grid-template-columns:1fr auto;
-      align-items:center;
-      padding:0 16px;
-      background:#030303;
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-      font-family:Georgia,"Times New Roman",serif;
-      color:#fff8ef;
-    }
-    .rail-btn{height:36px;font-size:clamp(15px,1.35vw,22px)}
-    .mini-rail-btn{height:32px;font-size:13px}
+/* ============== GRAIN ============== */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:300;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
 
-    .treatment{
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,.04), transparent 24%),
-        linear-gradient(180deg, #080808 0%, #000 100%);
-    }
-    .treatment-wrap{
-      width:100%;
-      height:100%;
-      padding:40px 16px 72px;
-      display:grid;
-      grid-template-columns:1.04fr .96fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    .media-pane{
-      position:relative;
-      border-radius:28px;
-      overflow:hidden;
-      background:#111;
-      box-shadow:var(--shadow);
-      min-height:0;
-    }
-    .media-stage{
-      width:100%;
-      height:100%;
-      position:relative;
-      background:#0e0e0e;
-    }
-    .media-stage img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .media-dots{
-      position:absolute;
-      left:50%;
-      bottom:12px;
-      transform:translateX(-50%);
-      display:flex;
-      gap:8px;
-      z-index:4;
-    }
-    .media-dots button{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:rgba(255,255,255,.42);
-      padding:0;
-    }
-    .media-dots button.active{background:#fff}
+/* ============== TOP NAV ============== */
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:22px 40px;
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  background:linear-gradient(180deg,rgba(13,8,5,.65),rgba(13,8,5,0));
+  backdrop-filter:blur(6px);
+  transition:background .4s, padding .4s;
+}
+.topnav.solid{background:rgba(13,8,5,.92);padding:14px 40px}
+.topnav .left{display:flex;gap:32px}
+.topnav .left a{color:var(--cream);opacity:.78;transition:.3s}
+.topnav .left a:hover, .topnav .left a.active{color:var(--gold-bright);opacity:1}
+.topnav .center{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;letter-spacing:.32em;color:var(--gold-bright);white-space:nowrap}
+.topnav .center .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 12px;vertical-align:middle;opacity:.7}
+.topnav .right{display:flex;justify-content:flex-end;gap:18px;align-items:center}
+.topnav .right .phone{color:var(--cream);opacity:.85}
+.topnav .right .pill{padding:9px 18px;border:1px solid rgba(201,168,117,.4);color:var(--gold-bright);transition:.3s;cursor:pointer}
+.topnav .right .pill:hover{background:var(--gold);color:var(--noir);border-color:var(--gold)}
 
-    .info-pane{
-      display:flex;
-      flex-direction:column;
-      min-height:0;
-    }
-    .page-card{
-      flex:1;
-      min-height:0;
-      border-radius:28px;
-      overflow:auto;
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
-      border:1px solid rgba(255,255,255,.06);
-      box-shadow:var(--shadow);
-    }
-    .page-card-inner{padding:24px 18px 18px}
-    .page-topline{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:12px;
-      color:rgba(255,255,255,.82);
-    }
-    .home-link{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-size:13px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.78);
-    }
-    .page-title{
-      margin:0 0 12px;
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(34px,4vw,62px);
-      line-height:.94;
-      font-weight:500;
-      color:#fff8ef;
-    }
-    .page-text{
-      margin:0;
-      font-size:clamp(15px,1.18vw,19px);
-      line-height:1.6;
-      color:var(--muted);
-    }
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin:18px 0 16px;
-    }
-    .chip{
-      padding:8px 13px;
-      border-radius:999px;
-      background:rgba(255,255,255,.07);
-      border:1px solid rgba(255,255,255,.10);
-      color:#f5ecdf;
-      font-size:13px;
-    }
-    .gallery{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-top:4px;
-    }
-    .gallery-card{
-      overflow:hidden;
-      background:#0b0b0b;
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:20px;
-    }
-    .gallery-lab{
-      padding:10px 8px;
-      text-align:center;
-      font-size:12px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      background:#000;
-      color:#f6ecdf;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .gallery-card img{
-      width:100%;
-      height:210px;
-      object-fit:cover;
-      display:block;
-      background:#111;
-    }
-    .actions{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:18px;
-    }
-    .btn{
-      min-height:48px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:999px;
-      font-size:16px;
-      font-weight:800;
-      border:1px solid rgba(255,255,255,.14);
-    }
-    .btn.light{background:transparent;color:#fff}
-    .btn.gold{background:var(--cream);color:#111;border-color:transparent}
-    .bottom-nav{
-      margin-top:12px;
-      display:grid;
-      gap:4px;
-    }
-    .whatsapp-float{
-      position:fixed;
-      bottom:20px;
-      left:50%;
-      transform:translateX(-50%);
-      z-index:60;
-      min-height:50px;
-      padding:0 22px;
-      border-radius:999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#25D366;
-      color:#fff;
-      box-shadow:0 16px 36px rgba(0,0,0,.35);
-      font-weight:800;
-    }
-    .swipe-hint{
-      position:absolute;
-      left:50%;
-      bottom:56px;
-      transform:translateX(-50%);
-      z-index:4;
-      font-size:11px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.66);
-      white-space:nowrap;
-    }
+@media(max-width:980px){
+  .topnav{grid-template-columns:auto 1fr auto;padding:18px 20px}
+  .topnav .left{display:none}
+  .topnav .right .phone{display:none}
+  .topnav .center{font-size:16px;letter-spacing:.24em}
+  .topnav.solid{padding:12px 20px}
+}
 
-    @media (max-width: 920px){
-      .treatment-wrap{
-        grid-template-columns:1fr;
-        gap:12px;
-        padding:28px 12px 72px;
-      }
-      .media-pane{
-        height:34vh;
-        min-height:240px;
-      }
-      .gallery-card img{height:140px}
-      .headline{font-size:clamp(46px,12vw,78px)}
-      .home-center{padding:110px 18px 190px}
-    }
-  </style>
-</head>
-<body>
-  <div class="app">
-    <main class="deck" id="deck"></main>
-    <a class="whatsapp-float" href="https://wa.me/message/6QSXBTK7A47QM1" target="_blank" rel="noopener">786 690 0960</a>
-  </div>
+/* ============== SIDE PROGRESS NAV ============== */
+.sidenav{
+  position:fixed;left:30px;top:50%;transform:translateY(-50%);z-index:150;
+  display:flex;flex-direction:column;gap:0;
+}
+.sn-item{
+  display:flex;align-items:center;gap:11px;padding:10px 0 10px 18px;position:relative;
+  font-size:9.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(239,226,207,.5);
+  cursor:pointer;transition:color .3s;
+}
+.sn-item .num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;letter-spacing:0;width:18px;color:var(--bronze)}
+.sn-item .ln{display:block;width:22px;height:1px;background:rgba(201,168,117,.22);transition:.4s}
+.sn-item.active{color:var(--cream)}
+.sn-item.active .num{color:var(--gold-bright)}
+.sn-item.active .ln{width:54px;background:var(--gold-bright)}
+.sn-item.active::before{content:"◆";position:absolute;left:0;top:50%;transform:translateY(-50%);color:var(--gold-bright);font-size:7px}
+@media(max-width:980px){.sidenav{display:none}}
 
-  <script>
-    const isSpanish = (navigator.language || '').toLowerCase().startsWith('es');
+/* ============== LIVE WIDGET ============== */
+.live{
+  position:fixed;bottom:24px;right:30px;z-index:140;
+  width:240px;height:144px;border:1px solid rgba(201,168,117,.45);background:#000;overflow:hidden;
+  box-shadow:0 16px 50px rgba(0,0,0,.5),inset 0 0 60px rgba(201,168,117,.06);
+  transition:opacity .4s, transform .4s;
+}
+.live::before{content:"";position:absolute;inset:7px;border:1px solid rgba(201,168,117,.32);z-index:5;pointer-events:none}
+.live video{width:100%;height:100%;object-fit:cover;filter:contrast(1.05) saturate(.96)}
+.live-tag{position:absolute;top:11px;left:11px;z-index:6;display:flex;align-items:center;gap:7px;padding:4px 9px;background:rgba(13,8,5,.7);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-bright);border:1px solid rgba(201,168,117,.22);backdrop-filter:blur(6px)}
+.live-tag .dot{width:5px;height:5px;border-radius:50%;background:#ff4d4d;box-shadow:0 0 0 3px rgba(255,77,77,.22);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.live-cap{position:absolute;bottom:11px;left:11px;right:11px;z-index:6;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--cream);text-shadow:0 1px 4px rgba(0,0,0,.85)}
+@media(max-width:980px){.live{width:180px;height:108px;bottom:18px;right:18px}}
 
-    const T = {
-      brand: "D’ROYAL SPA",
-      headline: isSpanish ? "Lipo sin cirugía" : "Surgery-Free Lipo",
-      areas: "Brickell · Downtown · Doral · Miami Beach",
-      offer: isSpanish ? "Primera sesión limitada" : "Limited first session",
-      pick: isSpanish ? "Desliza para ver tratamientos" : "Swipe to explore treatments",
-      pickSub: isSpanish ? "Resultados reales · Tecnología avanzada" : "Real results · Advanced technology",
-      home: isSpanish ? "Inicio" : "Home",
-      before: isSpanish ? "Antes" : "Before",
-      after: isSpanish ? "Después" : "After",
-      learn: isSpanish ? "Aprender más" : "Learn more",
-      book: isSpanish ? "Agendar cita" : "Book now",
-      swipe: isSpanish ? "desliza lateralmente" : "swipe sideways"
-    };
+/* ============== DECK + SECTIONS · NORMAL SCROLL ============== */
+.deck{
+  height:100vh;width:100%;
+  display:flex;flex-direction:column;
+  overflow-y:auto;overflow-x:hidden;
+  scroll-snap-type:y proximity;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.deck::-webkit-scrollbar{display:none}
 
-    const slides = [
-      { type:"home" },
-      {
-        nameEs:"LipoEscultura de Brazos 360",
-        nameEn:"Arm Sculpting 360",
-        textEs:"Ayuda a afinar, tensar y definir el brazo para una línea más limpia y estética.",
-        textEn:"Helps slim, tighten, and define the arms for a cleaner, more sculpted line.",
-        chipsEs:["Brazos","Definición","Firmeza","RF 40K"],
-        chipsEn:["Arms","Definition","Firmness","RF 40K"],
-        learn:"https://droyalspa.com/reduccion-de-brazos",
-        book:"https://DRoyalSpaMiami.as.me/?appointmentType=91873037",
-        media:["./arm1.jpg"],
-        gallery:["./arm1.jpg","./arm1.jpg"]
-      },
-      {
-        nameEs:"D-Cool",
-        nameEn:"D-Cool",
-        textEs:"Tratamiento facial regenerativo con RF 40K enfocado en textura, firmeza, mirada, cuello y rejuvenecimiento visual.",
-        textEn:"Regenerative facial treatment with RF 40K focused on texture, firmness, eyes, neck, and visible rejuvenation.",
-        chipsEs:["Cara","Cuello","Ojos","RF 40K"],
-        chipsEn:["Face","Neck","Eyes","RF 40K"],
-        learn:"https://droyalspa.com/d-cool-regeneracion-con-celulas-madre",
-        book:"https://DRoyalSpaMiami.as.me/?appointmentType=91560920",
-        media:["./face1.jpg","./face2.jpg","./face3.jpg"],
-        gallery:["./face1.jpg","./face2.jpg"]
-      },
-      {
-        nameEs:"Aumento de Glúteos sin Cirugía",
-        nameEn:"Non-Surgical Butt Enhancement",
-        textEs:"Busca más proyección, forma y una apariencia más levantada, combinando contorno visual y trabajo de tejido.",
-        textEn:"Targets more projection, shape, and a lifted appearance through contouring and tissue work.",
-        chipsEs:["Proyección","Forma","Lifting visual","RF 40K"],
-        chipsEn:["Projection","Shape","Lifted look","RF 40K"],
-        learn:"https://droyalspa.com/piernas",
-        book:"https://DRoyalSpaMiami.as.me/?appointmentType=91560697",
-        media:["./glute1.jpg","./glute2.jpg"],
-        gallery:["./glute1.jpg","./glute2.jpg"]
-      },
-      {
-        nameEs:"Lipo con Láser 360",
-        nameEn:"Lipo Laser 360",
-        textEs:"Moldea, define y ayuda a reducir grasa localizada en abdomen y espalda desde las primeras sesiones.",
-        textEn:"Contours and helps reduce localized fat across abdomen and back from the first sessions.",
-        chipsEs:["Abdomen","Espalda","Contorno","RF 40K"],
-        chipsEn:["Abdomen","Back","Contour","RF 40K"],
-        learn:"https://droyalspa.com/lipo-con-laser",
-        book:"https://DRoyalSpaMiami.as.me/?appointmentType=91559773",
-        media:["./lipo1.jpg","./lipo2.jpg"],
-        gallery:["./lipo1.jpg","./lipo2.jpg"]
-      },
-      {
-        nameEs:"Lipo con Láser 360 con Transfer",
-        nameEn:"Lipo Laser 360 with Transfer",
-        textEs:"Combina definición corporal con transferencia para resaltar curvas, glúteos, abdomen y espalda con un resultado más armónico.",
-        textEn:"Combines body definition with transfer to enhance curves, butt projection, abdomen, and back contour.",
-        chipsEs:["Transfer","Glúteos","Abdomen","RF 40K"],
-        chipsEn:["Transfer","Butt","Abdomen","RF 40K"],
-        learn:"https://droyalspa.com/lipo-laser-con-transfer",
-        book:"https://DRoyalSpaMiami.as.me/?appointmentType=91559810",
-        media:["./transfer1.jpg","./transfer2.jpg","./transfer3.jpg","./transfer4.jpg"],
-        gallery:["./transfer1.jpg","./transfer2.jpg"]
-      },
-      {
-        nameEs:"LipoPapada con Láser 360",
-        nameEn:"Chin Lipo Laser 360",
-        textEs:"Ayuda a definir mandíbula, perfil y cuello para una apariencia más limpia, elegante y estilizada.",
-        textEn:"Helps define jawline, profile, and neck for a cleaner, more elegant look.",
-        chipsEs:["Papada","Perfil","Cuello","RF 40K"],
-        chipsEn:["Double chin","Profile","Neck","RF 40K"],
-        learn:"https://droyalspa.com/lipo-papada",
-        book:"https://DRoyalSpaMiami.as.me/?appointmentType=91560745",
-        media:["./chin1.jpg","./chin2.jpg"],
-        gallery:["./chin1.jpg","./chin2.jpg"]
-      },
-      {
-        nameEs:"LipoEscultura de Piernas 360",
-        nameEn:"Leg Sculpting 360",
-        textEs:"Trabaja textura, contorno y reducción visual de celulitis para unas piernas más estilizadas.",
-        textEn:"Targets texture, contour, and visual cellulite reduction for more sculpted legs.",
-        chipsEs:["Piernas","Celulitis","Contorno","RF 40K"],
-        chipsEn:["Legs","Cellulite","Contour","RF 40K"],
-        learn:"https://droyalspa.com/1-reduccion-de-celulitis-en-piernas",
-        book:"https://DRoyalSpaMiami.as.me/?appointmentType=91873056",
-        media:["./legs1.jpg"],
-        gallery:["./legs1.jpg","./legs1.jpg"]
-      },
-      {
-        nameEs:"Aumento de Senos sin Cirugía",
-        nameEn:"Non-Surgical Breast Enhancement",
-        textEs:"Ayuda a mejorar volumen visual, escote y forma para una apariencia más llena y armónica sin cirugía.",
-        textEn:"Helps improve visual fullness, cleavage, and shape for a fuller non-surgical appearance.",
-        chipsEs:["Escote","Volumen visual","Forma","RF 40K"],
-        chipsEn:["Cleavage","Visual fullness","Shape","RF 40K"],
-        learn:"https://droyalspa.com/new-page",
-        book:"https://DRoyalSpaMiami.as.me/?appointmentType=91560087",
-        media:["./breast1.jpg","./breast2.jpg"],
-        gallery:["./breast1.jpg","./breast2.jpg"]
-      }
-    ];
+.section{
+  flex:0 0 100vh;width:100%;height:100vh;
+  scroll-snap-align:start;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
+}
+.sec-compact{display:none}
+.section.active .bg-vid{filter:saturate(1) contrast(1.05)}
+.bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.bg-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:saturate(.94) contrast(1.02);will-change:filter;transition:filter .6s}
+.veil{position:absolute;inset:0;z-index:2;pointer-events:none}
 
-    const deck = document.getElementById('deck');
+@media (max-width: 768px) and (orientation: portrait){
+  .bg-vid{object-position:center}
+}
+.veil{position:absolute;inset:0;z-index:2;pointer-events:none}
 
-    const getName = (s) => isSpanish ? s.nameEs : s.nameEn;
-    const getText = (s) => isSpanish ? s.textEs : s.textEn;
-    const getChips = (s) => isSpanish ? s.chipsEs : s.chipsEn;
+/* ============== CINEMATIC PINNED SCENE (Hero → Window → Clouds) ============== */
+.s-cine{
+  flex:0 0 320vh;height:320vh;width:100%;
+  scroll-snap-align:start;
+  position:relative;
+}
+.cine-stage{
+  position:sticky;top:0;height:100vh;width:100%;overflow:hidden;
+}
+.cine-layer{position:absolute;inset:0;width:100%;height:100%;will-change:transform,opacity;overflow:hidden}
+.cine-layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
+.cine-layer .veil{position:absolute;inset:0;z-index:2;pointer-events:none}
+.cine-l1{z-index:1}
+.cine-l1 .veil{background:linear-gradient(90deg,rgba(13,8,5,.55) 0%,rgba(13,8,5,.15) 35%,rgba(13,8,5,0) 60%,rgba(13,8,5,.35) 100%),linear-gradient(180deg,rgba(13,8,5,.35) 0%,rgba(13,8,5,0) 22%,rgba(13,8,5,0) 65%,rgba(13,8,5,.7) 100%)}
 
-    function makeHomeRail() {
-      return slides.slice(1).map((s, i) => `
-        <button class="rail-btn" data-go="${i + 1}">
-          <span>${getName(s)}</span>
-          <span>›</span>
-        </button>
-      `).join("");
-    }
+/* ===== Cinematic Sky FX — sun descends, moon rises, sky tints ===== */
+.cine-sky-fx{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;isolation:isolate}
 
-    function makeMiniRail(index) {
-      return slides.slice(1).map((s, i) => {
-        const real = i + 1;
-        if (real === index) return "";
-        return `
-          <button class="mini-rail-btn" data-go="${real}">
-            <span>${getName(s)}</span>
-            <span>›</span>
-          </button>
-        `;
-      }).join("");
-    }
+/* Sky tint covers only the sky area of the window (right ~50% of screen, top ~55%).
+   It shifts colour via CSS variables driven by GSAP. */
+.sky-tint{
+  position:absolute;right:0;top:0;width:55%;height:62%;
+  background:
+    linear-gradient(180deg,
+      rgba(var(--tint-top-rgb,255,200,110), var(--tint-top-a,0)) 0%,
+      rgba(var(--tint-bot-rgb,255,200,110), var(--tint-bot-a,0)) 100%);
+  z-index:1;
+  will-change:background;
+}
 
-    function mediaMarkup(media, cardIndex) {
-      return `
-        <div class="media-stage" data-media-stage="${cardIndex}">
-          <img src="${media[0]}" alt="">
-          ${media.length > 1 ? `
-          <div class="media-dots">
-            ${media.map((_, i) => `<button data-dot="${i}" class="${i === 0 ? 'active' : ''}"></button>`).join("")}
-          </div>` : ""}
-        </div>
-      `;
-    }
+/* Sun disc — starts high over the window, descends, fades into clouds */
+.sun-disc{
+  position:absolute;right:18%;top:14%;z-index:3;
+  width:130px;height:130px;border-radius:50%;
+  background:radial-gradient(circle, #fff8dc 0%, #ffd98a 38%, #ff9f4c 72%, rgba(255,159,76,0) 100%);
+  box-shadow:
+    0 0 120px 44px rgba(255,208,120,.55),
+    0 0 220px 90px rgba(255,180,90,.30);
+  will-change:transform,opacity,filter;
+}
 
-    deck.innerHTML = slides.map((slide, index) => {
-      if (slide.type === "home") {
-        return `
-          <section class="slide home-slide active" data-slide="${index}">
-            <div class="slide-inner home">
-              <div class="home-center">
-                <h2 class="brand">${T.brand}</h2>
-                <h1 class="headline">${T.headline}</h1>
-                <div class="areas">${T.areas}</div>
-                <a class="phone" href="https://wa.me/message/6QSXBTK7A47QM1" target="_blank" rel="noopener">786 690 0960</a>
-                <div class="offer"><b>25% OFF</b><span>${T.offer}</span></div>
-                <div class="pick">${T.pick}</div>
-                <div class="pick-sub">${T.pickSub}</div>
-              </div>
-              <div class="swipe-hint">${T.swipe}</div>
-              <div class="home-rail">
-                ${makeHomeRail()}
-              </div>
-            </div>
-          </section>
-        `;
-      }
+/* Moon disc — starts below the viewport, rises into the window sky */
+.moon-disc{
+  position:absolute;right:28%;top:92%;z-index:3;
+  width:110px;height:110px;border-radius:50%;
+  background:radial-gradient(circle at 40% 40%, #fffdf2 0%, #f0e6cc 55%, #cfbf93 88%, rgba(207,191,147,0) 100%);
+  box-shadow:
+    0 0 80px 22px rgba(239,228,201,.55),
+    0 0 180px 60px rgba(220,210,170,.30),
+    inset -10px -8px 18px rgba(0,0,0,.12);
+  opacity:0;
+  will-change:transform,opacity;
+}
 
-      return `
-        <section class="slide treatment" data-slide="${index}">
-          <div class="slide-inner">
-            <div class="treatment-wrap">
-              <div class="media-pane">
-                ${mediaMarkup(slide.media, index)}
-              </div>
+/* City twinkle — tiny warm dots overlaid on skyscraper area, fade in at night */
+.city-lights{
+  position:absolute;right:4%;top:28%;width:50%;height:34%;z-index:2;
+  opacity:0;mix-blend-mode:screen;
+  background:
+    radial-gradient(1.3px 1.3px at 12% 28%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 18% 42%, #ffe2a0 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 24% 18%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 31% 55%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.4px 1.4px at 38% 30%, #ffe2a0 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 44% 48%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 52% 22%, #ffe2a0 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 58% 40%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 64% 55%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 71% 32%, #ffe2a0 0%, transparent 100%),
+    radial-gradient(1.4px 1.4px at 78% 50%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 84% 18%, #ffe2a0 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 90% 44%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 16% 62%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 28% 72%, #ffe2a0 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 42% 68%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 56% 78%, #ffd88a 0%, transparent 100%),
+    radial-gradient(1.4px 1.4px at 68% 64%, #ffe2a0 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 80% 72%, #ffd88a 0%, transparent 100%);
+  animation:twinkle 4s infinite ease-in-out;
+}
+@keyframes twinkle{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
 
-              <div class="info-pane">
-                <div class="page-card">
-                  <div class="page-card-inner">
-                    <div class="page-topline">
-                      <button class="home-link" data-go="0">‹ ${T.home}</button>
-                      <span>${index}/${slides.length - 1}</span>
-                    </div>
+@media(max-width:980px){
+  .sun-disc{width:80px;height:80px;right:10%}
+  .moon-disc{width:72px;height:72px;right:18%}
+  .sky-tint{width:100%}
+  .city-lights{width:92%;right:2%}
+}
 
-                    <h2 class="page-title">${getName(slide)}</h2>
-                    <p class="page-text">${getText(slide)}</p>
+/* Hero text block — lives above layer1, animates with scroll */
+.cine-copy{position:absolute;left:0;right:0;top:0;bottom:0;z-index:8;display:flex;align-items:center;pointer-events:none;will-change:opacity,transform}
+.cine-copy .content{pointer-events:auto}
+.cine-copy.out{pointer-events:none}
 
-                    <div class="chips">
-                      ${getChips(slide).map(c => `<span class="chip">${c}</span>`).join("")}
-                    </div>
+/* Clouds text block — fades in */
+.cine-clouds-copy{position:absolute;left:0;right:0;top:0;bottom:0;z-index:9;display:flex;align-items:center;justify-content:center;opacity:0;will-change:opacity,transform;pointer-events:none;text-align:center;padding:0 40px}
+.cine-clouds-copy .title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5.6vw,92px);line-height:.94;letter-spacing:.04em;color:var(--cream)}
+.cine-clouds-copy .title em{font-style:italic;color:var(--gold-bright);font-weight:300}
+.cine-clouds-copy .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(18px,1.8vw,26px);color:var(--cream);opacity:.88;max-width:680px;margin:24px auto;line-height:1.5}
+.cine-clouds-copy .quote::before,.cine-clouds-copy .quote::after{content:"";display:block;width:56px;height:1px;background:var(--gold-bright);margin:22px auto}
 
-                    <div class="gallery">
-                      <div class="gallery-card">
-                        <div class="gallery-lab">${T.before}</div>
-                        <img src="${slide.gallery[0]}" alt="${T.before}">
-                      </div>
-                      <div class="gallery-card">
-                        <div class="gallery-lab">${T.after}</div>
-                        <img src="${slide.gallery[1] || slide.gallery[0]}" alt="${T.after}">
-                      </div>
-                    </div>
+/* Cine progress indicator */
+.cine-hud{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:12;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--cream);opacity:.7;display:flex;align-items:center;gap:14px}
+.cine-hud .bar{display:block;width:140px;height:1px;background:rgba(201,168,117,.3);position:relative;overflow:hidden}
+.cine-hud .bar::after{content:"";position:absolute;left:0;top:0;height:100%;width:var(--cp,0%);background:var(--gold-bright);transition:width .1s linear}
 
-                    <div class="actions">
-                      <a class="btn light" href="${slide.learn}" target="_blank" rel="noopener">${T.learn}</a>
-                      <a class="btn gold" href="${slide.book}" target="_blank" rel="noopener">${T.book}</a>
-                    </div>
+/* corner deco */
+.dc{position:absolute;width:28px;height:28px;border:1px solid rgba(201,168,117,.4);z-index:5;pointer-events:none}
+.dc.tl{top:96px;left:50px;border-right:none;border-bottom:none}
+.dc.tr{top:96px;right:50px;border-left:none;border-bottom:none}
+.dc.bl{bottom:96px;left:50px;border-right:none;border-top:none}
+.dc.br{bottom:96px;right:50px;border-left:none;border-top:none}
+@media(max-width:980px){.dc{width:20px;height:20px;left:16px;right:16px;top:80px;bottom:120px}.dc.tl,.dc.bl{left:16px}.dc.tr,.dc.br{right:16px}}
 
-                    <div class="bottom-nav">
-                      ${makeMiniRail(index)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      `;
-    }).join("");
+.ch-num{position:absolute;left:90px;top:118px;z-index:8;display:flex;flex-direction:column;gap:4px}
+.ch-num .big{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:54px;color:var(--gold-bright);font-weight:300;line-height:.9}
+.ch-num .lbl{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--bronze)}
+@media(max-width:980px){.ch-num{left:24px;top:90px}.ch-num .big{font-size:36px}.ch-num .lbl{font-size:9px}}
 
-    const slideEls = [...document.querySelectorAll('.slide')];
+/* content base */
+.content{position:relative;z-index:8;padding:0 80px;max-width:1500px;margin:0 auto;width:100%}
+@media(max-width:980px){.content{padding:0 24px}}
 
-    function setActiveSlide() {
-      const left = deck.scrollLeft;
-      const width = deck.clientWidth;
-      const active = Math.round(left / width);
-      slideEls.forEach((el, i) => el.classList.toggle('active', i === active));
-    }
+.eb{display:inline-flex;align-items:center;gap:14px;font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;text-shadow:0 2px 10px rgba(0,0,0,.55)}
+.eb .b{display:block;width:36px;height:1px;background:var(--gold)}
 
-    function goToSlide(index) {
-      deck.scrollTo({ left: index * deck.clientWidth, behavior: 'smooth' });
-    }
+.title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(48px,6.4vw,108px);line-height:.92;letter-spacing:.02em;color:var(--cream);text-shadow:0 4px 24px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.45)}
+.title em{font-style:italic;color:var(--gold-bright);font-weight:300}
+.sub{margin-top:24px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(18px,1.6vw,24px);color:var(--cream);opacity:.94;max-width:560px;line-height:1.5;text-shadow:0 2px 12px rgba(0,0,0,.65), 0 1px 4px rgba(0,0,0,.55)}
 
-    document.addEventListener('click', (e) => {
-      const go = e.target.closest('[data-go]');
-      if (go) goToSlide(Number(go.dataset.go));
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;align-items:center}
+.btn-gold{display:inline-flex;align-items:center;gap:12px;padding:18px 26px;background:var(--gold);color:var(--noir);font-size:11px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;cursor:pointer;border:none;transition:gap .3s,background .3s}
+.btn-gold:hover{background:var(--gold-bright);gap:18px}
+.btn-line{display:inline-flex;align-items:center;gap:10px;padding:18px 0;color:var(--cream);font-size:11px;letter-spacing:.32em;text-transform:uppercase;border-bottom:1px solid rgba(239,226,207,.4);cursor:pointer;transition:color .3s,border-color .3s}
+.btn-line:hover{color:var(--gold-bright);border-color:var(--gold-bright)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border:1px solid rgba(201,168,117,.4);color:var(--gold-bright);font-size:10px;letter-spacing:.32em;text-transform:uppercase;cursor:pointer;transition:.3s}
+.btn-ghost:hover{background:var(--gold);color:var(--noir);border-color:var(--gold)}
 
-      const dot = e.target.closest('[data-dot]');
-      if (dot) {
-        const stage = dot.closest('[data-media-stage]');
-        const slideIndex = Number(stage.dataset.mediaStage);
-        const slide = slides[slideIndex];
-        const img = stage.querySelector('img');
-        img.src = slide.media[Number(dot.dataset.dot)];
-        stage.querySelectorAll('[data-dot]').forEach((b, i) => {
-          b.classList.toggle('active', i === Number(dot.dataset.dot));
-        });
-      }
-    });
+/* HOME section - full page */
+.s-home{align-items:center;justify-content:center;padding:80px 90px 40px}
+.s-home .home-content{padding:0;width:100%;max-width:1100px;text-align:center}
+.s-home .home-brand{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,86px);color:var(--cream);font-weight:300;letter-spacing:.02em;line-height:1;text-shadow:0 6px 30px rgba(0,0,0,.6), 0 2px 8px rgba(0,0,0,.5)}
+.s-home .home-divider{width:min(680px,84%);height:1px;background:repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 12px);margin:30px auto;opacity:.7}
+.s-home .home-divider.bottom{margin-top:36px}
+.s-home .home-tag{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,1.9vw,30px);color:var(--cream);line-height:1.55;max-width:880px;margin:0 auto;text-shadow:0 2px 12px rgba(0,0,0,.65), 0 1px 4px rgba(0,0,0,.55)}
+.s-home .home-tag strong{color:var(--gold-bright);font-weight:500;font-style:italic}
+.s-home .areas{margin:30px auto 0;font-size:13px;letter-spacing:.6em;text-transform:uppercase;color:var(--gold-bright);max-width:780px;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.s-home .cta-row{margin-top:28px;justify-content:center}
+.s-home .stats{display:flex;gap:48px;margin:32px auto 0;padding-top:32px;border-top:none;max-width:760px;justify-content:center;flex-wrap:wrap}
+.s-home .stat{text-align:center}
+.s-home .stat.hide-stat{display:none}
+.s-home .stat .n{font-family:'Cormorant Garamond',serif;font-size:56px;color:var(--gold-bright);line-height:1;font-weight:300;text-shadow:0 3px 14px rgba(0,0,0,.7)}
+.s-home .stat .l{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--cream);opacity:.95;margin-top:8px;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.s-home .cta-row{margin-top:28px}
+.s-home .veil{
+  background:
+    linear-gradient(90deg,rgba(13,8,5,.78) 0%,rgba(13,8,5,.35) 40%,rgba(13,8,5,.15) 60%,rgba(13,8,5,.55) 100%),
+    linear-gradient(180deg,rgba(13,8,5,.55) 0%,rgba(13,8,5,.15) 22%,rgba(13,8,5,.15) 65%,rgba(13,8,5,.92) 100%);
+}
+@media(max-width:980px){
+  .s-home{padding:80px 24px 40px}
+  .s-home .stats{gap:18px;margin-top:22px;padding-top:22px}
+  .s-home .stat .n{font-size:38px}
+  .s-home .stat .l{font-size:10px}
+}
 
-    deck.addEventListener('scroll', setActiveSlide);
-    window.addEventListener('resize', setActiveSlide);
-    deck.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        deck.scrollLeft += e.deltaY;
-      }
-    }, { passive:false });
+/* Treatment sections - full page */
+.s-treat{align-items:center;padding:90px 90px 40px}
+.s-results{align-items:flex-start;padding:90px 90px 40px}
+.s-treat .content, .s-results .content{padding-bottom:0}
+@media(max-width:980px){.s-treat, .s-results{padding:80px 24px 40px}}
 
-    setActiveSlide();
-  </script>
-</body>
-</html>
+.s-treat{align-items:center;padding:90px 90px 40px}
+.s-results{align-items:flex-start;padding:90px 90px 40px}
+.s-treat .content, .s-results .content{padding-bottom:0}
+@media(max-width:980px){.s-treat, .s-results{padding:80px 24px 40px}}
+.hud{display:none}
+.hud .scroll-hint{display:flex;align-items:center;gap:14px}
+.hud .arr{display:inline-block;width:1px;height:32px;background:linear-gradient(180deg,var(--gold-bright),transparent);position:relative;animation:bobble 2s infinite}
+.hud .arr::after{content:"";position:absolute;bottom:0;left:-3px;width:7px;height:7px;border-right:1px solid var(--gold-bright);border-bottom:1px solid var(--gold-bright);transform:rotate(45deg)}
+@keyframes bobble{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@media(max-width:980px){.hud{right:0;padding:0 24px;font-size:9px;bottom:24px}}
+
+/* ========================================================
+   SECTION 01 · HERO
+   ======================================================== */
+.s-hero .veil, .cine-l1 .veil{
+  background:
+    linear-gradient(90deg,rgba(13,8,5,.55) 0%,rgba(13,8,5,.15) 35%,rgba(13,8,5,0) 60%,rgba(13,8,5,.4) 100%),
+    linear-gradient(180deg,rgba(13,8,5,.45) 0%,rgba(13,8,5,0) 22%,rgba(13,8,5,0) 65%,rgba(13,8,5,.85) 100%);
+}
+.s-hero .content, .cine-copy .content{padding-top:90px}
+.s-hero .title, .cine-copy .title{max-width:880px}
+.s-hero .areas, .cine-copy .areas{margin-top:22px;font-size:11px;letter-spacing:.6em;text-transform:uppercase;color:var(--gold-bright);max-width:680px}
+.s-hero .stats, .cine-copy .stats{display:flex;gap:48px;margin-top:32px;padding-top:32px;border-top:1px solid rgba(201,168,117,.22);max-width:560px}
+.s-hero .stat .n, .cine-copy .stat .n{font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--gold-bright);line-height:1;font-weight:300}
+.s-hero .stat .n sup, .cine-copy .stat .n sup{font-size:.4em;color:var(--bronze);margin-left:2px}
+.s-hero .stat .l, .cine-copy .stat .l{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--bronze);margin-top:6px}
+
+.s-hero .map-mini{
+  position:absolute;right:60px;top:50%;transform:translateY(-50%);z-index:7;
+  width:280px;background:rgba(13,8,5,.45);border:1px solid rgba(201,168,117,.32);backdrop-filter:blur(14px);padding:24px;
+}
+.s-hero .map-mini h4{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold-bright);margin-bottom:14px}
+.s-hero .map-mini ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--cream)}
+.s-hero .map-mini ul li{display:flex;align-items:center;gap:10px}
+.s-hero .map-mini ul li::before{content:"◆";color:var(--gold);font-size:7px}
+.s-hero .map-mini .note{margin-top:18px;padding-top:14px;border-top:1px solid rgba(201,168,117,.18);font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--bronze)}
+@media(max-width:980px){.s-hero .map-mini{display:none}.s-hero .stats{gap:24px}.s-hero .stat .n{font-size:30px}}
+
+/* ========================================================
+   TRANSITION SECTIONS (T1-T5)
+   ======================================================== */
+.s-trans .veil{background:linear-gradient(180deg,rgba(13,8,5,.35) 0%,rgba(13,8,5,0) 35%,rgba(13,8,5,0) 65%,rgba(13,8,5,.7) 100%)}
+.s-trans .content{text-align:center;padding:0 40px}
+.s-trans .title{font-size:clamp(36px,5vw,82px);text-align:center;margin:0 auto;letter-spacing:.05em}
+.s-trans .sub{margin-left:auto;margin-right:auto;text-align:center}
+.s-trans .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,2vw,32px);color:var(--cream);opacity:.85;max-width:720px;margin:24px auto;line-height:1.4;text-align:center}
+.s-trans .quote::before,.s-trans .quote::after{content:"";display:block;width:48px;height:1px;background:var(--gold-bright);margin:24px auto}
+
+/* ========================================================
+   TREATMENT SECTIONS (Lipo, Aumentos, Botox)
+   ======================================================== */
+.s-treat .veil{
+  background:
+    linear-gradient(90deg,rgba(13,8,5,.82) 0%,rgba(13,8,5,.45) 45%,rgba(13,8,5,.2) 65%,rgba(13,8,5,.65) 100%),
+    linear-gradient(180deg,rgba(13,8,5,.55) 0%,rgba(13,8,5,.15) 22%,rgba(13,8,5,.15) 70%,rgba(13,8,5,.92) 100%);
+}
+.s-treat .title{font-size:clamp(36px,4.8vw,72px)}
+.s-treat .sub{margin-top:14px}
+.s-treat .eb{margin-bottom:14px}
+.s-treat .content{max-width:1500px;overflow:visible}
+.s-treat .layout{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;padding-top:12px}
+@media(max-width:980px){.s-treat .layout{grid-template-columns:1fr;gap:24px;padding-top:12px}.s-treat .content{max-height:calc(100vh - 160px)}}
+
+/* sub-zone chips */
+.zones{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 30px}
+.zone-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border:1px solid rgba(201,168,117,.4);color:var(--cream);
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:.3s;
+}
+.zone-chip::before{content:"◆";color:var(--gold);font-size:7px}
+.zone-chip:hover,.zone-chip.active{background:var(--gold);color:var(--noir);border-color:var(--gold)}
+
+/* carousel inside treatment */
+.car{position:relative;width:100%;background:rgba(13,8,5,.58);border:1px solid rgba(201,168,117,.38);backdrop-filter:blur(14px);overflow:hidden;min-height:440px;display:flex;flex-direction:column;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.8), 0 14px 28px -10px rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.35), inset 0 0 50px rgba(201,168,117,.04)}
+.car-track{display:flex;width:100%;transition:transform .55s cubic-bezier(.22,.61,.36,1);will-change:transform;flex:1 1 auto}
+.car-slide{flex:0 0 100%;padding:26px 32px;display:flex;flex-direction:column;justify-content:center;min-height:380px;max-height:calc(100vh - 300px);overflow-y:auto}
+.car-slide h3{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold-bright);margin-bottom:14px;font-weight:400;letter-spacing:.04em}
+.car-slide .num-tag{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--bronze);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.car-slide .num-tag::before{content:"";display:inline-block;width:24px;height:1px;background:var(--gold)}
+.car-slide p{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--cream);line-height:1.6;opacity:.9;margin-bottom:14px}
+.car-slide ul{list-style:none;display:flex;flex-direction:column;gap:6px;font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--cream);opacity:.85}
+.car-slide ul li{padding-left:18px;position:relative}
+.car-slide ul li::before{content:"◆";position:absolute;left:0;top:5px;color:var(--gold);font-size:7px}
+.car-video-frame{aspect-ratio:16/9;background:#000;border:1px solid rgba(201,168,117,.32);overflow:hidden;margin-bottom:14px;position:relative}
+.car-video-frame video,.car-video-frame img{width:100%;height:100%;object-fit:cover}
+.car-video-frame .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--bronze);font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+
+.car-pkg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+.car-pkg .p-card{padding:18px 14px;border:1px solid rgba(201,168,117,.32);background:rgba(13,8,5,.4);text-align:center}
+.car-pkg .p-card.featured{border-color:var(--gold-bright);background:rgba(201,168,117,.12)}
+.car-pkg .p-name{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--bronze);margin-bottom:8px}
+.car-pkg .p-price{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold-bright);line-height:1;font-weight:300}
+.car-pkg .p-price small{font-size:.4em;color:var(--bronze);margin-left:2px}
+.car-pkg .p-desc{margin-top:8px;font-size:9px;letter-spacing:.18em;color:var(--cream);opacity:.7}
+
+/* carousel nav */
+.car-nav{display:flex;justify-content:space-between;align-items:center;padding:14px 32px;border-top:1px solid rgba(201,168,117,.32);background:rgba(13,8,5,.78);flex-shrink:0;z-index:5}
+.car-arrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-bright);cursor:pointer;transition:color .3s,transform .3s;padding:6px 12px;border:1px solid rgba(201,168,117,.4)}
+.car-arrow:hover{color:var(--noir);background:var(--gold);border-color:var(--gold);transform:translateX(2px)}
+.car-arrow[data-dir="-1"]:hover{transform:translateX(-2px)}
+.car-dots{display:flex;gap:6px}
+.car-dot{width:8px;height:8px;border-radius:50%;background:rgba(201,168,117,.32);cursor:pointer;transition:.3s}
+.car-dot.active{background:var(--gold-bright);transform:scale(1.4)}
+
+/* ========================================================
+   RESULTADOS
+   ======================================================== */
+.s-results .veil{background:linear-gradient(180deg,rgba(13,8,5,.35) 0%,rgba(13,8,5,0) 30%,rgba(13,8,5,0) 65%,rgba(13,8,5,.85) 100%)}
+.s-results .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:32px;max-width:1300px}
+.s-results .g-item{aspect-ratio:4/5;overflow:hidden;border:1px solid rgba(201,168,117,.4);position:relative;cursor:pointer;transition:transform .45s cubic-bezier(.22,.61,.36,1), box-shadow .45s;background:#0d0805;border-radius:2px;
+  box-shadow:0 22px 48px -18px rgba(0,0,0,.75), 0 10px 24px -8px rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.35)}
+.s-results .g-item:hover{transform:translateY(-10px);box-shadow:0 40px 70px -22px rgba(0,0,0,.85), 0 18px 38px -10px rgba(201,168,117,.22), 0 3px 8px rgba(0,0,0,.4)}
+.s-results .g-item .bg-blur{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(22px) brightness(.45) saturate(1.1);transform:scale(1.15);z-index:1}
+.s-results .g-item .fg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;padding:6px}
+.s-results .g-item .lbl{position:absolute;bottom:10px;left:14px;right:14px;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--cream);text-shadow:0 1px 4px rgba(0,0,0,.9);z-index:3;background:linear-gradient(180deg,transparent 0%,rgba(13,8,5,.7) 100%);padding:20px 4px 0;margin:0 -14px -10px}
+@media(max-width:980px){.s-results .gallery{grid-template-columns:repeat(2,1fr)}}
+
+/* ========================================================
+   FOOTER (last section, black bg, white text)
+   ======================================================== */
+.s-footer{
+  flex:0 0 auto;height:auto;min-height:auto;
+  scroll-snap-align:end;background:#0a0807;color:var(--cream);
+  padding:80px 50px 40px;display:block;
+}
+.s-footer .ftr-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:60px;max-width:1500px;margin:0 auto}
+.s-footer .brand-blk h2{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold-bright);margin-bottom:14px}
+.s-footer .brand-blk p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--cream);opacity:.78;line-height:1.5;max-width:340px}
+.s-footer h4{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid rgba(201,168,117,.18)}
+.s-footer ul{list-style:none}
+.s-footer ul li{margin-bottom:10px}
+.s-footer ul a{color:var(--cream);opacity:.78;font-size:13px;transition:.3s;display:inline-flex;align-items:center;gap:8px}
+.s-footer ul a:hover{color:var(--gold-bright);opacity:1;gap:12px}
+.s-footer ul a::before{content:"›";color:var(--gold);opacity:.6}
+.s-footer .bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;margin-top:48px;border-top:1px solid rgba(201,168,117,.18);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--bronze)}
+.s-footer .socials{display:flex;gap:18px}
+.s-footer .socials a{font-size:11px;color:var(--gold-bright);transition:.3s}
+.s-footer .socials a:hover{color:var(--cream)}
+@media(max-width:980px){
+  .s-footer{padding:50px 22px 24px}
+  .s-footer .ftr-grid{grid-template-columns:1fr 1fr;gap:30px}
+  .s-footer .brand-blk{grid-column:1/-1}
+  .s-footer .bottom{flex-direction:column;gap:18px;text-align:center}
+}
+
+/* ============== modal (legal/contact) ============== */
+.modal{position:fixed;inset:0;z-index:400;background:rgba(13,8,5,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:24px}
+.modal.open{display:flex}
+.modal-card{background:#1a0f0a;border:1px solid rgba(201,168,117,.38);max-width:480px;width:100%;padding:36px;position:relative;box-shadow:0 40px 80px -20px rgba(0,0,0,.8), 0 20px 40px -12px rgba(0,0,0,.5)}
+.modal-close{position:absolute;top:12px;right:18px;font-size:22px;color:var(--gold-bright);cursor:pointer;background:none;border:none}
+.modal h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold-bright);margin-bottom:18px}
+.modal .opt{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.modal .opt a{padding:14px 18px;border:1px solid rgba(201,168,117,.4);color:var(--cream);font-size:11px;letter-spacing:.32em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;transition:.3s}
+.modal .opt a:hover{background:var(--gold);color:var(--noir);border-color:var(--gold)}
+
+/* ============== QUIZ · "Cotiza en 30s" floating CTA + modal ============== */
+.quiz-fab{
+  position:fixed;right:28px;bottom:36px;z-index:170;
+  display:flex;align-items:center;gap:10px;
+  padding:14px 22px;background:var(--gold);color:var(--noir);
+  border:none;cursor:pointer;
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;
+  box-shadow:0 14px 32px -8px rgba(201,168,117,.55), 0 6px 14px -4px rgba(0,0,0,.55);
+  transition:background .3s, transform .3s, box-shadow .3s;
+  animation:fabPulse 2.4s infinite;
+}
+.quiz-fab:hover{background:var(--gold-bright);transform:translateY(-4px);box-shadow:0 22px 42px -8px rgba(232,199,137,.7), 0 10px 20px -6px rgba(0,0,0,.6)}
+.quiz-fab .wa{display:inline-flex;width:18px;height:18px;border-radius:50%;background:#25d366;align-items:center;justify-content:center;font-size:11px;color:#fff}
+@keyframes fabPulse{0%,100%{box-shadow:0 14px 32px -8px rgba(201,168,117,.55), 0 6px 14px -4px rgba(0,0,0,.55), 0 0 0 0 rgba(201,168,117,.45)}50%{box-shadow:0 14px 32px -8px rgba(201,168,117,.55), 0 6px 14px -4px rgba(0,0,0,.55), 0 0 0 14px rgba(201,168,117,0)}}
+@media(max-width:980px){
+  .quiz-fab{
+    right:auto;left:50%;bottom:8px;transform:translateX(-50%);
+    padding:11px 26px;font-size:9.5px;letter-spacing:.26em;
+  }
+  .quiz-fab:hover{transform:translateX(-50%) translateY(-3px)}
+}
+
+.quiz-modal{position:fixed;inset:0;z-index:410;background:rgba(13,8,5,.9);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:24px}
+.quiz-modal.open{display:flex}
+.quiz-card{background:#1a0f0a;border:1px solid rgba(201,168,117,.45);max-width:520px;width:100%;padding:40px;position:relative;box-shadow:0 40px 80px -20px rgba(0,0,0,.85), 0 20px 40px -12px rgba(201,168,117,.12)}
+.quiz-card .q-step{display:none}
+.quiz-card .q-step.active{display:block;animation:stepIn .5s cubic-bezier(.22,.61,.36,1)}
+@keyframes stepIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.quiz-card h3{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold-bright);margin-bottom:10px;font-weight:400}
+.quiz-card .q-lead{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--cream);opacity:.8;margin-bottom:24px}
+.quiz-card .q-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.quiz-card .q-opt{padding:18px 14px;border:1px solid rgba(201,168,117,.38);background:rgba(13,8,5,.4);color:var(--cream);font-size:10px;letter-spacing:.32em;text-transform:uppercase;cursor:pointer;transition:.3s;text-align:center}
+.quiz-card .q-opt:hover,.quiz-card .q-opt.selected{background:var(--gold);color:var(--noir);border-color:var(--gold)}
+.quiz-card .q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.quiz-card .q-back,.quiz-card .q-next,.quiz-card .q-send{font-size:11px;letter-spacing:.32em;text-transform:uppercase;cursor:pointer;background:none;border:none;color:var(--cream);padding:10px 0;transition:.3s}
+.quiz-card .q-next,.quiz-card .q-send{padding:14px 22px;background:var(--gold);color:var(--noir);font-weight:500}
+.quiz-card .q-next:hover,.quiz-card .q-send:hover{background:var(--gold-bright)}
+.quiz-card .q-next:disabled{opacity:.35;cursor:not-allowed}
+.quiz-card .q-progress{display:flex;gap:6px;margin-bottom:22px}
+.quiz-card .q-progress .dot{width:8px;height:8px;border-radius:50%;background:rgba(201,168,117,.3);transition:.3s}
+.quiz-card .q-progress .dot.active{background:var(--gold-bright);transform:scale(1.4)}
+.quiz-card .q-close{position:absolute;top:14px;right:20px;font-size:24px;color:var(--gold-bright);cursor:pointer;background:none;border:none}
+@media(max-width:980px){.quiz-card{padding:28px 22px}.quiz-card .q-options{grid-template-columns:1fr}}
+
+/* ============== RESULTS CAROUSEL · 8 photos linked to treatments ============== */
+.s-results{align-items:center;padding:90px 90px 80px}
+.s-results .veil{background:linear-gradient(180deg,rgba(13,8,5,.55) 0%,rgba(13,8,5,.15) 22%,rgba(13,8,5,.15) 70%,rgba(13,8,5,.92) 100%)}
+Exit code: 0
