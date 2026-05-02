@@ -93,73 +93,70 @@ a{color:inherit;text-decoration:none}
 .live-cap{position:absolute;bottom:11px;left:11px;right:11px;z-index:6;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--cream);text-shadow:0 1px 4px rgba(0,0,0,.85)}
 @media(max-width:980px){.live{width:180px;height:108px;bottom:18px;right:18px}}
 
-/* ============== DECK + SECTIONS ============== */
+/* ============== DECK + SECTIONS · TRUE ACCORDION (no scroll) ============== */
 .deck{
-  height:100vh;
+  height:100vh;width:100%;
   display:flex;flex-direction:column;
-  overflow-y:auto;overflow-x:hidden;
-  scroll-snap-type:y proximity;
-  scroll-behavior:smooth;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
+  overflow:hidden;
 }
-.deck::-webkit-scrollbar{display:none}
 
 .section{
-  flex:0 0 100vh;width:100%;height:100vh;
-  scroll-snap-align:start;
+  flex:1 1 0%;min-height:56px;width:100%;
   position:relative;overflow:hidden;
   display:flex;align-items:center;
+  transition:flex .75s cubic-bezier(.22,.61,.36,1), background .4s;
+  will-change:flex;
 }
-.bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;
-  transition:transform 1.4s cubic-bezier(.22,.61,.36,1);will-change:transform}
-.section.active .bg-img{transform:scale(1.05)}
 
-/* Video backgrounds for sections */
-.bg-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;
-  filter:saturate(.94) contrast(1.02);will-change:filter}
+/* COLLAPSED state = button bar */
+.section.collapsed{
+  flex:0 0 60px;
+  cursor:pointer;
+  background:rgba(13,8,5,.78);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(201,168,117,.22);
+  align-items:center;justify-content:center;
+}
+.section.collapsed:hover{background:rgba(22,14,9,.9);border-bottom-color:rgba(232,199,137,.45)}
+.section.collapsed .bg-vid,
+.section.collapsed .veil,
+.section.collapsed .content,
+.section.collapsed .dc{display:none !important}
+.section.collapsed .sec-compact{opacity:1;pointer-events:auto}
+.section.collapsed:hover .sec-compact{color:var(--gold-bright)}
+.section.collapsed:hover .sec-compact .num{color:var(--gold-bright);transform:translateX(-4px)}
+.section.collapsed:hover .sec-compact .lbl{transform:translateX(4px)}
+
+/* Compact button view (shown only when collapsed) */
+.sec-compact{
+  position:absolute;inset:0;z-index:6;
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  opacity:0;pointer-events:none;
+  color:var(--cream);font-size:11px;letter-spacing:.38em;text-transform:uppercase;
+  transition:color .3s,opacity .4s .25s;
+  text-shadow:0 2px 8px rgba(0,0,0,.6);
+}
+.sec-compact .num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--gold);letter-spacing:0;transition:color .3s,transform .35s cubic-bezier(.22,.61,.36,1)}
+.sec-compact .lbl{transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.sec-compact .arrow{display:inline-block;width:24px;height:1px;background:var(--gold);margin:0 6px;opacity:.5;transition:opacity .3s,width .3s}
+.section.collapsed:hover .sec-compact .arrow{opacity:1;width:36px}
+
+/* EXPANDED state */
 .section.active .bg-vid{filter:saturate(1) contrast(1.05)}
+.bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.bg-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:saturate(.94) contrast(1.02);will-change:filter;transition:filter .6s}
+.veil{position:absolute;inset:0;z-index:2;pointer-events:none}
 
-/* ============== ACCORDION NAV · section buttons that float top & bottom ============== */
-.acc-nav{
-  position:fixed;left:0;right:0;z-index:180;
-  display:flex;justify-content:center;align-items:center;gap:14px;
-  padding:14px 28px;pointer-events:none;
+/* mobile portrait: bg video can be taller aspect */
+@media (max-width: 768px) and (orientation: portrait){
+  .bg-vid{object-position:center}
 }
-.acc-nav.top{top:62px}
-.acc-nav.bot{bottom:0;padding-bottom:20px}
-.acc-nav .acc-btn{
-  pointer-events:auto;
-  display:flex;align-items:center;gap:12px;
-  padding:12px 22px;
-  background:rgba(13,8,5,.62);backdrop-filter:blur(14px);
-  border:1px solid rgba(201,168,117,.35);
-  color:var(--cream);font-size:10px;letter-spacing:.32em;text-transform:uppercase;
-  cursor:pointer;transition:background .3s,border-color .3s,color .3s,transform .35s;
-  min-width:150px;justify-content:center;
-}
-.acc-nav .acc-btn .num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--gold);letter-spacing:0}
-.acc-nav .acc-btn:hover{background:var(--gold);color:var(--noir);border-color:var(--gold)}
-.acc-nav .acc-btn:hover .num{color:var(--noir)}
-.acc-nav.top .acc-btn{animation:accEnterTop .55s cubic-bezier(.22,.61,.36,1) both}
-.acc-nav.bot .acc-btn{animation:accEnterBot .55s cubic-bezier(.22,.61,.36,1) both}
-@keyframes accEnterTop{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes accEnterBot{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.acc-nav:empty{display:none}
 @media(max-width:980px){
-  .acc-nav{gap:8px;padding:10px 12px;flex-wrap:wrap}
-  .acc-nav.top{top:54px}
-  .acc-nav .acc-btn{min-width:0;padding:9px 14px;font-size:9px;letter-spacing:.26em}
+  .section.collapsed{flex:0 0 52px}
+  .sec-compact{gap:10px;font-size:10px;letter-spacing:.24em}
+  .sec-compact .num{font-size:13px}
+  .sec-compact .arrow{display:none}
 }
-
-/* Active section label (bottom-left indicator) */
-.sec-indicator{
-  position:fixed;left:28px;bottom:28px;z-index:150;
-  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--gold-bright);
-  letter-spacing:.12em;opacity:.85;pointer-events:none;
-}
-.sec-indicator .n{font-size:22px;margin-right:8px}
-@media(max-width:980px){.sec-indicator{display:none}}
 .veil{position:absolute;inset:0;z-index:2;pointer-events:none}
 
 /* ============== CINEMATIC PINNED SCENE (Hero → Window → Clouds) ============== */
@@ -314,12 +311,12 @@ a{color:inherit;text-decoration:none}
 }
 @media(max-width:980px){.s-home .stats{gap:24px}.s-home .stat .n{font-size:30px}.s-home .home-content{padding-bottom:160px}}
 
-/* Treatment sections: leave breathing room at top (acc-nav.top) + bottom (acc-nav.bot) */
-.s-treat{align-items:flex-start;padding-top:130px;padding-bottom:40px}
-.s-results{align-items:flex-start;padding-top:130px;padding-bottom:80px}
-.s-treat .content, .s-results .content{padding-bottom:80px}
+/* Treatment sections: full height accordion — internal padding only */
+.s-treat{align-items:flex-start;padding-top:80px;padding-bottom:20px}
+.s-results{align-items:flex-start;padding-top:80px;padding-bottom:20px}
+.s-treat .content, .s-results .content{padding-bottom:40px}
 .s-treat .layout{padding-top:0}
-@media(max-width:980px){.s-treat, .s-results{padding-top:140px;padding-bottom:160px}}
+@media(max-width:980px){.s-treat, .s-results{padding-top:72px;padding-bottom:20px}}
 .hud{display:none}
 .hud .scroll-hint{display:flex;align-items:center;gap:14px}
 .hud .arr{display:inline-block;width:1px;height:32px;background:linear-gradient(180deg,var(--gold-bright),transparent);position:relative;animation:bobble 2s infinite}
@@ -527,17 +524,13 @@ a{color:inherit;text-decoration:none}
   </div>
 </nav>
 
-<!-- ============== ACCORDION NAV (dynamic) ============== -->
-<div class="acc-nav top" id="accTop"></div>
-<div class="acc-nav bot" id="accBot"></div>
-<div class="sec-indicator" id="secInd"><span class="n">01</span><span id="secIndLbl">Inicio</span></div>
-
 <!-- ============== DECK ============== -->
 <main class="deck" id="deck">
 
   <!-- ===== 01 · HOME · video bg + centered hero + bottom accordion nav ===== -->
-  <section class="section s-home" id="s-home" data-label="Inicio">
-    <video class="bg-vid" autoplay muted loop playsinline preload="auto" poster="home-video-frame.jpg">
+  <section class="section s-home active" id="s-home" data-label="Inicio">
+    <div class="sec-compact"><span class="num">01</span><span class="lbl" data-i18n="nav.inicio">Inicio</span><span class="arrow"></span></div>
+    <video class="bg-vid" autoplay muted loop playsinline preload="auto" poster="home-video-frame.jpg" data-desktop="home-video.mp4" data-mobile="home-video-mobile.mp4">
       <source src="home-video.mp4" type="video/mp4">
     </video>
     <div class="veil"></div>
@@ -561,8 +554,9 @@ a{color:inherit;text-decoration:none}
   </section>
 
   <!-- ===== 02 · LIPO CON LÁSER ===== -->
-  <section class="section s-treat" id="s-lipo" data-label="Lipo Láser">
-    <video class="bg-vid" autoplay muted loop playsinline preload="auto" poster="lipo-video-frame.jpg">
+  <section class="section s-treat collapsed" id="s-lipo" data-label="Lipo Láser">
+    <div class="sec-compact"><span class="num">02</span><span class="lbl" data-i18n="nav.sec.lipo">Lipo Láser</span><span class="arrow"></span></div>
+    <video class="bg-vid" autoplay muted loop playsinline preload="auto" poster="lipo-video-frame.jpg" data-desktop="lipo-video.mp4" data-mobile="lipo-video-mobile.mp4">
       <source src="lipo-video.mp4" type="video/mp4">
     </video>
     <div class="veil"></div>
@@ -648,8 +642,9 @@ a{color:inherit;text-decoration:none}
   </section>
 
   <!-- ===== 03 · AUMENTOS ===== -->
-  <section class="section s-treat" id="s-aumentos" data-label="Aumentos">
-    <video class="bg-vid" autoplay muted loop playsinline preload="auto" poster="glute-video-frame.jpg">
+  <section class="section s-treat collapsed" id="s-aumentos" data-label="Aumentos">
+    <div class="sec-compact"><span class="num">03</span><span class="lbl" data-i18n="nav.sec.aumentos">Aumentos</span><span class="arrow"></span></div>
+    <video class="bg-vid" autoplay muted loop playsinline preload="auto" poster="glute-video-frame.jpg" data-desktop="glute-video.mp4" data-mobile="glute-video-mobile.mp4">
       <source src="glute-video.mp4" type="video/mp4">
     </video>
     <div class="veil"></div>
@@ -729,8 +724,9 @@ a{color:inherit;text-decoration:none}
   </section>
 
   <!-- ===== 04 · BOTOX NATURAL CON LÁSER ===== -->
-  <section class="section s-treat" id="s-botox" data-label="Botox Láser">
-    <video class="bg-vid" autoplay muted loop playsinline preload="auto" poster="face-video-frame.jpg">
+  <section class="section s-treat collapsed" id="s-botox" data-label="Botox Láser">
+    <div class="sec-compact"><span class="num">04</span><span class="lbl" data-i18n="nav.sec.botox">Botox Láser</span><span class="arrow"></span></div>
+    <video class="bg-vid" autoplay muted loop playsinline preload="auto" poster="face-video-frame.jpg" data-desktop="face-video.mp4" data-mobile="face-video-mobile.mp4">
       <source src="face-video.mp4" type="video/mp4">
     </video>
     <div class="veil"></div>
@@ -809,8 +805,9 @@ a{color:inherit;text-decoration:none}
   </section>
 
   <!-- ===== 05 · RESULTADOS ===== -->
-  <section class="section s-results" id="s-results" data-label="Resultados">
-    <video class="bg-vid" autoplay muted loop playsinline preload="auto" poster="home-video-frame.jpg">
+  <section class="section s-results collapsed" id="s-results" data-label="Resultados">
+    <div class="sec-compact"><span class="num">05</span><span class="lbl" data-i18n="nav.resultados">Resultados</span><span class="arrow"></span></div>
+    <video class="bg-vid" autoplay muted loop playsinline preload="auto" poster="home-video-frame.jpg" data-desktop="home-video.mp4" data-mobile="home-video-mobile.mp4">
       <source src="home-video.mp4" type="video/mp4">
     </video>
     <div class="veil"></div>
@@ -833,8 +830,8 @@ a{color:inherit;text-decoration:none}
     <div class="hud"><div>05 / 05</div></div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="s-footer">
+  <!-- ===== FOOTER (hidden · content available via modals) ===== -->
+  <footer class="s-footer" style="display:none">
     <div class="ftr-grid">
       <div class="brand-blk">
         <h2>D'Royal<span style="color:var(--gold);margin:0 8px">·</span>Spa</h2>
@@ -946,13 +943,8 @@ a{color:inherit;text-decoration:none}
 // ============== REFS ==============
 const deck = document.getElementById('deck');
 const topnav = document.getElementById('topnav');
-const accTop = document.getElementById('accTop');
-const accBot = document.getElementById('accBot');
-const secInd = document.getElementById('secInd');
-const secIndN = secInd.querySelector('.n');
-const secIndLbl = document.getElementById('secIndLbl');
 
-// Ordered list of sections (5 total) for accordion nav
+// Ordered list of sections (5 total)
 const SECTIONS = [
   { id: 's-home',     n: '01', labelKey:'nav.inicio',       label: 'Inicio' },
   { id: 's-lipo',     n: '02', labelKey:'nav.sec.lipo',     label: 'Lipo Láser' },
@@ -960,60 +952,62 @@ const SECTIONS = [
   { id: 's-botox',    n: '04', labelKey:'nav.sec.botox',    label: 'Botox Láser' },
   { id: 's-results',  n: '05', labelKey:'nav.resultados',   label: 'Resultados' },
 ];
-
 const secEls = SECTIONS.map(s => document.getElementById(s.id));
-
-// ============== ACCORDION NAV RENDER ==============
 let activeIdx = 0;
-function renderAcc(idx){
-  const getLbl = s => (typeof I18N !== 'undefined' && s.labelKey) ? I18N.get(s.labelKey) : s.label;
-  // Build TOP buttons: sections BEFORE active
-  accTop.innerHTML = SECTIONS.slice(0, idx).map(s =>
-    `<button class="acc-btn" data-target="${s.id}" data-testid="acc-top-${s.id}"><span class="num">${s.n}</span><span>${getLbl(s)}</span></button>`
-  ).join('');
-  // Build BOTTOM buttons: sections AFTER active
-  accBot.innerHTML = SECTIONS.slice(idx + 1).map(s =>
-    `<button class="acc-btn" data-target="${s.id}" data-testid="acc-bot-${s.id}"><span class="num">${s.n}</span><span>${getLbl(s)}</span></button>`
-  ).join('');
-  // Wire clicks
-  document.querySelectorAll('.acc-btn').forEach(btn => {
-    btn.addEventListener('click', () => scrollToId(btn.dataset.target));
-  });
-  // Indicator
-  const s = SECTIONS[idx];
-  secIndN.textContent = s.n;
-  secIndLbl.textContent = getLbl(s);
-}
 
-// ============== ACTIVE SECTION TRACKING ==============
-function setActive(){
-  const top = deck.scrollTop;
-  const vh = deck.clientHeight;
-  const mid = top + vh * 0.45;
-
-  let newIdx = 0;
-  secEls.forEach((el, i) => {
-    if (el && el.offsetTop <= mid) newIdx = i;
+// ============== ACCORDION STATE ==============
+function setActive(i){
+  activeIdx = Math.max(0, Math.min(SECTIONS.length - 1, i));
+  secEls.forEach((el, idx) => {
+    if (!el) return;
+    const isActive = idx === activeIdx;
+    el.classList.toggle('active', isActive);
+    el.classList.toggle('collapsed', !isActive);
   });
-  topnav.classList.toggle('solid', top > 80);
-  // active class on sections for bg-vid filter
-  secEls.forEach((el, i) => el && el.classList.toggle('active', i === newIdx));
-  // top nav current
+  // Update top nav active state
   document.querySelectorAll('.topnav .left a[data-target]').forEach(a => {
-    a.classList.toggle('active', a.dataset.target === SECTIONS[newIdx].id);
+    a.classList.toggle('active', a.dataset.target === SECTIONS[activeIdx].id);
   });
-  if (newIdx !== activeIdx){
-    activeIdx = newIdx;
-    renderAcc(newIdx);
-  }
+  topnav.classList.toggle('solid', activeIdx > 0);
 }
-deck.addEventListener('scroll', setActive, { passive: true });
+
+// ============== SECTION CLICK (when collapsed) ==============
+secEls.forEach((el, i) => {
+  if (!el) return;
+  el.addEventListener('click', (e) => {
+    if (el.classList.contains('collapsed')) {
+      setActive(i);
+      e.stopPropagation();
+    }
+  });
+});
+
+// ============== WHEEL · changes section ==============
+let wheelLock = false;
+window.addEventListener('wheel', (e) => {
+  if (wheelLock) return;
+  if (Math.abs(e.deltaY) < 12) return;
+  // Allow scrolling inside scrollable content (modal, carousel, etc.)
+  if (e.target.closest('.modal.open, .quiz-modal.open')) return;
+  wheelLock = true;
+  setActive(activeIdx + Math.sign(e.deltaY));
+  setTimeout(() => { wheelLock = false; }, 820);
+  e.preventDefault();
+}, { passive: false });
+
+// ============== TOUCH swipe (mobile) ==============
+let touchY = 0;
+window.addEventListener('touchstart', e => { touchY = e.touches[0].clientY; }, { passive: true });
+window.addEventListener('touchend', e => {
+  if (e.target.closest('.modal.open, .quiz-modal.open, .car')) return;
+  const dy = e.changedTouches[0].clientY - touchY;
+  if (Math.abs(dy) > 55) setActive(activeIdx + (dy < 0 ? 1 : -1));
+}, { passive: true });
 
 // ============== NAV CLICK ==============
 function scrollToId(id){
-  const el = document.getElementById(id);
-  if (!el) return;
-  deck.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+  const i = SECTIONS.findIndex(s => s.id === id);
+  if (i >= 0) setActive(i);
 }
 document.querySelectorAll('[data-target]').forEach(el => {
   el.addEventListener('click', e => {
@@ -1022,9 +1016,34 @@ document.querySelectorAll('[data-target]').forEach(el => {
   });
 });
 
-// initial render
-renderAcc(0);
-setActive();
+// ============== VIDEO SRC swap (desktop / mobile) ==============
+function syncVideoSources(){
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  document.querySelectorAll('video.bg-vid[data-desktop]').forEach(v => {
+    const src = isMobile ? (v.dataset.mobile || v.dataset.desktop) : v.dataset.desktop;
+    if (!src) return;
+    // Only swap if actually different and file exists (avoid 404 loops)
+    if (v.currentSrc.endsWith(src)) return;
+    // Check via fetch HEAD; fallback to desktop if mobile missing
+    fetch(src, { method:'HEAD' }).then(r => {
+      const finalSrc = r.ok ? src : v.dataset.desktop;
+      if (v.currentSrc.endsWith(finalSrc)) return;
+      v.src = finalSrc;
+      v.load();
+      v.play().catch(()=>{});
+    }).catch(() => {
+      if (!v.currentSrc.endsWith(v.dataset.desktop)) {
+        v.src = v.dataset.desktop;
+        v.load();
+      }
+    });
+  });
+}
+syncVideoSources();
+window.addEventListener('resize', () => { clearTimeout(window._rsz); window._rsz = setTimeout(syncVideoSources, 250); });
+
+// initial
+setActive(0);
 
 // ============== CAROUSELS ==============
 document.querySelectorAll('.car').forEach(car => {
@@ -1139,8 +1158,8 @@ document.querySelectorAll('[data-modal]').forEach(el => {
 // ============== KEYBOARD ==============
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { modal.classList.remove('open'); document.getElementById('quizModal').classList.remove('open'); }
-  if (e.key === 'ArrowDown' || e.key === 'PageDown') deck.scrollTo({top: deck.scrollTop + deck.clientHeight, behavior:'smooth'});
-  if (e.key === 'ArrowUp' || e.key === 'PageUp') deck.scrollTo({top: deck.scrollTop - deck.clientHeight, behavior:'smooth'});
+  if (e.key === 'ArrowDown' || e.key === 'PageDown') { setActive(activeIdx + 1); e.preventDefault(); }
+  if (e.key === 'ArrowUp' || e.key === 'PageUp') { setActive(activeIdx - 1); e.preventDefault(); }
 });
 
 // ============== QUIZ · "Cotiza en 30s" ==============
@@ -1268,8 +1287,10 @@ const I18N = {
   }
 };
 I18N.init();
-// Re-render acc-nav with translated labels now that I18N is ready
-renderAcc(activeIdx);
+// Re-render section compact labels now that I18N is ready
+document.querySelectorAll('.sec-compact [data-i18n]').forEach(el => {
+  el.textContent = I18N.get(el.dataset.i18n);
+});
 </script>
 </body>
 </html>
