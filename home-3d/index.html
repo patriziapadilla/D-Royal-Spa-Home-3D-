@@ -1,15 +1,167 @@
-<section id="home" class="hero">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D’ROYAL SPA</title>
 
+<style>
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #fff;
+  color: #111;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  z-index: 1000;
+}
+
+/* SECCIONES */
+section {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+/* HOME */
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-content {
+  max-width: 500px;
+}
+
+h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.line {
+  width: 60px;
+  height: 2px;
+  background: black;
+  margin: 15px auto;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.locations {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  padding: 14px;
+  border-radius: 30px;
+  text-decoration: none;
+}
+
+.primary {
+  background: #0A66FF;
+  color: white;
+}
+
+.secondary {
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+.trust {
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+/* BLOQUES */
+.block {
+  max-width: 600px;
+  margin: auto;
+}
+
+.title {
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.text {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* BOTONES AREAS */
+.area-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.area-buttons a {
+  padding: 10px 18px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+/* FOOTER */
+footer {
+  background: black;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div>D’ROYAL SPA</div>
+  <div>AGENDAR</div>
+</nav>
+
+<!-- HOME -->
+<section class="hero" id="home">
   <div class="hero-content">
-
     <h1>D’ROYAL SPA</h1>
-
     <div class="line"></div>
 
     <p class="subtitle">
       Belleza inteligente, resultados reales<br>
-      Tecnología avanzada para moldear y rejuvenecer tu cuerpo<br>
-      sin agujas y sin cirugía
+      Tecnología avanzada para moldear y rejuvenecer tu cuerpo sin cirugía
     </p>
 
     <p class="locations">
@@ -17,16 +169,94 @@
     </p>
 
     <div class="buttons">
-      <a href="https://wa.me/message/6QSXBTK7A47QM1" class="btn primary">AGENDAR CITA</a>
+      <a href="https://wa.me/message/6QSXBTK7A47QM1" class="btn primary">AGENDAR</a>
       <a href="https://wa.me/message/6QSXBTK7A47QM1" class="btn secondary">WHATSAPP</a>
-      <a href="tel:+1XXXXXXXXXX" class="btn secondary">LLAMAR</a>
+      <a href="tel:+13050000000" class="btn secondary">LLAMAR</a>
     </div>
 
     <div class="trust">
-      <span>$80 1RA SESIÓN</span>
-      <span>★★★★★ MIAMI</span>
+      $80 PRIMERA SESIÓN · ★★★★★ MIAMI
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<section id="resultados">
+  <div class="block">
+    <div class="title">Resultados visibles desde la primera sesión</div>
+    <div class="text">Antes y después reales de nuestros tratamientos</div>
+  </div>
+</section>
+
+<!-- LIPO -->
+<section id="lipo">
+  <div class="block">
+    <div class="title">Lipo con Láser 360</div>
+    <div class="text">
+      Incluye RF, cavitación, lipolaser, 7 colores y maderoterapia
     </div>
 
+    <div class="area-buttons">
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Abdomen</a>
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Brazos</a>
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Piernas</a>
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Papada</a>
+    </div>
   </div>
-
 </section>
+
+<!-- AUMENTOS -->
+<section id="aumentos">
+  <div class="block">
+    <div class="title">Aumentos sin Cirugía</div>
+    <div class="text">
+      Tratamientos avanzados para glúteos y senos sin cirugía
+    </div>
+
+    <div class="area-buttons">
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Glúteos</a>
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Senos</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOTOX -->
+<section id="botox">
+  <div class="block">
+    <div class="title">Botox Natural con Láser</div>
+    <div class="text">
+      Rejuvenecimiento sin agujas para rostro completo
+    </div>
+
+    <div class="area-buttons">
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Ojos</a>
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Cara</a>
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Cuello</a>
+    </div>
+  </div>
+</section>
+
+<!-- COOLSCULPTING -->
+<section id="cool">
+  <div class="block">
+    <div class="title">CoolSculpting</div>
+    <div class="text">
+      Reducción de grasa con frío + reafirmación con RF
+    </div>
+
+    <div class="area-buttons">
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Abdomen</a>
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Brazos</a>
+      <a href="https://wa.me/message/6QSXBTK7A47QM1">Piernas</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <h2>D’ROYAL SPA</h2>
+  <p>Miami · Resultados reales</p>
+</footer>
+
+</body>
+</html>
