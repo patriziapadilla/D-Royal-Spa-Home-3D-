@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>D’ROYAL SPA</title>
 
 <style>
@@ -10,8 +11,8 @@
 body{
 margin:0;
 font-family: 'Helvetica Neue', sans-serif;
-background:#f5f5f5;
-color:#111;
+background:#111;
+color:white;
 }
 
 /* NAV */
@@ -20,34 +21,27 @@ display:flex;
 justify-content:space-between;
 padding:20px 40px;
 background:white;
-}
-
-nav a{
-margin-right:20px;
-text-decoration:none;
 color:black;
 }
 
 .btn-blue{
 background:#0a58ff;
 color:white;
-padding:12px 25px;
+padding:10px 20px;
 }
 
 /* ===== LIPO SECTION ===== */
 
 .lipo{
-background:linear-gradient(to right,#111,#555);
-color:white;
 padding:100px 60px;
-position:relative;
+background:linear-gradient(to right,#0d0d0d,#555);
 }
 
 /* SIGNATURE */
 .signature{
 color:#c8a96a;
 letter-spacing:3px;
-font-size:13px;
+font-size:12px;
 margin-bottom:10px;
 display:flex;
 align-items:center;
@@ -59,11 +53,10 @@ content:"";
 width:40px;
 height:1px;
 background:#c8a96a;
-display:inline-block;
 }
 
 /* TITLE */
-.lipo h1{
+h1{
 font-size:70px;
 font-weight:300;
 margin:10px 0 30px;
@@ -81,9 +74,9 @@ padding:12px 25px;
 margin-right:10px;
 }
 
-/* DESCRIPTION */
+/* DESC */
 .desc{
-max-width:600px;
+max-width:700px;
 line-height:1.6;
 margin-bottom:30px;
 }
@@ -92,8 +85,8 @@ margin-bottom:30px;
 .actions{
 display:flex;
 gap:10px;
+margin-bottom:60px;
 flex-wrap:wrap;
-margin-bottom:40px;
 }
 
 .actions button{
@@ -113,21 +106,18 @@ border:none;
 /* ===== CARRUSEL ===== */
 
 .carousel-wrapper{
-margin-top:40px;
 position:relative;
 }
 
 .carousel{
 display:flex;
 gap:20px;
-overflow-x:auto;
-scroll-behavior:smooth;
-padding-bottom:10px;
+overflow:hidden;
 }
 
 .carousel img{
 height:260px;
-border-radius:10px;
+border-radius:15px;
 background:white;
 padding:5px;
 }
@@ -146,13 +136,22 @@ cursor:pointer;
 .prev{left:-20px;}
 .next{right:-20px;}
 
+/* TEXTO BAJO */
+.carousel-text{
+text-align:center;
+margin-top:20px;
+color:#ddd;
+font-size:14px;
+}
+
+/* MOBILE */
 @media(max-width:768px){
 
 .lipo{
 padding:40px 20px;
 }
 
-.lipo h1{
+h1{
 font-size:40px;
 }
 
@@ -169,19 +168,15 @@ height:180px;
 
 <nav>
 <div>
-<a>inicio</a>
-<a>tratamientos</a>
-<a>resultados</a>
-<a>áreas</a>
+inicio tratamientos resultados áreas
 </div>
 
 <div>
 +1 786 690 0960
-<a class="btn-blue">AGENDAR</a>
+<span class="btn-blue">AGENDAR</span>
 </div>
 </nav>
 
-<!-- LIPO -->
 <section class="lipo">
 
 <div class="signature">SIGNATURE · BODY SCULPTING</div>
@@ -204,9 +199,6 @@ Reduce, moldea, reafirma y rejuvenece tu piel sin cirugía, sin dolor, resultado
 <div class="actions">
 <button class="gold">RESERVAR →</button>
 <button>CONSULTAR ↗</button>
-<button>AUMENTOS</button>
-<button>BOTOX LÁSER</button>
-<button>RESULTADOS</button>
 </div>
 
 <!-- CARRUSEL -->
@@ -226,6 +218,13 @@ Reduce, moldea, reafirma y rejuvenece tu piel sin cirugía, sin dolor, resultado
 <img src="legs-results.jpg">
 
 </div>
+
+</div>
+
+<!-- TEXTO BAJO -->
+<div class="carousel-text">
+ANTES / DESPUÉS · RESULTADOS REALES<br>
+La diferencia se ve desde la primera sesión
 </div>
 
 </section>
