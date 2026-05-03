@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>D’ROYAL SPA</title>
 
 <style>
+
+/* RESET */
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial, sans-serif;
 background:#f5f5f5;
 color:#111;
 }
@@ -18,16 +19,31 @@ color:#111;
 nav{
 display:flex;
 justify-content:space-between;
+align-items:center;
 padding:20px 40px;
 background:white;
 position:sticky;
 top:0;
+z-index:1000;
 }
 
 nav a{
 margin-right:20px;
 text-decoration:none;
 color:black;
+}
+
+.btn{
+padding:12px 25px;
+border:1px solid black;
+text-decoration:none;
+display:inline-block;
+}
+
+.btn-blue{
+background:#0a58ff;
+color:white;
+border:none;
 }
 
 /* HERO */
@@ -38,30 +54,11 @@ background:white;
 }
 
 .hero h1{
-font-size:48px;
-margin-bottom:20px;
+font-size:50px;
 }
 
 .hero p{
 margin:8px 0;
-}
-
-.btns{
-margin-top:30px;
-}
-
-.btn{
-padding:14px 28px;
-border:1px solid black;
-margin:5px;
-display:inline-block;
-text-decoration:none;
-}
-
-.btn.primary{
-background:#0a58ff;
-color:white;
-border:none;
 }
 
 /* RESULTADOS */
@@ -71,90 +68,147 @@ padding:80px 20px;
 }
 
 .carousel{
-position:relative;
 overflow:hidden;
 margin-top:30px;
 }
 
-.carousel-track{
+.track{
 display:flex;
 gap:20px;
-transition:0.4s;
+overflow-x:auto;
 padding:20px;
 background:url('hero-dubai.png') center/cover no-repeat;
 }
 
-.carousel img{
+.track img{
 height:220px;
 border-radius:10px;
 background:white;
-padding:10px;
+padding:8px;
 }
 
-/* TEXTO RESULTADOS */
-.sub{
-margin-top:10px;
-font-size:18px;
-}
-
-/* LIPO */
+/* LIPO PRO */
 .lipo{
-display:flex;
-padding:80px 40px;
-gap:60px;
-align-items:center;
-}
-
-.lipo-text{
-flex:1;
-}
-
-.lipo-text h2{
-font-size:40px;
-}
-
-.lipo-text p{
-margin-top:20px;
-line-height:1.6;
-}
-
-.lipo-areas{
-margin-top:30px;
-letter-spacing:2px;
-}
-
-.lipo-carousel{
-flex:1;
+position:relative;
+height:100vh;
+color:white;
 overflow:hidden;
 }
 
-.lipo-track{
-display:flex;
-gap:20px;
+.lipo-bg{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
-.lipo-track img{
-height:220px;
-border-radius:12px;
+.lipo-overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.3));
+}
+
+.lipo-content{
+position:relative;
+z-index:2;
+padding:80px;
+max-width:600px;
+}
+
+.lipo h2{
+font-size:60px;
+font-weight:300;
+margin:20px 0;
+}
+
+.tag{
+color:#c8a96a;
+letter-spacing:3px;
+}
+
+.desc{
+line-height:1.6;
+}
+
+.areas span{
+border:1px solid #c8a96a;
+padding:10px 20px;
+margin:10px;
+display:inline-block;
+color:#c8a96a;
+}
+
+.actions{
+margin-top:30px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.actions button{
+background:transparent;
+border:1px solid white;
+color:white;
+padding:10px 20px;
+cursor:pointer;
+}
+
+.gold{
+background:#c8a96a !important;
+color:black !important;
+border:none !important;
+}
+
+/* CARD */
+.card{
+position:absolute;
+right:80px;
+top:50%;
+transform:translateY(-50%);
+background:rgba(0,0,0,0.6);
+padding:20px;
+width:320px;
+backdrop-filter:blur(10px);
+border-radius:10px;
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
 .lipo{
-flex-direction:column;
+height:auto;
 }
 
-.carousel img,
-.lipo-track img{
-height:160px;
+.lipo-content{
+padding:30px;
 }
 
-.hero h1{
-font-size:32px;
+.lipo h2{
+font-size:36px;
+}
+
+.card{
+position:relative;
+right:auto;
+top:auto;
+transform:none;
+margin:20px;
+width:auto;
+}
+
+.track img{
+height:150px;
 }
 
 }
+
 </style>
 </head>
 
@@ -171,7 +225,7 @@ font-size:32px;
 
 <div>
 +1 786 690 0960
-<a class="btn primary" href="#">AGENDAR</a>
+<a class="btn btn-blue" href="#">AGENDAR</a>
 </div>
 </nav>
 
@@ -185,8 +239,8 @@ font-size:32px;
 
 <p>BRICKELL · DOWNTOWN · DORAL · MIAMI BEACH</p>
 
-<div class="btns">
-<a class="btn primary" href="#">AGENDAR</a>
+<div style="margin-top:20px;">
+<a class="btn btn-blue" href="#">AGENDAR</a>
 <a class="btn" href="https://wa.me/message/6QSXBTK7A47QM1">WHATSAPP</a>
 <a class="btn" href="tel:17866900960">LLAMAR</a>
 </div>
@@ -198,10 +252,10 @@ font-size:32px;
 <section class="resultados">
 
 <h2>Resultados</h2>
-<p class="sub">La diferencia se ve</p>
+<p>La diferencia se ve</p>
 
 <div class="carousel">
-<div class="carousel-track">
+<div class="track">
 
 <img src="lipo-results.jpg">
 <img src="chin-results.jpg">
@@ -217,9 +271,9 @@ font-size:32px;
 </div>
 </div>
 
-<p class="sub">Desde la primera sesión</p>
+<p style="margin-top:20px;">Desde la primera sesión</p>
 
-<p style="margin-top:20px;">
+<p>
 <a href="#">Lipo con Láser</a> ·
 <a href="#">Aumentos</a> ·
 <a href="#">Botox</a> ·
@@ -228,48 +282,53 @@ font-size:32px;
 
 </section>
 
-<!-- LIPO -->
+<!-- LIPO PRO -->
 <section class="lipo">
 
-<div class="lipo-text">
+<img src="hero-dubai.png" class="lipo-bg">
+<div class="lipo-overlay"></div>
 
-<p>SIGNATURE · BODY SCULPTING</p>
+<div class="lipo-content">
+
+<p class="tag">SIGNATURE · BODY SCULPTING</p>
 
 <h2>Lipo con Láser</h2>
 
-<p>
+<p class="desc">
 Esculpe localizadamente abdomen, brazos, piernas o papada con tecnología 
 <b>láser + ultrasonido + radiofrecuencia + terapia de luz de 7 colores</b>. 
 Reduce, moldea, reafirma y rejuvenece tu piel sin cirugía, sin dolor, resultados desde la primera sesión.
 </p>
 
-<div class="lipo-areas">
-ABDOMEN · BRAZOS · PIERNAS · PAPADA
+<div class="areas">
+<span>ABDOMEN</span>
+<span>BRAZOS</span>
+<span>PIERNAS</span>
+<span>PAPADA</span>
 </div>
 
-<p style="margin-top:30px;">
+<p style="margin-top:20px;">
 El láser rojo (650nm) penetra la piel y actúa sobre las células de grasa, 
 que el cuerpo elimina de forma natural a través del sistema linfático. 
 Luego, la radiofrecuencia y la luz terapéutica reafirman la piel, mejoran estrías y dejan una apariencia más luminosa.
 </p>
 
-<div class="btns">
-<a class="btn primary" href="#">RESERVAR</a>
-<a class="btn" href="#">CONSULTAR</a>
+<div class="actions">
+<button class="gold">RESERVAR →</button>
+<button>CONSULTAR ↗</button>
+<button>AUMENTOS</button>
+<button>BOTOX LÁSER</button>
+<button>RESULTADOS</button>
 </div>
 
 </div>
 
-<div class="lipo-carousel">
-<div class="lipo-track">
-
-<img src="lipo-treatment-bg.jpg">
-<img src="double-chin-laser-neck-tightening-treatment.jpg">
-<img src="body-contouring-treatment.jpg">
-<img src="legs-results.jpg">
-<img src="lipo-results.jpg">
-
-</div>
+<!-- CARD -->
+<div class="card">
+<img src="explainer-lipo-frame.jpg">
+<p>
+El láser rojo (650nm) penetra la piel, actúa sobre las células de grasa y el cuerpo las elimina naturalmente. Luego reafirma la piel y mejora su apariencia.
+</p>
 </div>
 
 </section>
