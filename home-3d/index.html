@@ -5,200 +5,151 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>D’ROYAL SPA</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
 
-body {
-  background: #fff;
-  color: #111;
-}
-
-/* NAV */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: white;
-  padding: 12px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  z-index: 1000;
-}
+body{background:#fff;color:#111;}
 
 /* SECCIONES */
-section {
-  padding: 100px 20px;
-  text-align: center;
-}
+section{padding:120px 20px;text-align:center;}
 
 /* HOME */
-.hero {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(180deg, #ffffff, #f5f5f5);
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(#ffffff,#f7f7f7);
 }
 
-.hero-content {
-  max-width: 500px;
+.hero h1{
+font-size:42px;
+font-weight:600;
+margin-bottom:15px;
 }
 
-h1 {
-  font-size: 40px;
+.subtitle{
+font-size:16px;
+line-height:1.6;
+color:#444;
+margin-bottom:20px;
 }
 
-.line {
-  width: 60px;
-  height: 2px;
-  background: black;
-  margin: 15px auto;
+.buttons{
+display:flex;
+flex-direction:column;
+gap:12px;
+margin-top:20px;
 }
 
-.subtitle {
-  font-size: 15px;
-  color: #444;
-  margin: 20px 0;
+.btn{
+padding:14px;
+border-radius:30px;
+text-decoration:none;
+font-size:14px;
+transition:0.3s;
 }
 
-.locations {
-  font-size: 12px;
-  color: #777;
+.primary{background:#0A66FF;color:white;}
+.primary:hover{background:#004ed6;}
+
+.secondary{border:1px solid #ccc;color:#333;}
+.secondary:hover{background:#f5f5f5;}
+
+.trust{margin-top:20px;font-size:13px;color:#555;}
+
+/* TITULOS */
+.title{
+font-size:30px;
+font-weight:600;
+margin-bottom:15px;
 }
 
-.buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.btn {
-  padding: 14px;
-  border-radius: 30px;
-  text-decoration: none;
-}
-
-.primary {
-  background: #0A66FF;
-  color: white;
-}
-
-.secondary {
-  border: 1px solid #ccc;
-  color: #333;
-}
-
-.trust {
-  margin-top: 15px;
-  font-size: 12px;
+.text{
+font-size:15px;
+color:#555;
+margin-bottom:30px;
 }
 
 /* CARRUSEL */
-
-.carousel {
-  position: relative;
-  overflow: hidden;
-  margin-top: 30px;
+.carousel{
+position:relative;
+margin-top:30px;
+display:flex;
+justify-content:center;
 }
 
-.carousel-track {
-  display: flex;
-  gap: 15px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 20px;
+.track{
+display:flex;
+gap:20px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+padding:10px;
 }
 
-.card {
-  flex: 0 0 80%;
-  scroll-snap-align: center;
-  border-radius: 20px;
-  overflow: hidden;
-  transform: scale(0.9);
-  transition: 0.3s;
+.card{
+flex:0 0 55%;
+max-width:500px;
+scroll-snap-align:center;
+border-radius:20px;
+overflow:hidden;
+transform:scale(0.9);
+transition:0.4s;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-.card.active {
-  transform: scale(1);
+.card.active{transform:scale(1);}
+
+.card img{
+width:100%;
+height:260px;
+object-fit:cover;
 }
 
-.card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-}
-
-.label {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.6);
-  color: white;
-  padding: 5px 12px;
-  font-size: 12px;
-  border-radius: 20px;
-}
-
-.carousel-links {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-.carousel-links a {
-  font-size: 13px;
-  text-decoration: none;
-  color: #0A66FF;
-}
-
-/* BLOQUES */
-.block {
-  max-width: 600px;
-  margin: auto;
-}
-
-.title {
-  font-size: 26px;
-  margin-bottom: 15px;
-}
-
-.text {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 20px;
+/* etiqueta */
+.label{
+position:absolute;
+top:10px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,0.6);
+color:white;
+padding:6px 12px;
+font-size:12px;
+border-radius:20px;
 }
 
 /* BOTONES */
-.area-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+.area-buttons{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+justify-content:center;
 }
 
-.area-buttons a {
-  padding: 10px 18px;
-  border: 1px solid #ccc;
-  border-radius: 25px;
-  text-decoration: none;
+.area-buttons a{
+padding:10px 18px;
+border-radius:30px;
+border:1px solid #ddd;
+text-decoration:none;
+font-size:14px;
+transition:0.3s;
+}
+
+.area-buttons a:hover{
+background:#111;
+color:#fff;
 }
 
 /* FOOTER */
-footer {
-  background: black;
-  color: white;
-  padding: 40px;
+footer{
+background:#000;
+color:#fff;
+padding:60px 20px;
+text-align:center;
 }
 
 </style>
@@ -206,142 +157,154 @@ footer {
 
 <body>
 
-<nav>
-  <div>D’ROYAL SPA</div>
-  <div>AGENDAR</div>
-</nav>
-
 <!-- HOME -->
 <section class="hero">
-  <div class="hero-content">
-    <h1>D’ROYAL SPA</h1>
-    <div class="line"></div>
+<div>
 
-    <p class="subtitle">
-      Belleza inteligente, resultados reales<br>
-      Tecnología avanzada sin cirugía
-    </p>
+<h1>D’ROYAL SPA</h1>
 
-    <p class="locations">
-      BRICKELL · DOWNTOWN · DORAL · MIAMI BEACH
-    </p>
+<p class="subtitle">
+Belleza natural con tecnología avanzada<br>
+Resultados reales sin cirugía ni agujas<br>
+<i>Diseñados para rejuvenecer de forma inteligente</i>
+</p>
 
-    <div class="buttons">
-      <a href="https://wa.me/message/6QSXBTK7A47QM1" class="btn primary">AGENDAR</a>
-      <a href="https://wa.me/message/6QSXBTK7A47QM1" class="btn secondary">WHATSAPP</a>
-      <a href="tel:+13050000000" class="btn secondary">LLAMAR</a>
-    </div>
+<div class="buttons">
+<a href="https://wa.me/message/6QSXBTK7A47QM1" class="btn primary">AGENDAR</a>
+<a href="tel:+17866900960" class="btn secondary">LLAMAR</a>
+</div>
 
-    <div class="trust">
-      $80 PRIMERA SESIÓN · ★★★★★ MIAMI
-    </div>
-  </div>
+<div class="trust">$80 · ★★★★★ MIAMI</div>
+
+</div>
 </section>
 
 <!-- RESULTADOS -->
-<section id="resultados">
+<section>
+<div class="title">Resultados reales</div>
 
-  <div class="block">
-    <div class="title">Resultados visibles desde la primera sesión</div>
-  </div>
+<div class="carousel">
+<div class="track">
 
-  <div class="carousel">
-    <div class="carousel-track">
+<div class="card"><img src="https://images.unsplash.com/photo-1594824475544-9c8d47c0b6cb"></div>
+<div class="card active"><img src="https://images.unsplash.com/photo-1603570419888-65f7b7b8bca7"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1611078489935-0cb964de46d6"></div>
 
-      <div class="card"><img src="https://via.placeholder.com/600x400"></div>
-      <div class="card active"><img src="https://via.placeholder.com/600x400"></div>
-      <div class="card"><img src="https://via.placeholder.com/600x400"></div>
-
-    </div>
-
-    <div class="label">ANTES / DESPUÉS</div>
-  </div>
-
-  <div class="carousel-links">
-    <a href="#lipo">Lipo Láser 360</a>
-    <a href="#botox">Botox</a>
-    <a href="#aumentos">Aumentos</a>
-    <a href="#cool">CoolSculpting</a>
-  </div>
-
+</div>
+<div class="label">ANTES / DESPUÉS</div>
+</div>
 </section>
 
 <!-- LIPO -->
-<section id="lipo">
-  <div class="block">
-    <div class="title">Lipo con Láser 360</div>
-    <div class="text">RF · Cavitación · Lipolaser · 7 Colors · Maderoterapia</div>
+<section>
+<div class="title">Lipo Láser 360</div>
+<div class="text">RF · Cavitación · Lipolaser · 7 Colors · Maderoterapia</div>
 
-    <div class="area-buttons">
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Abdomen</a>
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Brazos</a>
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Piernas</a>
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Papada</a>
-    </div>
-  </div>
+<div class="carousel">
+<div class="track">
+
+<div class="card"><img src="https://images.unsplash.com/photo-1580281658629-8f4b1f88c9f0"></div>
+<div class="card active"><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1594824475544-9c8d47c0b6cb"></div>
+
+</div>
+<div class="label">ANTES / DESPUÉS</div>
+</div>
+
+<div class="area-buttons">
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Abdomen</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Brazos</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Piernas</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Papada</a>
+</div>
 </section>
 
 <!-- AUMENTOS -->
-<section id="aumentos">
-  <div class="block">
-    <div class="title">Aumentos sin Cirugía</div>
-    <div class="text">Glúteos y Senos sin cirugía</div>
+<section>
+<div class="title">Aumentos sin cirugía</div>
 
-    <div class="area-buttons">
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Glúteos</a>
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Senos</a>
-    </div>
-  </div>
+<div class="carousel">
+<div class="track">
+
+<div class="card"><img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2"></div>
+<div class="card active"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5"></div>
+
+</div>
+<div class="label">ANTES / DESPUÉS</div>
+</div>
+
+<div class="area-buttons">
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Glúteos</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Senos</a>
+</div>
 </section>
 
 <!-- BOTOX -->
-<section id="botox">
-  <div class="block">
-    <div class="title">Botox Natural con Láser</div>
-    <div class="text">Rejuvenecimiento sin agujas</div>
+<section>
+<div class="title">Botox Natural con Láser</div>
 
-    <div class="area-buttons">
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Ojos</a>
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Cara</a>
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Cuello</a>
-    </div>
-  </div>
+<div class="carousel">
+<div class="track">
+
+<div class="card"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5"></div>
+<div class="card active"><img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1603570419888-65f7b7b8bca7"></div>
+
+</div>
+<div class="label">ANTES / DESPUÉS</div>
+</div>
+
+<div class="area-buttons">
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Ojos</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Cara</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Cuello</a>
+</div>
 </section>
 
 <!-- COOL -->
-<section id="cool">
-  <div class="block">
-    <div class="title">CoolSculpting</div>
-    <div class="text">Reducción de grasa con frío + RF</div>
+<section>
+<div class="title">CoolSculpting</div>
 
-    <div class="area-buttons">
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Abdomen</a>
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Brazos</a>
-      <a href="https://wa.me/message/6QSXBTK7A47QM1">Piernas</a>
-    </div>
-  </div>
+<div class="carousel">
+<div class="track">
+
+<div class="card"><img src="https://images.unsplash.com/photo-1580281658629-8f4b1f88c9f0"></div>
+<div class="card active"><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1594824475544-9c8d47c0b6cb"></div>
+
+</div>
+<div class="label">ANTES / DESPUÉS</div>
+</div>
+
+<div class="area-buttons">
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Abdomen</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Brazos</a>
+<a href="https://wa.me/message/6QSXBTK7A47QM1">Piernas</a>
+</div>
 </section>
 
 <footer>
-  <h2>D’ROYAL SPA</h2>
+<h2>D’ROYAL SPA</h2>
 </footer>
 
 <script>
-const track = document.querySelector('.carousel-track');
-const cards = document.querySelectorAll('.card');
+document.querySelectorAll('.track').forEach(track=>{
+const cards=track.querySelectorAll('.card');
 
-track.addEventListener('scroll', () => {
-  let center = track.scrollLeft + track.offsetWidth / 2;
+track.addEventListener('scroll',()=>{
+let center=track.scrollLeft+track.offsetWidth/2;
 
-  cards.forEach(card => {
-    let cardCenter = card.offsetLeft + card.offsetWidth / 2;
+cards.forEach(card=>{
+let cardCenter=card.offsetLeft+card.offsetWidth/2;
 
-    if (Math.abs(center - cardCenter) < card.offsetWidth / 2) {
-      card.classList.add('active');
-    } else {
-      card.classList.remove('active');
-    }
-  });
+if(Math.abs(center-cardCenter)<card.offsetWidth/2){
+card.classList.add('active');
+}else{
+card.classList.remove('active');
+}
+});
+});
 });
 </script>
 
