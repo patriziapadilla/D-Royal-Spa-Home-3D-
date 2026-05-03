@@ -7,10 +7,9 @@
 
 <style>
 
-/* RESET */
 body{
 margin:0;
-font-family:Arial, sans-serif;
+font-family: 'Helvetica Neue', sans-serif;
 background:#f5f5f5;
 color:#111;
 }
@@ -19,12 +18,8 @@ color:#111;
 nav{
 display:flex;
 justify-content:space-between;
-align-items:center;
 padding:20px 40px;
 background:white;
-position:sticky;
-top:0;
-z-index:1000;
 }
 
 nav a{
@@ -33,178 +28,136 @@ text-decoration:none;
 color:black;
 }
 
-.btn{
-padding:12px 25px;
-border:1px solid black;
-text-decoration:none;
-display:inline-block;
-}
-
 .btn-blue{
 background:#0a58ff;
 color:white;
-border:none;
+padding:12px 25px;
 }
 
-/* HERO */
-.hero{
-text-align:center;
-padding:80px 20px;
-background:white;
-}
+/* ===== LIPO SECTION ===== */
 
-.hero h1{
-font-size:50px;
-}
-
-.hero p{
-margin:8px 0;
-}
-
-/* RESULTADOS */
-.resultados{
-text-align:center;
-padding:80px 20px;
-}
-
-.carousel{
-overflow:hidden;
-margin-top:30px;
-}
-
-.track{
-display:flex;
-gap:20px;
-overflow-x:auto;
-padding:20px;
-background:url('hero-dubai.png') center/cover no-repeat;
-}
-
-.track img{
-height:220px;
-border-radius:10px;
-background:white;
-padding:8px;
-}
-
-/* LIPO PRO */
 .lipo{
-position:relative;
-height:100vh;
+background:linear-gradient(to right,#111,#555);
 color:white;
-overflow:hidden;
-}
-
-.lipo-bg{
-position:absolute;
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.lipo-overlay{
-position:absolute;
-width:100%;
-height:100%;
-background:linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.3));
-}
-
-.lipo-content{
+padding:100px 60px;
 position:relative;
-z-index:2;
-padding:80px;
-max-width:600px;
 }
 
-.lipo h2{
-font-size:60px;
-font-weight:300;
-margin:20px 0;
-}
-
-.tag{
+/* SIGNATURE */
+.signature{
 color:#c8a96a;
 letter-spacing:3px;
+font-size:13px;
+margin-bottom:10px;
+display:flex;
+align-items:center;
+gap:10px;
 }
 
-.desc{
-line-height:1.6;
+.signature::before{
+content:"";
+width:40px;
+height:1px;
+background:#c8a96a;
+display:inline-block;
+}
+
+/* TITLE */
+.lipo h1{
+font-size:70px;
+font-weight:300;
+margin:10px 0 30px;
+}
+
+/* AREAS */
+.areas{
+margin-bottom:30px;
 }
 
 .areas span{
 border:1px solid #c8a96a;
-padding:10px 20px;
-margin:10px;
-display:inline-block;
 color:#c8a96a;
+padding:12px 25px;
+margin-right:10px;
 }
 
+/* DESCRIPTION */
+.desc{
+max-width:600px;
+line-height:1.6;
+margin-bottom:30px;
+}
+
+/* BUTTONS */
 .actions{
-margin-top:30px;
 display:flex;
 gap:10px;
 flex-wrap:wrap;
+margin-bottom:40px;
 }
 
 .actions button{
-background:transparent;
+padding:12px 20px;
 border:1px solid white;
+background:transparent;
 color:white;
-padding:10px 20px;
 cursor:pointer;
 }
 
-.gold{
-background:#c8a96a !important;
-color:black !important;
-border:none !important;
+.actions .gold{
+background:#c8a96a;
+color:black;
+border:none;
 }
 
-/* CARD */
-.card{
+/* ===== CARRUSEL ===== */
+
+.carousel-wrapper{
+margin-top:40px;
+position:relative;
+}
+
+.carousel{
+display:flex;
+gap:20px;
+overflow-x:auto;
+scroll-behavior:smooth;
+padding-bottom:10px;
+}
+
+.carousel img{
+height:260px;
+border-radius:10px;
+background:white;
+padding:5px;
+}
+
+/* BOTONES */
+.carousel-btn{
 position:absolute;
-right:80px;
-top:50%;
-transform:translateY(-50%);
-background:rgba(0,0,0,0.6);
-padding:20px;
-width:320px;
-backdrop-filter:blur(10px);
-border-radius:10px;
+top:40%;
+background:black;
+color:white;
+border:none;
+padding:10px;
+cursor:pointer;
 }
 
-.card img{
-width:100%;
-border-radius:10px;
-margin-bottom:10px;
-}
+.prev{left:-20px;}
+.next{right:-20px;}
 
-/* MOBILE */
 @media(max-width:768px){
 
 .lipo{
-height:auto;
+padding:40px 20px;
 }
 
-.lipo-content{
-padding:30px;
+.lipo h1{
+font-size:40px;
 }
 
-.lipo h2{
-font-size:36px;
-}
-
-.card{
-position:relative;
-right:auto;
-top:auto;
-transform:none;
-margin:20px;
-width:auto;
-}
-
-.track img{
-height:150px;
+.carousel img{
+height:180px;
 }
 
 }
@@ -214,91 +167,26 @@ height:150px;
 
 <body>
 
-<!-- NAV -->
 <nav>
 <div>
-<a href="#">inicio</a>
-<a href="#">tratamientos</a>
-<a href="#">resultados</a>
-<a href="#">áreas</a>
+<a>inicio</a>
+<a>tratamientos</a>
+<a>resultados</a>
+<a>áreas</a>
 </div>
 
 <div>
 +1 786 690 0960
-<a class="btn btn-blue" href="#">AGENDAR</a>
+<a class="btn-blue">AGENDAR</a>
 </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-<h1>D’ROYAL SPA</h1>
-
-<p>Belleza natural con tecnología avanzada</p>
-<p>Resultados reales sin cirugía ni agujas</p>
-<p><i>Diseñados para rejuvenecer de forma inteligente</i></p>
-
-<p>BRICKELL · DOWNTOWN · DORAL · MIAMI BEACH</p>
-
-<div style="margin-top:20px;">
-<a class="btn btn-blue" href="#">AGENDAR</a>
-<a class="btn" href="https://wa.me/message/6QSXBTK7A47QM1">WHATSAPP</a>
-<a class="btn" href="tel:17866900960">LLAMAR</a>
-</div>
-
-<p style="margin-top:20px;">$90 1RA SESIÓN · 5★ CALIFICACIÓN MIAMI</p>
-</section>
-
-<!-- RESULTADOS -->
-<section class="resultados">
-
-<h2>Resultados</h2>
-<p>La diferencia se ve</p>
-
-<div class="carousel">
-<div class="track">
-
-<img src="lipo-results.jpg">
-<img src="chin-results.jpg">
-<img src="face-results.jpg">
-<img src="breast-results.jpg">
-<img src="glute-results.jpg">
-<img src="arm-results.jpg">
-<img src="legs-results.jpg">
-
-<img src="lipo-laser-360-before-after-side-waist.jpg">
-<img src="lipo-laser-360-before-after-front-abdomen.jpg">
-
-</div>
-</div>
-
-<p style="margin-top:20px;">Desde la primera sesión</p>
-
-<p>
-<a href="#">Lipo con Láser</a> ·
-<a href="#">Aumentos</a> ·
-<a href="#">Botox</a> ·
-<a href="#">CoolSculpting</a>
-</p>
-
-</section>
-
-<!-- LIPO PRO -->
+<!-- LIPO -->
 <section class="lipo">
 
-<img src="hero-dubai.png" class="lipo-bg">
-<div class="lipo-overlay"></div>
+<div class="signature">SIGNATURE · BODY SCULPTING</div>
 
-<div class="lipo-content">
-
-<p class="tag">SIGNATURE · BODY SCULPTING</p>
-
-<h2>Lipo con Láser</h2>
-
-<p class="desc">
-Esculpe localizadamente abdomen, brazos, piernas o papada con tecnología 
-<b>láser + ultrasonido + radiofrecuencia + terapia de luz de 7 colores</b>. 
-Reduce, moldea, reafirma y rejuvenece tu piel sin cirugía, sin dolor, resultados desde la primera sesión.
-</p>
+<h1>Lipo con Láser</h1>
 
 <div class="areas">
 <span>ABDOMEN</span>
@@ -307,10 +195,10 @@ Reduce, moldea, reafirma y rejuvenece tu piel sin cirugía, sin dolor, resultado
 <span>PAPADA</span>
 </div>
 
-<p style="margin-top:20px;">
-El láser rojo (650nm) penetra la piel y actúa sobre las células de grasa, 
-que el cuerpo elimina de forma natural a través del sistema linfático. 
-Luego, la radiofrecuencia y la luz terapéutica reafirman la piel, mejoran estrías y dejan una apariencia más luminosa.
+<p class="desc">
+Esculpe localizadamente abdomen, brazos, piernas o papada con tecnología 
+<b>láser + ultrasonido + radiofrecuencia + terapia de luz de 7 colores</b>. 
+Reduce, moldea, reafirma y rejuvenece tu piel sin cirugía, sin dolor, resultados desde la primera sesión.
 </p>
 
 <div class="actions">
@@ -321,17 +209,38 @@ Luego, la radiofrecuencia y la luz terapéutica reafirman la piel, mejoran estr�
 <button>RESULTADOS</button>
 </div>
 
-</div>
+<!-- CARRUSEL -->
+<div class="carousel-wrapper">
 
-<!-- CARD -->
-<div class="card">
-<img src="explainer-lipo-frame.jpg">
-<p>
-El láser rojo (650nm) penetra la piel, actúa sobre las células de grasa y el cuerpo las elimina naturalmente. Luego reafirma la piel y mejora su apariencia.
-</p>
+<button class="carousel-btn prev" onclick="scrollCarousel(-1)">‹</button>
+<button class="carousel-btn next" onclick="scrollCarousel(1)">›</button>
+
+<div class="carousel" id="carousel">
+
+<img src="lipo-treatment-bg.jpg">
+<img src="double-chin-laser-neck-tightening-treatment.jpg">
+<img src="body-contouring-treatment.jpg">
+<img src="radio-frequency-rf-treatment-heads.jpg">
+<img src="lipo-results.jpg">
+<img src="chin-results.jpg">
+<img src="legs-results.jpg">
+
+</div>
 </div>
 
 </section>
+
+<script>
+
+function scrollCarousel(direction){
+const carousel = document.getElementById('carousel');
+carousel.scrollBy({
+left: direction * 300,
+behavior:'smooth'
+});
+}
+
+</script>
 
 </body>
 </html>
