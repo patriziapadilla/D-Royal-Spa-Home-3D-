@@ -1,210 +1,90 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D’Royal Spa</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
-<style>
-body{
-  margin:0;
-  font-family: 'Inter', sans-serif;
-  background:#f5f3ef;
-  color:#1a1a1a;
-}
-
-h1,h2,h3{
-  font-family:'Playfair Display', serif;
-}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:40px 20px;
-}
-
-/* NAV */
-nav{
-  display:flex;
-  justify-content:space-between;
-  padding:20px;
-  background:#fff;
-  position:sticky;
-  top:0;
-}
-
-nav a{
-  margin:0 10px;
-  text-decoration:none;
-  color:#333;
-}
-
-/* HERO */
-.hero{
-  height:90vh;
-  background:url('assets/hero.jpg') center/cover no-repeat;
-  display:flex;
-  align-items:center;
-}
-
-.hero h1{
-  font-size:70px;
-}
-
-.btn{
-  padding:12px 25px;
-  border-radius:30px;
-  border:none;
-  cursor:pointer;
-}
-
-.btn-dark{
-  background:#000;
-  color:#fff;
-}
-
-/* SECTIONS */
-.section{
-  padding:80px 0;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
-}
-
-.card img{
-  width:100%;
-  border-radius:20px;
-}
-
-/* RESULTADOS */
-.results{
-  display:flex;
-  gap:20px;
-}
-
-.results img{
-  width:100%;
-  border-radius:15px;
-}
-
-/* CONTACT */
-.contact{
-  background:#fff;
-  padding:40px;
-  border-radius:20px;
-}
-
-input,select,textarea{
-  width:100%;
-  margin:10px 0;
-  padding:10px;
-}
-
-</style>
+  <meta charset="UTF-8">
+  <title>D'Royal Spa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
 
-<nav>
-  <div>D’Royal Spa</div>
-  <div>
+<header>
+  <div class="logo">D'Royal Spa</div>
+  <nav>
     <a href="#">Inicio</a>
-    <a href="#">Tratamientos</a>
-    <a href="#">Resultados</a>
-  </div>
-  <button class="btn btn-dark">Agendar</button>
-</nav>
+    <a href="#tratamientos">Tratamientos</a>
+    <a href="#resultados">Resultados</a>
+  </nav>
+  <a class="btn" href="#">Agendar</a>
+</header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="container">
+  <div class="overlay"></div>
+  <div class="hero-content">
     <h1>D’Royal<br>Spa.</h1>
     <p>Tecnología avanzada para moldear y rejuvenecer tu cuerpo.</p>
-    <button class="btn btn-dark">Agendar cita</button>
+    <a class="btn" href="#">Agendar cita</a>
   </div>
 </section>
 
-<!-- LIPO -->
-<section class="section container">
-  <div class="grid">
-    <div>
+<!-- TRATAMIENTOS -->
+<section id="tratamientos" class="section">
+
+  <div class="block">
+    <div class="text">
       <h2>Lipo con Láser</h2>
-      <p>Reduce grasa localizada sin cirugía y sin dolor.</p>
+      <p>Reduce grasa localizada sin cirugía.</p>
     </div>
-    <div class="card">
-      <img src="assets/lipo.jpg">
-    </div>
+    <img src="./images/lipo-results.jpg">
   </div>
-</section>
 
-<!-- BOTOX -->
-<section class="section container">
-  <div class="grid">
-    <div class="card">
-      <img src="assets/botox.jpg">
-    </div>
-    <div>
+  <div class="block reverse">
+    <div class="text">
       <h2>Botox Natural</h2>
-      <p>Rejuvenece tu piel sin agujas ni tiempo de recuperación.</p>
+      <p>Rejuvenece tu piel sin agujas.</p>
     </div>
+    <img src="./images/botox-laser-forehead-premium-treatment.jpg">
   </div>
-</section>
 
-<!-- AUMENTOS -->
-<section class="section container">
-  <div class="grid">
-    <div>
+  <div class="block">
+    <div class="text">
       <h2>Aumentos sin Cirugía</h2>
       <p>Volumen natural sin implantes.</p>
     </div>
-    <div class="card">
-      <img src="assets/aumento.jpg">
-    </div>
+    <img src="./images/glute-results.jpg">
   </div>
-</section>
 
-<!-- COOL -->
-<section class="section container">
-  <div class="grid">
-    <div class="card">
-      <img src="assets/cool.jpg">
-    </div>
-    <div>
+  <div class="block reverse">
+    <div class="text">
       <h2>CoolSculpting</h2>
-      <p>Elimina grasa resistente con frío controlado.</p>
+      <p>Elimina grasa con frío controlado.</p>
     </div>
+    <img src="./images/body-contouring-treatment.jpg">
   </div>
+
 </section>
 
 <!-- RESULTADOS -->
-<section class="section container">
+<section id="resultados" class="results">
   <h2>Resultados</h2>
-  <div class="results">
-    <img src="assets/resultados1.jpg">
-    <img src="assets/resultados2.jpg">
-    <img src="assets/resultados3.jpg">
+  <div class="gallery">
+    <img src="./images/lipo-results.jpg">
+    <img src="./images/chin-results.jpg">
+    <img src="./images/arm-results.jpg">
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section container">
-  <div class="contact">
-    <h2>Agenda tu cita</h2>
-    <input placeholder="Nombre">
-    <input placeholder="Teléfono">
-    <select>
-      <option>Lipo con Láser</option>
-      <option>Botox</option>
-      <option>Aumentos</option>
-    </select>
+<!-- CONTACTO -->
+<section class="contact">
+  <h2>Agenda tu cita</h2>
+  <form>
+    <input type="text" placeholder="Nombre">
+    <input type="text" placeholder="Teléfono">
     <textarea placeholder="Mensaje"></textarea>
-    <button class="btn btn-dark">Enviar</button>
-  </div>
+    <button class="btn">Reservar</button>
+  </form>
 </section>
 
 </body>
